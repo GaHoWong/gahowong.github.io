@@ -3,8 +3,8 @@
         <title>CRC校验 - 标签 - 黄家豪的博客</title>
         <link>http://example.org/tags/crc%E6%A0%A1%E9%AA%8C/</link>
         <description>CRC校验 - 标签 - 黄家豪的博客</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
-            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Mon, 09 Mar 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/crc%E6%A0%A1%E9%AA%8C/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Mon, 09 Mar 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/crc%E6%A0%A1%E9%AA%8C/" rel="self" type="application/rss+xml" /><item>
     <title>2.5CRC校验及其实现</title>
     <link>http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</link>
     <pubDate>Mon, 09 Mar 2020 13:50:38 &#43;0800</pubDate>

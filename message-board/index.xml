@@ -6,8 +6,8 @@
     <description>Recent content in Message boards on 黄家豪的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
-    <webMaster>gahowong@qq.com (黄家豪)</webMaster>
+    <managingEditor>gahowong@qq.com (GaHo)</managingEditor>
+    <webMaster>gahowong@qq.com (GaHo)</webMaster>
     <lastBuildDate>Thu, 16 Apr 2020 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="http://example.org/message-board/index.xml" rel="self" type="application/rss+xml" />
@@ -17,7 +17,7 @@
       <title>message board</title>
       <link>http://example.org/message-board/message-board/</link>
       <pubDate>Thu, 16 Apr 2020 00:00:00 +0800</pubDate>
-      <author>gahowong@qq.com (黄家豪)</author>
+      <author>gahowong@qq.com (GaHo)</author>
       <guid>http://example.org/message-board/message-board/</guid>
       <description>动态与留言专区 目前使用的是Gravatar 作为评论列表头像。 请自行登录或注册Gravatar，然后修改自己的头像。 评论的时候，留下在Grav</description>
     </item>

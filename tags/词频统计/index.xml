@@ -3,8 +3,8 @@
         <title>词频统计 - 标签 - 黄家豪的博客</title>
         <link>http://example.org/tags/%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/</link>
         <description>词频统计 - 标签 - 黄家豪的博客</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
-            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Wed, 13 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Wed, 13 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/" rel="self" type="application/rss+xml" /><item>
     <title>wordcloud库</title>
     <link>http://example.org/py23_wordcloud%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
     <pubDate>Wed, 13 May 2020 00:00:00 &#43;0800</pubDate>
