@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Python3 函数 - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="Python3 函数" />
+<meta property="og:description" content="函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。函数能提高应用的模块性，和代码的重复利用率。 定义一个函数 ~函数代码块以 def 关" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/2020/05/py14_python3-%E5%87%BD%E6%95%B0/" />
+<meta property="article:published_time" content="2020-05-05T00:00:00+08:00" />
+<meta property="article:modified_time" content="2020-05-05T00:00:00+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python3 函数"/>
+<meta name="twitter:description" content="函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。函数能提高应用的模块性，和代码的重复利用率。 定义一个函数 ~函数代码块以 def 关"/>
+<meta name="application-name" content="黄家豪的博客">
+<meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/2020/05/py14_python3-%E5%87%BD%E6%95%B0/" /><link rel="prev" href="http://example.org/2020/05/py13_%E5%88%A9%E7%94%A8%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97%E6%96%B9%E6%B3%95%E8%AE%A1%E7%AE%97%E5%9C%86%E5%91%A8%E7%8E%87/" /><link rel="next" href="http://example.org/2020/05/py15_%E4%B8%83%E6%AE%B5%E6%95%B0%E7%A0%81%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Python3 函数",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/2020\/05\/py14_python3-%E5%87%BD%E6%95%B0\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Python语言程序设计, 函数, 参数, 函数返回值, lambda, 匿名函数, 模块化编程","wordcount":  2187 ,
+        "url": "http:\/\/example.org\/2020\/05\/py14_python3-%E5%87%BD%E6%95%B0\/","datePublished": "2020-05-05T00:00:00+08:00","dateModified": "2020-05-05T00:00:00+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "GaHo"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><script src="/live2d-widget/autoload.js"></script><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> 主页 </a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。"> 文章 </a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！"> 标签 </a><a class="menu-item" href="/categories/" title="分类可以快速查找文章"> 分类 </a><a class="menu-item" href="/file/" title="好东西都在这！"> 资源 </a><a class="menu-item" href="/message-board/message-board" title="留言板"> 动态与留言 </a><a class="menu-item" href="/about/" title="我的个人简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">主页</a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。">文章</a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！">标签</a><a class="menu-item" href="/categories/" title="分类可以快速查找文章">分类</a><a class="menu-item" href="/file/" title="好东西都在这！">资源</a><a class="menu-item" href="/message-board/message-board" title="留言板">动态与留言</a><a class="menu-item" href="/about/" title="我的个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Python3 函数</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/about/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>GaHo</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/python%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
+                                <i class="far fa-folder fa-fw"></i>Python语言程序设计
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-05-05>2020-05-05</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2187 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id="/2020/05/py14_python3-%E5%87%BD%E6%95%B0/" class="leancloud_visitors" data-flag-title="Python3 函数">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#定义一个函数">定义一个函数</a></li>
+        <li><a href="#函数调用">函数调用</a></li>
+        <li><a href="#参数传递">参数传递</a></li>
+        <li><a href="#函数返回值">函数返回值</a></li>
+        <li><a href="#匿名函数">匿名函数</a></li>
+        <li><a href="#强制位置参数">强制位置参数</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。函数能提高应用的模块性，和代码的重复利用率。</p>
+<hr>
+<h3 id="定义一个函数">定义一个函数</h3>
+<p>~函数代码块以 def 关键词开头，后接函数标识符名称和圆括号 ()。</p>
+<p>~任何传入参数和自变量必须放在圆括号中间，圆括号之间可以用于定义参数。</p>
+<p>~函数的第一行语句可以选择性地使用文档字符串—用于存放函数说明。</p>
+<p>~函数内容以冒号起始，并且缩进。</p>
+<p>~return [表达式] 结束函数，选择性地返回一个值给调用方。不带表达式的return相当于返回 None。</p>
+<p>函数定义时，所指定的参数是一种占位符，函数定义后，如果不经过调用，不会被执行，函数定义时，参数是输入、函数体是处理、结果是输出(IPO)</p>
+<h3 id="函数调用">函数调用</h3>
+<p>在函数被调用时，实际参数（实参）会被引入被调用函数的本地符号表中；因此，实参是通过 按值调用 传递的（其中 值 始终是对象 引用 而不是对象的值）。 当一个函数调用另外一个函数时，将会为该调用创建一个新的本地符号表。</p>
+<h3 id="参数传递">参数传递</h3>
+<p>调用函数时可使用的正式参数类型：</p>
+<p><strong>必需参数</strong></p>
+<p><strong>关键字参数</strong></p>
+<p><strong>默认参数</strong></p>
+<p><strong>不定长参数</strong></p>
+<p>**必需参数:**必需参数须以正确的顺序传入函数。调用时的数量必须和声明时的一样。
+**关键字参数：**关键字参数和函数调用关系紧密，函数调用使用关键字参数来确定传入的参数值。使用关键字参数允许函数调用时参数的顺序与声明时不一致，因为 Python 解释器能够用参数名匹配参数值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">printme</span><span class="p">(</span> <span class="nb">str</span> <span class="p">):</span>
+   <span class="s2">&#34;打印任何传入的字符串&#34;</span>
+   <span class="k">print</span> <span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+   <span class="k">return</span>
+<span class="c1">#调用printme函数</span>
+<span class="n">printme</span><span class="p">(</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;测试&#34;</span><span class="p">)</span>
+<span class="o">----------------------------</span>
+<span class="err">测试</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>**默认参数:**调用函数时，如果没有传递参数，则会使用默认参数。以下实例中如果没有传入 age 参数，则使用默认值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">printinfo</span><span class="p">(</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">):</span>
+   <span class="s2">&#34;打印任何传入的字符串&#34;</span>
+   <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;名字: &#34;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+   <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;年龄: &#34;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+   <span class="k">return</span>
+ 
+<span class="c1">#调用printinfo函数</span>
+<span class="n">printinfo</span><span class="p">(</span> <span class="n">age</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;小明&#34;</span> <span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&#34;************&#34;</span><span class="p">)</span>
+<span class="n">printinfo</span><span class="p">(</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;小明&#34;</span> <span class="p">)</span>
+<span class="n">__________________________________________________</span>
+<span class="err">名字</span><span class="p">:</span>  <span class="err">小明</span>
+<span class="err">年龄</span><span class="p">:</span>  <span class="mi">12</span>
+<span class="o">************</span>
+<span class="err">名字</span><span class="p">:</span>  <span class="err">小明</span>
+<span class="err">年龄</span><span class="p">:</span>  <span class="mi">8</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>不定长参数</strong>
+像max（x,y,z,&hellip;）这种不确定参数的函数，经常会使用到。
+1、加了星号 * 的参数会以元组(tuple)的形式导入，存放所有未命名的变量参数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">printinfo</span><span class="p">(</span> <span class="n">arg1</span><span class="p">,</span> <span class="o">*</span><span class="n">vartuple</span> <span class="p">):</span>
+   <span class="s2">&#34;打印任何传入的参数&#34;</span>
+   <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;输出: &#34;</span><span class="p">)</span>
+   <span class="k">print</span> <span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+   <span class="k">print</span> <span class="p">(</span><span class="n">vartuple</span><span class="p">)</span>
+ 
+<span class="c1"># 调用printinfo 函数</span>
+<span class="n">printinfo</span><span class="p">(</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">50</span> <span class="p">)</span>
+<span class="err">——————————————————————————————</span>
+<span class="err">输出</span><span class="p">:</span> 
+<span class="mi">70</span>
+<span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>2、加了两个星号 ** 的参数会以字典的形式导入。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">printinfo</span><span class="p">(</span> <span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">vardict</span> <span class="p">):</span>
+   <span class="s2">&#34;打印任何传入的参数&#34;</span>
+   <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;输出: &#34;</span><span class="p">)</span>
+   <span class="k">print</span> <span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+   <span class="k">print</span> <span class="p">(</span><span class="n">vardict</span><span class="p">)</span>
+ 
+<span class="c1"># 调用printinfo 函数</span>
+<span class="n">printinfo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="err">——————————————————————————————————</span>
+<span class="err">输出</span><span class="p">:</span> 
+<span class="mi">1</span>
+<span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>3、声明函数时，参数中星号 *可以单独出现，如果单独出现星号  后的参数必须用关键字传入。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="o">*</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">+</span><span class="n">c</span>
+<span class="o">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>   <span class="c1"># 报错</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&#34;&lt;stdin&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">f</span><span class="p">()</span> <span class="n">takes</span> <span class="mi">2</span> <span class="n">positional</span> <span class="n">arguments</span> <span class="n">but</span> <span class="mi">3</span> <span class="n">were</span> <span class="n">given</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># 正常</span>
+<span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="函数返回值">函数返回值</h3>
+<p>1、return [表达式] 语句用于退出函数，选择性地向调用方返回一个表达式。不带参数值的return语句返回None。</p>
+<p>2、return可以传递0个返回值，也可以传递任意多个返回值</p>
+<p>3、即使没有 return 语句的函数也会返回一个值，尽管它是一个相当无聊的值。这个值称为 None （它是内置名称）。一般来说解释器不会打印出单独的返回值 None ，如果真想看到它，可以使用 print()。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="n">inrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">*=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">//</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span>
+<span class="err">————————————————————————————</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">fact</span><span class="p">(</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">5</span>  <span class="p">)</span>
+<span class="p">(</span><span class="mi">725760</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="o">=</span> <span class="n">fact</span><span class="p">(</span><span class="mi">10</span> <span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="mi">725760</span> <span class="mi">10</span> <span class="mi">5</span>
+    
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="匿名函数">匿名函数</h3>
+<p>python 使用 lambda 来创建匿名函数。</p>
+<p>—所谓匿名，意即不再使用 def 语句这样标准的形式定义一个函数。</p>
+<p>—lambda 只是一个表达式，函数体比 def 简单很多。</p>
+<p>—lambda的主体是一个表达式，而不是一个代码块。仅仅能在lambda表达式中封装有限的逻辑进去。</p>
+<p>—lambda 函数拥有自己的命名空间，且不能访问自己参数列表之外或全局命名空间里的参数。</p>
+<p>—虽然lambda函数看起来只能写一行，却不等同于C或C++的内联函数，后者的目的是调用小函数时不占用栈内存从而增加运行效率。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="err">函数名</span><span class="o">&gt;=</span><span class="k">lambda</span><span class="o">&lt;</span><span class="err">参数</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="err">表达式</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span> <span class="o">=</span> <span class="n">lambdax</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="err">输出：</span><span class="mi">25</span>
+<span class="err">——————————————————————————</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span>  <span class="s2">&#34;lambda函数&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">())</span>
+<span class="err">输出：</span><span class="n">lambda函数</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>lambda函数主要用作一些特定函数或方法的参数，lambda函数有一些固定使用方式，一般情况，建议使用def定义的普通函数。</p>
+<h3 id="强制位置参数">强制位置参数</h3>
+<p>Python3.8 新增了一个函数形参语法 / 用来指明函数形参必须使用指定位置参数，不能使用关键字参数的形式。</p>
+<p>在以下的例子中，形参 a 和 b 必须使用指定位置参数，c 或 d 可以是位置形参或关键字形参，而 e 或 f 要求为关键字形参:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>正确使用方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>以下使用方法会发生错误:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>   <span class="c1"># b 不能使用关键字参数的形式</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>           <span class="c1"># e 必须使用关键字参数的形式</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>参考资料:<a href="https://item.jd.com/12128326.html?dist=jd" target="_blank" rel="noopener noreffer">Python语言程序设计基础(第2版)》嵩天、礼欣、黄天羽著，高等教育出版社，2017.2（讲授Python 3版本）</a></p>
+<p><a href="http://www.icourse163.org/course/BIT-268001" target="_blank" rel="noopener noreffer">视频课程</a></p>
+<p><a href="https://www.runoob.com/python3/python3-number.html" target="_blank" rel="noopener noreffer">Python3菜鸟教程</a></p>
+<p><a href="https://docs.python.org/zh-cn/3/" target="_blank" rel="noopener noreffer">Python官方手册</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-05-05 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/2020/05/py14_python3-%E5%87%BD%E6%95%B0/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/2020/05/py14_python3-%E5%87%BD%E6%95%B0/" data-title="Python3 函数" data-hashtags="Python语言程序设计,函数,参数,函数返回值,lambda,匿名函数,模块化编程"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/2020/05/py14_python3-%E5%87%BD%E6%95%B0/" data-hashtag="Python语言程序设计"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/2020/05/py14_python3-%E5%87%BD%E6%95%B0/" data-title="Python3 函数"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/2020/05/py14_python3-%E5%87%BD%E6%95%B0/" data-title="Python3 函数"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">Python语言程序设计</a>,&nbsp;<a href="/tags/%E5%87%BD%E6%95%B0/">函数</a>,&nbsp;<a href="/tags/%E5%8F%82%E6%95%B0/">参数</a>,&nbsp;<a href="/tags/%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC/">函数返回值</a>,&nbsp;<a href="/tags/lambda/">lambda</a>,&nbsp;<a href="/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/">匿名函数</a>,&nbsp;<a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B/">模块化编程</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2020/05/py13_%E5%88%A9%E7%94%A8%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97%E6%96%B9%E6%B3%95%E8%AE%A1%E7%AE%97%E5%9C%86%E5%91%A8%E7%8E%87/" class="prev" rel="prev" title="利用蒙特卡罗方法计算圆周率"><i class="fas fa-angle-left fa-fw"></i>利用蒙特卡罗方法计算圆周率</a>
+            <a href="/2020/05/py15_%E4%B8%83%E6%AE%B5%E6%95%B0%E7%A0%81%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F/" class="next" rel="next" title="七段数码管显示当前日期">七段数码管显示当前日期<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{"valine":{"appId":"LzWmGBbN4JzdkCMWlCR1AcUQ-gzGzoHsz","appKey":"3Tw1cqFWjneUsJIio9gXs8CI","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"data":{"id-1":"❤欢迎来到我的博客~","id-2":"❤欢迎来到我的博客~"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":" ","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":140}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

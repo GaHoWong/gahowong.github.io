@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>第二章数据表示总结与练习 - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="第二章数据表示总结与练习" />
+<meta property="og:description" content="一、总结 真值： 正号和负号分别用“ &#43; ”和“ - ”表示，数据位保持二进制值不变的数据表示方法。 数值数据：计算机所支持的一种数据类型，用于科学计算，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/2020/03/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/" />
+<meta property="article:published_time" content="2020-03-11T13:50:38+08:00" />
+<meta property="article:modified_time" content="2020-03-11T15:58:26+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="第二章数据表示总结与练习"/>
+<meta name="twitter:description" content="一、总结 真值： 正号和负号分别用“ &#43; ”和“ - ”表示，数据位保持二进制值不变的数据表示方法。 数值数据：计算机所支持的一种数据类型，用于科学计算，"/>
+<meta name="application-name" content="黄家豪的博客">
+<meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/2020/03/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/" /><link rel="prev" href="http://example.org/2020/03/2.6%E6%B5%B7%E6%98%8E%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="next" href="http://example.org/2020/03/3.1%E5%AE%9A%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%8A%E6%BA%A2%E5%87%BA%E6%A3%80%E6%B5%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第二章数据表示总结与练习",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/2020\/03\/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "计算机组成原理, 总结, 练习, 奇偶校验, 海明校验","wordcount":  4036 ,
+        "url": "http:\/\/example.org\/2020\/03\/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0\/","datePublished": "2020-03-11T13:50:38+08:00","dateModified": "2020-03-11T15:58:26+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "GaHo"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><script src="/live2d-widget/autoload.js"></script><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> 主页 </a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。"> 文章 </a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！"> 标签 </a><a class="menu-item" href="/categories/" title="分类可以快速查找文章"> 分类 </a><a class="menu-item" href="/file/" title="好东西都在这！"> 资源 </a><a class="menu-item" href="/message-board/message-board" title="留言板"> 动态与留言 </a><a class="menu-item" href="/about/" title="我的个人简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">主页</a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。">文章</a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！">标签</a><a class="menu-item" href="/categories/" title="分类可以快速查找文章">分类</a><a class="menu-item" href="/file/" title="好东西都在这！">资源</a><a class="menu-item" href="/message-board/message-board" title="留言板">动态与留言</a><a class="menu-item" href="/about/" title="我的个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">第二章数据表示总结与练习</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/about/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>GaHo</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                                <i class="far fa-folder fa-fw"></i>计算机组成原理
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-03-11>2020-03-11</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4036 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;<span id="/2020/03/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/" class="leancloud_visitors" data-flag-title="第二章数据表示总结与练习">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-为什么计算机中采用二进制-">1) 为什么计算机中采用二进制 ?</a></li>
+        <li><a href="#2-为什么计算机中采用补码表示带符号的整数-">2) 为什么计算机中采用补码表示带符号的整数 ?</a></li>
+        <li><a href="#3-浮点数的表示范围和精确度分别由什么决定--字长一定时浮点数的表示范围与精确度之间有和关系-">3) 浮点数的表示范围和精确度分别由什么决定 ? 字长一定时浮点数的表示范围与精确度之间有和关系 ?</a></li>
+        <li><a href="#4-汉字输入码机内码和字型码在汉字处理过程中各有何作用">4) 汉字输入码、机内码和字型码在汉字处理过程中各有何作用？</a></li>
+        <li><a href="#5-在机内码中如何区分两个-ascii-码字符和一个汉字-">5) 在机内码中如何区分两个 ASCII 码字符和一个汉字 ?</a></li>
+        <li><a href="#6--8421-码-就是二进制数这种说法对吗为什么">6) “ 8421 码 就是二进制数”。这种说法对吗？为什么？</a></li>
+        <li><a href="#7-如何识别浮点数的正负浮点数能表示的数值范围和数值的精确度取决于什么">7) 如何识别浮点数的正负？浮点数能表示的数值范围和数值的精确度取决于什么？</a></li>
+        <li><a href="#8-简述-crc-的纠错原理">8) 简述 CRC 的纠错原理。</a></li>
+        <li><a href="#9写出下列各数的原码反码和补码">9)写出下列各数的原码、反码和补码。</a></li>
+        <li><a href="#10已知-x--010110y--001010-求">10)已知 x ＝ 0.10110,y ＝ —0.01010, 求：</a></li>
+        <li><a href="#11c-语言中允许无符号数和有符号整数之间的转换---下面是一段-c-语言代码---给出在-32-位计算机中上述程序段的输出结果并分析原因-">11)C 语言中允许无符号数和有符号整数之间的转换 ,  下面是一段 C 语言代码 ,  给出在 32 位计算机中上述程序段的输出结果并分析原因 。</a></li>
+        <li><a href="#12用-ieee754--32位浮点数标准表示十进制数">12)用 IEEE754  32位浮点数标准表示十进制数</a></li>
+        <li><a href="#13求与-ieee754-32-位浮点数-43940000h-对应的十进制数">13)求与 IEEE754 32 位浮点数 43940000H 对应的十进制数。</a></li>
+        <li><a href="#14设有效信息为-01011011分别写出奇校验码和偶校验码如果接收方收到的有效信息为-01011010说明如何发现错误">14)设有效信息为 01011011，分别写出奇校验码和偶校验码。如果接收方收到的有效信息为 01011010，说明如何发现错误。</a></li>
+        <li><a href="#15由6个字符的7位ascii编码排列再加上水平和垂直偶校验位构成如表223的行列结构最后一列为水平奇偶校验位最后一行为垂直奇偶校验位">15)由6个字符的7位ASCII编码排列，再加上水平和垂直偶校验位构成如表2.23的行列结构（最后一列为水平奇偶校验位，最后一行为垂直奇偶校验位）</a></li>
+        <li><a href="#16设8位有效信息为01101ll0试写出它的海明校验码给出过程说明分组检测方式并给出指误字及其逻辑表达式如果接收方收到的有效信息变成01101111说明如何定位错误并纠正错误">16)设8位有效信息为01101ll0，试写出它的海明校验码。给出过程，说明分组检测方式，并给出指误字及其逻辑表达式。如果接收方收到的有效信息变成01101111，说明如何定位错误并纠正错误。</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="一总结">一、总结</h1>
+<p><strong>真值</strong>： 正号和负号分别用“ + ”和“ - ”表示，数据位保持二进制值不变的数据表示方法。
+<strong>数值数据</strong>：计算机所支持的一种数据类型，用于科学计算，常见的数值数据类型包括小数、整数、浮点数数等。<br>
+<strong>非数值数据</strong>：计算机所支持的一种数据类型，一般用来表示符号或文字等没有数值值的数据。<br>
+<strong>机器数</strong>：数据在机器中的表示形式，是正负符号数码化后的二进制数据。<br>
+<strong>变形补码</strong>：用两个二进制位来表示数字的符号位，其余与补码相同。即“ 00 ”表示正，“ 11 ”表示负。<br>
+<strong>规格化</strong>：将非规格化的数处理成规格化数的过程。规格化数规定尾数用纯小数表示，且真值表示时小数点后第一位不为 0 （以机器数表示时对小数点后第一位的规定与具体的机器数的形式有关）。<br>
+<strong>机器零</strong>： 计算机保存数字的位有限，所能表示最小的数也有范围， 其中有一个范围之中的数据无法精确表示，当实际的数据处在这个无法精确表示的数据范围时计算机就将该数作为机器零来处理，因此，计算机中的机器零其实对应的不是一个固定的数，而是一个数据表示范围。<br>
+<strong>BCD 码</strong>： 用 4 位二进制数来表示 1 位十进制数中的 0~9 这 10 个数码，即二进制表示的十进制数。<br>
+<strong>汉字内码</strong>： 计算机内部存储、处理加工和传输汉字时所用的由 0 和 1 符号组成的代码。
+<strong>码距</strong>： 一组编码中对应位上数字位不同的最小个数。<br>
+<strong>奇偶校验</strong>：通过检测校验码中 1 的个数的奇 / 偶性是否改变来判断数据是否出错的一种数据校验方法。<br>
+<strong>海明校验</strong>：是一种基于多重奇校验且具有检测与纠正错误的校验方法。其基本原理是 将有效信息按某种规律分成若干组，每组安排一个校验位进行奇偶测试，就能提供多位检错信息，以指出最大可能是哪位出错，从而将其纠正。
+<strong>循环冗余校验</strong>： 是数据通信领域中最常用的一种 具有检测与纠正错误能力 差错校验码， 基利用生成多项式并基于模 2 运算建立编码规则。
+<strong>检错</strong>：检测被传送的信息中是否发生差错。<br>
+<strong>纠错</strong>： 纠正信息在传送或存储过程中所发生的错误。</p>
+<h1 id="二练习">二、练习</h1>
+<h3 id="1-为什么计算机中采用二进制-">1) 为什么计算机中采用二进制 ?</h3>
+<p>答： 因为二进制具有运算简单和表示简单的优点，除此之外还有可靠和容易实现等特点。
+具体来说，是因为：
+（ 1 ）技术实现简单，计算机是由逻辑电路组成，逻辑电话通常只有两个状态，开关
+的接通与断开，这两种状态正好可以用“ 1 ”和“ 0 ”表示。<br>
+（ 2 ）简化运算规则：两个二进制数和、积运算组合各有三种，运算规则简单，有利
+于简化计算机内部结构，提高运算速度。<br>
+（ 3 ）适合逻辑运算：逻辑代数是逻辑运算的理论依据，二进制只有两个数码，正好
+与逻辑代数中的“真”和“假”相吻合。<br>
+（ 4 ）易于进行转换，二进制与十进制数易于互相转换。</p>
+<h3 id="2-为什么计算机中采用补码表示带符号的整数-">2) 为什么计算机中采用补码表示带符号的整数 ?</h3>
+<p>答： 采用补码运算具有如下两个特征：
+（ 1 ） 因为使用补码可以将符号位和其他位统一处理，同时，减法也可以按加法来处理，即如果是补码表示的数，不管是加减法都直接用加法运算即可实现。
+（ 2 ） 两个用补码表示的数相加时，如果最高位（符号位）有进位，则进位被舍弃。
+这样的运算有两个好处：
+（ a ） 使符号位能与有效值部分一起参加运算，从而简化运算规则。从而可以简化运算器的结构，提高运算速度；（减法运算可以用加法运算表示出来。）
+（ b ） 加法运算比减法运算更易于实现。使减法运算转换为加法运算，进一步简化计算机中运算器的线路设计。</p>
+<h3 id="3-浮点数的表示范围和精确度分别由什么决定--字长一定时浮点数的表示范围与精确度之间有和关系-">3) 浮点数的表示范围和精确度分别由什么决定 ? 字长一定时浮点数的表示范围与精确度之间有和关系 ?</h3>
+<p>答：浮点数的表示范围由阶码的位数决定，精确度由尾数的位数决定。
+当机器字长一定时，分给阶码的位数越多，尾数占用的位数就越少，则数的表示范围越大。而尾数占用的位数减少，必然会减少数的有效数位，即影响数的精度。</p>
+<h3 id="4-汉字输入码机内码和字型码在汉字处理过程中各有何作用">4) 汉字输入码、机内码和字型码在汉字处理过程中各有何作用？</h3>
+<p>答：汉字输入码、机内码和字型码，分别用于汉字的输入、汉字在计算机内的处理以及汉字的显示和打印。
+具体来说，计算机要对汉字信息进行处理，首先要将汉字转换成计算机可以识别的二进制形式并输入到计算机，这是由汉字输入码完成的；汉字输入到计算机后，还需要转换成内码才能被计算机处理，显然，汉字内码也应该是二进制形式。如果需要显示和打印汉字，还要将汉字的内码转换成字形码。</p>
+<h3 id="5-在机内码中如何区分两个-ascii-码字符和一个汉字-">5) 在机内码中如何区分两个 ASCII 码字符和一个汉字 ?</h3>
+<p>答：将一个汉字看成是两个扩展 ASCII 码，使表示 GB2312 汉字的两个字节的最高位都为 1 ，而每个 ASCII 码字符中每个字节的最高位为 0 。这样就能区别一个机内码到底对应一个汉字还是两个西文字符。</p>
+<h3 id="6--8421-码-就是二进制数这种说法对吗为什么">6) “ 8421 码 就是二进制数”。这种说法对吗？为什么？</h3>
+<p>答：这种说法是不对的。 8421 码 是一种最简单的有权码， 它选取 4 位二进制数的前 10 个代码 0000 ～ 1001 分别对应表示十进制数的 10 个数码。若按权求和，和数就等于该代码所对应的十进制数。
+8421 码 是一种编码方式，用于十进位制与二进制数之间的转换。
+而 二进制数是用 0 和 1 两个数码来表示的数。二者是不同的概念，不能等同。</p>
+<h3 id="7-如何识别浮点数的正负浮点数能表示的数值范围和数值的精确度取决于什么">7) 如何识别浮点数的正负？浮点数能表示的数值范围和数值的精确度取决于什么？</h3>
+<p>答：当采用一般浮点数格式表示浮点数时 , 阶码和尾数都各包含一位符号位。浮点数的正负由尾数的的符号位决定。当采用 IEEE754 格式时，通过数符就能判断出浮点数的正负。
+浮点数能表示的数值范围和数值的精确度，分别取决于阶码的位数和尾数的位数。</p>
+<h3 id="8-简述-crc-的纠错原理">8) 简述 CRC 的纠错原理。</h3>
+<p>答：发送部件将某信息的 CRC 码传送至接收部件，接收部件收到 CRC 码后，仍用约定的生成多项式 G(x) 去除，若余数为 0 ，表示传送正确；若余数不为 0 ，表示出错，再由余数的值来确定哪一位出错，从而加以纠正。具体的纠错原理如下：
+（ 1 ） 不论错误出现在哪一位 , 均要通过将出错位循环左移到最左边的一位上时被纠正；
+（ 2 ） 不为零余数的具有循环特性。即在余数后面补一个零除以生成多项目式 , 将得到下一个余数 , 继续在新余数基础上补零除以生成多项式 , 继续该操作，余数最后能循环到最开始的余数。
+（ 3 ） CRC 就是利用不为零余数的循环特性 , 在循环计算余数的同时，将收到的 CRC 编码同步移动，当余数循环到等于最左边位出错对应的余数时，表明已将出错的位移到 CRC 码的最左边 , 对出错位进行纠错。
+（ 4 ） 继续进行余数的循环计算 , 并同步移动 CRC 编码 , 当余数又回到最开始的值时 , 纠错后的 CRC 码又回到了最开始的位置。至此，完成 CRC 的纠错任务。</p>
+<h3 id="9写出下列各数的原码反码和补码">9)写出下列各数的原码、反码和补码。</h3>
+<p>0 ，   一 0 ，  0.10101 ，   一 0.10101 ，  0.11111 ，   一 0.11111 ，   － 0.10000 ，  0.10000
+解：
+x=0 ，则［＋ 0 ］ 原   ＝  0.00 … 0  ，  [ ＋ 0   ] 反 ＝  0.00 … 0 ，［＋ 0 ］ 补   ＝ 0.00 … 0 ；
+x=-0 ，则［－ 0 ］ 原   ＝  1.00 … 0 ， [ － 0] 反   ＝  1.11 … l ， [ － 0] 补   ＝   0.00 … 0 ；
+x= 0.10101 ，则［ x ］ 原   ＝ 0.10101 ， [x] 反   ＝ 0.10101 ， [x] 补   ＝ 0.10101 ；
+x= 一 0.10101 ，则［ x ］ 原   ＝ 1.10101 ， [x] 反   ＝ 1.01010 ， [x] 补   ＝ 1.01011 ；
+x= 0.11111 ，则［ x ］ 原   ＝ 0.11111 ， [x] 反   ＝ 0.00000 ， [x] 补   ＝ 0.00001 ；
+x= 一 0.11111 ，则［ x ］ 原   ＝ 1.11111 ， [x] 反   ＝ 1.00000 ， [x] 补   ＝ 1.00001 ；
+x= － 0.10000 ，则［ x ］ 原   ＝ 1.10000 ， [x] 反   ＝ 1.01111 ， [x] 补   ＝ 1.10000 ；
+x= 0.10000 ，则［ x ］ 原   ＝ 0.10000 ， [x] 反   ＝ 0.10000 ， [x] 补   ＝ 0.10000 。</p>
+<h3 id="10已知-x--010110y--001010-求">10)已知 x ＝ 0.10110,y ＝ —0.01010, 求：</h3>
+<p>[x/2] 补 , [x/4] 补 , [y/2] 补 , [2y] 补
+解：  [x] 原 =0.10110=[x] 反 =[x] 补 ，
+所以 [x/2] 补 =0.010110 ， [x/4] 补 =0.0010110 ；
+[y] 原 =1.01010 ， [y] 反 =1.10101 ， [y] 补 =1.10110 ，
+所以 [y/2] 补 =1.110110 ， [2y] 补 =1.0110 。</p>
+<h3 id="11c-语言中允许无符号数和有符号整数之间的转换---下面是一段-c-语言代码---给出在-32-位计算机中上述程序段的输出结果并分析原因-">11)C 语言中允许无符号数和有符号整数之间的转换 ,  下面是一段 C 语言代码 ,  给出在 32 位计算机中上述程序段的输出结果并分析原因 。</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"> <span class="kt">int</span> <span class="n">x</span> <span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+ <span class="n">Unsigned</span> <span class="n">u</span><span class="o">=</span><span class="mi">2147483648</span><span class="p">;</span>
+<span class="n">Printf</span> <span class="p">(</span><span class="err">“</span><span class="n">x</span><span class="o">=%</span><span class="n">u</span><span class="o">=%</span><span class="n">d</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+<span class="n">Printf</span> <span class="p">(</span><span class="err">“</span><span class="n">u</span><span class="o">=%</span><span class="n">u</span><span class="o">=%</span><span class="n">d</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">u</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>原因： x 是 int 型，在计算机中以补码形式存在。 %u 以无符号输出， %d 输出真值 , 所以 x=4294967295=-1 。
+u=2 31 是一个无符号数，无溢出，由于首位为 1
+%u 符号输出第一位为非符号位，所以是 2147483648
+%d  第一位为符号位，所以是负数，取反加 1 还是 2 31 所以是 -2147483648 。</p>
+<h3 id="12用-ieee754--32位浮点数标准表示十进制数">12)用 IEEE754  32位浮点数标准表示十进制数</h3>
+<p>a)   b) 3.1415927 c )64000
+解：
+a)   首先分别将整数和分数部分转换成二进制数 ：
+=-110.101
+移动小数点，使其 变成 1.M 的形式：
+-110.101=-1.10101*2 2
+于是得到：
+S=0,  e = 2 ， E=  10 + 01111111  =  10000001 ， M   =   10101
+最后得到 32 位浮点数的二进制存储格式为：
+1 100   0000   1 101 0100 0000 0000 0000 0000= （ C0D40000 ） 16
+b)   首先分别将整数和分数部分转换成二进制数：
+3.1415927 = 11.00100100001111110110101
+移动小数点，使其 变成 1.M 的形式
+11.00100100001111110110101 = 1.100100100001111110110101 × 2
+于是得到：
+S=0,  e = 1 ， E=  1 + 01111111  = 10000000 ， M   =   10010010000111111011010
+最后得到 32 位浮点数的二进制存储格式为：
+0 100   0000   0 100 1001 0000 1111 1101 1010= （ 40490FDA ） 16
+c)   首先将 6400 转换成二进制数：
+64000 =1100100000000
+移动小数点，使其 变成 1.M 的形式
+1100100000000=1.100100000000 × 2 12
+于是得到：
+S=0,  e = 12 ， E=  1100 + 01111111  = 10001011 ， M   =  1001
+最后得到 32 位浮点数的二进制存储格式为：
+0 100   0101   1 100 1000 0000 0000 0000 0000=( 45C 80000)   16</p>
+<h3 id="13求与-ieee754-32-位浮点数-43940000h-对应的十进制数">13)求与 IEEE754 32 位浮点数 43940000H 对应的十进制数。</h3>
+<p>解：
+43940000H= （ 0 100   0011   1 001 0100 0000 0000 0000 0000 ） 2
+S=0 ， E= （ 10000111 ） 2 -127=8 ， M=1.00101
+所以表示数为 100101000 ，对应的十进制数为 296 。</p>
+<h3 id="14设有效信息为-01011011分别写出奇校验码和偶校验码如果接收方收到的有效信息为-01011010说明如何发现错误">14)设有效信息为 01011011，分别写出奇校验码和偶校验码。如果接收方收到的有效信息为 01011010，说明如何发现错误。</h3>
+<p>解：奇偶校验位分别为： 0 和 1 ，
+奇校验码： 01011011 0
+偶校验码： 01011011 1
+如果采用奇校验，则发送方发出的奇校验码 x= 01011011 0 （前 8 位 是 有效信息位，最后一位 是 校验位），
+如果接收方收到的 x=01011010 0  ( 只有 1 位出错，最后一个 0 是校验位 ),
+接收方按奇校验方式根据 01011010 计算得到的验位 C ’ ＝ 1  ，与从信息中读到得校验码的取值不同，表明传送的信息发生了错误。
+如果采用偶校验，利用相似的方法可以发现错误。</p>
+<h3 id="15由6个字符的7位ascii编码排列再加上水平和垂直偶校验位构成如表223的行列结构最后一列为水平奇偶校验位最后一行为垂直奇偶校验位">15)由6个字符的7位ASCII编码排列，再加上水平和垂直偶校验位构成如表2.23的行列结构（最后一列为水平奇偶校验位，最后一行为垂直奇偶校验位）</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200405215605137.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200405215605137.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200405215605137.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200405215605137.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<p>则  X 1  X 2  X 3  X 4  处的比特分别为   _1110 _ ；  X 5  X 6  X 7  X 8  处的比特分别为   <em>1000</em> ；  X 9  X 10  X 11  X 12   处的比特分别为   _1011 _ ；  Y 1  和  Y 2  处的字符分别为   <em><em>I</em> _  和  __ 7</em> _ 。
+解答思路：利用 交叉奇 / 偶校验 原理来确定各个 X 值，再查询 ASCII 码表获知   Y 1  和  Y 2 是什么字符。</p>
+<h3 id="16设8位有效信息为01101ll0试写出它的海明校验码给出过程说明分组检测方式并给出指误字及其逻辑表达式如果接收方收到的有效信息变成01101111说明如何定位错误并纠正错误">16)设8位有效信息为01101ll0，试写出它的海明校验码。给出过程，说明分组检测方式，并给出指误字及其逻辑表达式。如果接收方收到的有效信息变成01101111，说明如何定位错误并纠正错误。</h3>
+<p>解：被检验位有 8 位，设检验位有 r 位
+因为： 8+r&lt;=2 r   -1
+r=4;
+设四位分别为 P1，P2，P3，P4
+海明码为：
+P1 P2 0 P3 1 1 0 P4 1110
+P1 ： 3 ， 5 ， 7 ， 9 ， 11
+P2 ： 3 ， 6 ， 7 ， 10 ， 11
+P3 ： 5 ， 6 ， 7 ， 12
+P4 ： 9 ， 10 ， 11 ， 12
+所以  P1=1 ， P2=1 P3=0 P4=1
+海明码为： 110011011110
+指错位 G1 ： 1 ， 3 ， 5 ， 7 ， 9 ， 11
+G2 ： 2 ， 3 ， 6 ， 7 ， 10 ， 11
+G3 ： 4 ， 5 ， 6 ， 7 ， 12
+G4 ： 8 ， 9 ， 10 ， 11 ， 12
+G1=0 ， G2=0 ， G3=0 ， G4=0</p>
+<hr>
+<p><a href="http://www.icourse163.org/learn/HUST-1003159001?tid=1206076221#/learn/announce" target="_blank" rel="noopener noreffer">参考资料</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-03-11 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/2020/03/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/2020/03/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/" data-title="第二章数据表示总结与练习" data-hashtags="计算机组成原理,总结,练习,奇偶校验,海明校验"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/2020/03/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/" data-hashtag="计算机组成原理"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/2020/03/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/" data-title="第二章数据表示总结与练习"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/2020/03/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/" data-title="第二章数据表示总结与练习"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a>,&nbsp;<a href="/tags/%E6%80%BB%E7%BB%93/">总结</a>,&nbsp;<a href="/tags/%E7%BB%83%E4%B9%A0/">练习</a>,&nbsp;<a href="/tags/%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C/">奇偶校验</a>,&nbsp;<a href="/tags/%E6%B5%B7%E6%98%8E%E6%A0%A1%E9%AA%8C/">海明校验</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2020/03/2.6%E6%B5%B7%E6%98%8E%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" class="prev" rel="prev" title="2.6海明校验及其实现"><i class="fas fa-angle-left fa-fw"></i>2.6海明校验及其实现</a>
+            <a href="/2020/03/3.1%E5%AE%9A%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%8A%E6%BA%A2%E5%87%BA%E6%A3%80%E6%B5%8B/" class="next" rel="next" title="3.1定点数运算及溢出检测">3.1定点数运算及溢出检测<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{"valine":{"appId":"LzWmGBbN4JzdkCMWlCR1AcUQ-gzGzoHsz","appKey":"3Tw1cqFWjneUsJIio9gXs8CI","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"data":{"id-1":"❤欢迎来到我的博客~","id-2":"❤欢迎来到我的博客~"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":" ","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":140}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

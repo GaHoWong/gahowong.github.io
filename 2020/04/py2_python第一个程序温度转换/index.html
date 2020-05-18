@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Python第一个程序——温度转换 - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="Python第一个程序——温度转换" />
+<meta property="og:description" content="之前学习C语言的时候，是先学习C的各种概念后才去动手的，这次我希望先动手操作，再去慢慢理解它的原理。学习一门新语言时，当然少不了”Hello" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/2020/04/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2/" />
+<meta property="article:published_time" content="2020-04-18T13:50:38+08:00" />
+<meta property="article:modified_time" content="2020-04-18T15:58:26+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python第一个程序——温度转换"/>
+<meta name="twitter:description" content="之前学习C语言的时候，是先学习C的各种概念后才去动手的，这次我希望先动手操作，再去慢慢理解它的原理。学习一门新语言时，当然少不了”Hello"/>
+<meta name="application-name" content="黄家豪的博客">
+<meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/2020/04/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2/" /><link rel="prev" href="http://example.org/2020/04/py1_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0python/" /><link rel="next" href="http://example.org/2020/04/py3_python%E7%9A%8435%E4%B8%AA%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E5%90%AB%E4%B9%89%E5%8F%8A%E7%94%A8%E6%B3%95/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Python第一个程序——温度转换",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/2020\/04\/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Python语言程序设计, 温度转换程序, Hello World, in, 列表, eval()","wordcount":  1215 ,
+        "url": "http:\/\/example.org\/2020\/04\/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2\/","datePublished": "2020-04-18T13:50:38+08:00","dateModified": "2020-04-18T15:58:26+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "GaHo"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><script src="/live2d-widget/autoload.js"></script><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> 主页 </a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。"> 文章 </a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！"> 标签 </a><a class="menu-item" href="/categories/" title="分类可以快速查找文章"> 分类 </a><a class="menu-item" href="/file/" title="好东西都在这！"> 资源 </a><a class="menu-item" href="/message-board/message-board" title="留言板"> 动态与留言 </a><a class="menu-item" href="/about/" title="我的个人简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">主页</a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。">文章</a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！">标签</a><a class="menu-item" href="/categories/" title="分类可以快速查找文章">分类</a><a class="menu-item" href="/file/" title="好东西都在这！">资源</a><a class="menu-item" href="/message-board/message-board" title="留言板">动态与留言</a><a class="menu-item" href="/about/" title="我的个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Python第一个程序——温度转换</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/about/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>GaHo</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/python%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
+                                <i class="far fa-folder fa-fw"></i>Python语言程序设计
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-04-18>2020-04-18</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1215 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id="/2020/04/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="leancloud_visitors" data-flag-title="Python第一个程序——温度转换">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>之前学习C语言的时候，是先学习C的各种概念后才去动手的，这次我希望先动手操作，再去慢慢理解它的原理。学习一门新语言时，当然少不了”Hello Word“</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#传统操作</span>
+<span class="s2">&#34;&#34;&#34;多行
+</span><span class="s2">注释&#34;&#34;&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Hello Word!&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>先对与C来说，输出hello word简直是太简单了。有了C的基础，学习Python也容易很多。不难发现，在 Python 程序中使用 # 可以对代码进行单行注释，用三个单引号或三个双引号将注释的内容括起来，则是多行注释。print()函数也与C中的printf()有区别,在函数后不用加分号（；）了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#温度转换.py</span>
+<span class="n">TempStr</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;请输入带有符号的温度值：&#34;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">TempStr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">]:</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">TempStr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span><span class="o">/</span><span class="mf">1.8</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;转换后的温度是{:.2f}C&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">C</span><span class="p">))</span>
+<span class="k">elif</span> <span class="n">TempStr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]:</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="mf">1.8</span><span class="o">*</span><span class="nb">eval</span><span class="p">(</span><span class="n">TempStr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">32</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;转换后的温度是{:.2f}F&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">F</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;输入格式错误&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在python中，与C不同的时不需要在每一条语句后面加上分号，而Python中是通过缩进来判断语句是否执行完毕，一般的是四个空格，在同一个文本中缩进格式必须是一致的，尽量少使用tab键缩进。
+短短的十行代码，它包括了四种数据类型，整数、浮点数、字符串和列表。
+TempStr是<strong>字符串类型</strong>，字符串顾名思义就是一对单引号或双引号表示，由0个或多个字符组成的<strong>有序字符序列</strong>。索引的下标是从0开始，字符串有正向递增和反向递减的序号，比如TempStr[-1]，就是索引TempStr这个字符串中，倒数第一个字符串。</p>
+<p><strong>列表</strong>刚开始我以为列表很难理解，当我深入了解发现，其实列表相当于C语言中的数组，与C语言数组不同的是：列表可以存储任意数据类型的数据。列表中的每一个元素分配一个索引号，且索引的下标是从0开始。与C语言的数组类似。</p>
+<p><strong>关键字 in</strong>可以判断字符串是否在列表中，比如TempStr[-1] in [&lsquo;F&rsquo;,&lsquo;f&rsquo;]判断，TempStr字符串的最后一个字符是否与列表的某一个元素相同，如果相同则返回True否则False。
+<strong>分支语句 if else elif</strong>要注意格式和c不同，例如：<strong>if</strong>  条件  **：**如果中间的条件为True，它将执行冒号之后的带有缩进的语句。</p>
+<p><strong>函数</strong>函数能根据参数产生不同的输出功能的过程。
+&lt;变量&gt; = input(&ldquo;这里是提示作用的字符串&rdquo;)</p>
+<p>print（”&lt;字符串&gt;“）</p>
+<p>eval()作用就是去掉参数最外侧的引号（单引号和双引号）然后执行里面余下语句的函数，假如</p>
+<p>TempStr[0:-1] = “123”，eval(TempStr[0:-1])就是把字符串”123“转换为数字123。</p>
+<hr>
+<p>参考资料:<a href="https://item.jd.com/12128326.html?dist=jd" target="_blank" rel="noopener noreffer">Python语言程序设计基础(第2版)》嵩天、礼欣、黄天羽著，高等教育出版社，2017.2（讲授Python 3版本）</a></p>
+<p><a href="http://www.icourse163.org/course/BIT-268001" target="_blank" rel="noopener noreffer">视频课程</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-04-18 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/2020/04/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/2020/04/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2/" data-title="Python第一个程序——温度转换" data-hashtags="Python语言程序设计,温度转换程序,Hello World,in,列表,eval()"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/2020/04/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2/" data-hashtag="Python语言程序设计"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/2020/04/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2/" data-title="Python第一个程序——温度转换"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/2020/04/py2_python%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2/" data-title="Python第一个程序——温度转换"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">Python语言程序设计</a>,&nbsp;<a href="/tags/%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2%E7%A8%8B%E5%BA%8F/">温度转换程序</a>,&nbsp;<a href="/tags/hello-world/">Hello World</a>,&nbsp;<a href="/tags/in/">in</a>,&nbsp;<a href="/tags/%E5%88%97%E8%A1%A8/">列表</a>,&nbsp;<a href="/tags/eval/">eval()</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2020/04/py1_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0python/" class="prev" rel="prev" title="为什么要学习Python？"><i class="fas fa-angle-left fa-fw"></i>为什么要学习Python？</a>
+            <a href="/2020/04/py3_python%E7%9A%8435%E4%B8%AA%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E5%90%AB%E4%B9%89%E5%8F%8A%E7%94%A8%E6%B3%95/" class="next" rel="next" title="Python的35个关键字的含义及用法">Python的35个关键字的含义及用法<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{"valine":{"appId":"LzWmGBbN4JzdkCMWlCR1AcUQ-gzGzoHsz","appKey":"3Tw1cqFWjneUsJIio9gXs8CI","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"data":{"id-1":"❤欢迎来到我的博客~","id-2":"❤欢迎来到我的博客~"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":" ","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":140}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
