@@ -22,3 +22,7 @@
 评论的时候，留下在[Gravatar](http://cn.gravatar.com/)注册时所使用的邮箱即可。
 
 
+
+1
+
+
