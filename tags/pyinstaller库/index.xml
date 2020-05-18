@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>PyInstaller库 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/pyinstaller%E5%BA%93/</link>
+        <description>PyInstaller库 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Sun, 10 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/pyinstaller%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+    <title>PyInstaller库应用——科赫雪花小包裹</title>
+    <link>http://example.org/py20_pyinstaller%E5%BA%93/</link>
+    <pubDate>Sun, 10 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py20_pyinstaller%E5%BA%93/</guid>
+    <description><![CDATA[PyInstaller库是第三方库，因此需要pip安装，（用的是清华镜像） 1 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyinstaller 安装完会出现这样的提示 使用方法 cmd命令行 1 pyinstaller -F &lt]]></description>
+</item></channel>
+</rss>

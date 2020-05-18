@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>变量 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/%E5%8F%98%E9%87%8F/</link>
+        <description>变量 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Sun, 07 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E5%8F%98%E9%87%8F/" rel="self" type="application/rss+xml" /><item>
+    <title>C 变量</title>
+    <link>http://example.org/7c-%E5%8F%98%E9%87%8F/</link>
+    <pubDate>Sun, 07 Oct 2018 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/7c-%E5%8F%98%E9%87%8F/</guid>
+    <description><![CDATA[变量其实只不过是程序可操作的存储区的名称。C 中每个变量都有特定的类型，类型决定了变量存储的大小和布局，该范围内的值都可以存储在内存中，运算符]]></description>
+</item><item>
+    <title>C 程序结构</title>
+    <link>http://example.org/4c-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/</link>
+    <pubDate>Thu, 04 Oct 2018 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/4c-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/</guid>
+    <description><![CDATA[C 程序主要包括以下部分： 预处理器指令 函数 变量 语句 &amp; 表达式 注释 1 2 3 4 5 6 7 #include &lt;stdio.h&gt; /* 我的第一个 C 程序 */ int main() { printf(&#34;Hello, World! \n&#34;); return 0; } 1、程序的第一行 #include &lt;stdio.h&gt; 是预]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,78 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Python语言程序设计 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/python%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</link>
+        <description>Python语言程序设计 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Sat, 16 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/python%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="self" type="application/rss+xml" /><item>
+    <title>Python 程序设计思维</title>
+    <link>http://example.org/py27_python-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4/</link>
+    <pubDate>Sat, 16 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py27_python-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4/</guid>
+    <description><![CDATA[自顶向下 和 自底向上 自顶向下（设计） 解决复杂问题的有效方法 将一个总问题表达为若干个小问题组成的形式 使用同样方法进一步分解小问题 直至，小问题可以]]></description>
+</item><item>
+    <title>OS库</title>
+    <link>http://example.org/py25_os%E5%BA%93/</link>
+    <pubDate>Fri, 15 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py25_os%E5%BA%93/</guid>
+    <description><![CDATA[OS库是Python标准库，包含几百个函数。OS模块提供了非常丰富的方法用来处理文件和目录。 常用的几个函数 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17]]></description>
+</item><item>
+    <title>文件的使用</title>
+    <link>http://example.org/py26_%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+    <pubDate>Thu, 14 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py26_%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+    <description><![CDATA[定义 文件是数据的抽象和集合 是存储在辅助存储器上的数据序列 是数据存储的一种形式 文件的展现形态：文本文件和二进制文件 文件文件和二进制文件只是文件]]></description>
+</item><item>
+    <title>wordcloud库</title>
+    <link>http://example.org/py23_wordcloud%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+    <pubDate>Wed, 13 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py23_wordcloud%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+    <description><![CDATA[wordcloud是优秀的词云展示第三方库，它可以根据文本中词语出现的频率等参数绘制词云，词云的绘制形状、尺寸和颜色都可以设定。 安装 安装wo]]></description>
+</item><item>
+    <title>二维数据的格式化和处理</title>
+    <link>http://example.org/py22_%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AE%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%92%8C%E5%A4%84%E7%90%86/</link>
+    <pubDate>Tue, 12 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py22_%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AE%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%92%8C%E5%A4%84%E7%90%86/</guid>
+    <description><![CDATA[什么是二维数据？ 我的理解跟c语言的二位数组的理解一致，例如这个列表list[0][1]就是二维数据，它跟数学上的二维是一致的。 1 2 3 list = [[1,2,3],[4,5,6],[7,8,9]] list[0][1]]]></description>
+</item><item>
+    <title>用python实现文本词频统计</title>
+    <link>http://example.org/py21_%E6%96%87%E6%9C%AC%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/</link>
+    <pubDate>Mon, 11 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py21_%E6%96%87%E6%9C%AC%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/</guid>
+    <description><![CDATA[英文文本 对于英文文本，首先要把文本放到当前代码.py文件的目录下。 1、对文本进行open操作 2、由于英文单词有大小写的，将所有大写转换为小写]]></description>
+</item><item>
+    <title>PyInstaller库应用——科赫雪花小包裹</title>
+    <link>http://example.org/py20_pyinstaller%E5%BA%93/</link>
+    <pubDate>Sun, 10 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py20_pyinstaller%E5%BA%93/</guid>
+    <description><![CDATA[PyInstaller库是第三方库，因此需要pip安装，（用的是清华镜像） 1 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyinstaller 安装完会出现这样的提示 使用方法 cmd命令行 1 pyinstaller -F &lt]]></description>
+</item><item>
+    <title>基本统计值计算</title>
+    <link>http://example.org/py18_%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1%E5%80%BC%E8%AE%A1%E7%AE%97/</link>
+    <pubDate>Sat, 09 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py18_%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1%E5%80%BC%E8%AE%A1%E7%AE%97/</guid>
+    <description><![CDATA[为了加深组合数据类型的理解，用python实现基本数值的计算，根据用户给出的n个数值，分别求出平均值、方差、中位数。 1、要求平均值，那么就需]]></description>
+</item><item>
+    <title>Python组合数据类型</title>
+    <link>http://example.org/py17_python%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+    <pubDate>Fri, 08 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py17_python%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+    <description><![CDATA[之前写了一篇文章是Python基本数据类型，主要记录了python的整数类型、浮点数类型、负数类型和常用的数值运算函数。除了基本类型，pyt]]></description>
+</item><item>
+    <title>函数递归思维</title>
+    <link>http://example.org/py16_%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92/</link>
+    <pubDate>Thu, 07 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py16_%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92/</guid>
+    <description><![CDATA[编程语言中，函数直接或间接调用函数本身，则该函数称为递归函数。它的定义是这样写的：一种计算过程，如果其中每一步都要用到前一步或前几步的结果，]]></description>
+</item></channel>
+</rss>

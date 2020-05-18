@@ -1,0 +1,29 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>STM8s - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/stm8s/</link>
+        <description>STM8s - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Fri, 01 May 2020 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/stm8s/" rel="self" type="application/rss+xml" /><item>
+    <title>步进电机运动控制板设计二</title>
+    <link>http://example.org/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9D%BF%E8%AE%BE%E8%AE%A1%E4%B8%89/</link>
+    <pubDate>Fri, 01 May 2020 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9D%BF%E8%AE%BE%E8%AE%A1%E4%B8%89/</guid>
+    <description><![CDATA[PCB设计 用Altium Designer打开StepperMotor.PrjPcb（File -&gt; Open Project…），在PCB图MotorSt]]></description>
+</item><item>
+    <title>步进电机运动控制板设计二</title>
+    <link>http://example.org/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9D%BF%E8%AE%BE%E8%AE%A1%E4%BA%8C/</link>
+    <pubDate>Tue, 21 Apr 2020 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9D%BF%E8%AE%BE%E8%AE%A1%E4%BA%8C/</guid>
+    <description><![CDATA[最小系统原理图设计 第一部分电机模块原理图设计 1. 创建项目 用Altium Designer打开\Labs\StepperMoto目录下名为Step]]></description>
+</item><item>
+    <title>步进电机运动控制板设计一</title>
+    <link>http://example.org/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9D%BF%E8%AE%BE%E8%AE%A1%E4%B8%80/</link>
+    <pubDate>Sat, 21 Mar 2020 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9D%BF%E8%AE%BE%E8%AE%A1%E4%B8%80/</guid>
+    <description><![CDATA[前言：嵌入式系统基础这门课是大二下学期开设的，由于疫情的原因，我们都未能返校做实验，因此有些动手的过程都是在家里做的。在这门课开始之前，我对]]></description>
+</item></channel>
+</rss>

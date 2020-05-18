@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>void类型 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/void%E7%B1%BB%E5%9E%8B/</link>
+        <description>void类型 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Sat, 06 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/void%E7%B1%BB%E5%9E%8B/" rel="self" type="application/rss+xml" /><item>
+    <title>C语言模板</title>
+    <link>http://example.org/6c-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+    <pubDate>Sat, 06 Oct 2018 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/6c-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+    <description><![CDATA[在 C 语言中，数据类型指的是用于声明不同类型的变量或函数的一个广泛的系统。变量的类型决定了变量存储占用的空间，以及如何解释存储的位模式。 C 中的]]></description>
+</item></channel>
+</rss>

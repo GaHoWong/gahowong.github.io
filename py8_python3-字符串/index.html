@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Python3 字符串 - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="Python3 字符串" />
+<meta property="og:description" content="字符串 字符串是 Python 中最常用的数据类型。是由0个或多个字符组成的有序字符序列，我们可以使用引号( &#39; 或 &quot; )来创建单行字符串，由一对三单引号或三双引" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2/" />
+<meta property="article:published_time" content="2020-04-29T00:00:00+08:00" />
+<meta property="article:modified_time" content="2020-04-30T00:00:00+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python3 字符串"/>
+<meta name="twitter:description" content="字符串 字符串是 Python 中最常用的数据类型。是由0个或多个字符组成的有序字符序列，我们可以使用引号( &#39; 或 &quot; )来创建单行字符串，由一对三单引号或三双引"/>
+<meta name="application-name" content="黄家豪的博客">
+<meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2/" /><link rel="prev" href="http://example.org/py7_%E6%AF%8F%E5%A4%A9%E5%8A%AA%E5%8A%9B%E4%B8%80%E7%82%B9%E7%82%B9%E5%92%8C%E6%AF%8F%E5%A4%A9%E9%80%80%E6%AD%A5%E4%B8%80%E7%82%B9%E7%82%B9%E7%9A%84%E6%80%9D%E8%80%83/" /><link rel="next" href="http://example.org/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Python3 字符串",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Python语言程序设计, 数据类型, 字符串","wordcount":  3612 ,
+        "url": "http:\/\/example.org\/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2\/","datePublished": "2020-04-29T00:00:00+08:00","dateModified": "2020-04-30T00:00:00+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "HAO"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><script src="/live2d-widget/autoload.js"></script><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> 主页 </a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。"> 文章 </a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！"> 标签 </a><a class="menu-item" href="/categories/" title="分类可以快速查找文章"> 分类 </a><a class="menu-item" href="/file/" title="好东西都在这！"> 资源 </a><a class="menu-item" href="/message-board/" title="我的个人简介"> 动态与留言 </a><a class="menu-item" href="/about/" title="我的个人简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">主页</a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。">文章</a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！">标签</a><a class="menu-item" href="/categories/" title="分类可以快速查找文章">分类</a><a class="menu-item" href="/file/" title="好东西都在这！">资源</a><a class="menu-item" href="/message-board/" title="我的个人简介">动态与留言</a><a class="menu-item" href="/about/" title="我的个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Python3 字符串</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/about/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>HAO</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/python%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
+                                <i class="far fa-folder fa-fw"></i>Python语言程序设计
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-04-29>2020-04-29</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3612 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;<span id="/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="leancloud_visitors" data-flag-title="Python3 字符串">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#字符串的顺序">字符串的顺序</a></li>
+        <li><a href="#字符串的使用">字符串的使用</a>
+          <ul>
+            <li><a href="#索引">索引</a></li>
+            <li><a href="#切片">切片</a></li>
+            <li><a href="#拼接">拼接</a></li>
+          </ul>
+        </li>
+        <li><a href="#转义符">转义符</a></li>
+        <li><a href="#python字符串运算符">Python字符串运算符</a></li>
+        <li><a href="#python字符串格式化">Python字符串格式化</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<h1 id="字符串">字符串</h1>
+<p>字符串是 Python 中最常用的数据类型。<strong>是由0个或多个字符组成的有序字符序列</strong>，我们可以使用引号( ' 或 &quot; )来创建<strong>单行</strong>字符串，由一对三单引号或三双引号表示，可表示<strong>多行</strong>字符串。</p>
+<p>问：三引号不是多行注释吗？</p>
+<p>答：其实在python中并没有规定三引号是多行注释。在python中，如果字符串没有被赋值，程序是不会执行的，三引号的多行注释，本质上还是字符串。</p>
+<h3 id="字符串的顺序">字符串的顺序</h3>
+<p>字符串是由0个或多个字符组成的有序字符序列，他的第一个字符串序号为0.
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200417170426797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200417170426797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200417170426797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200417170426797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<h3 id="字符串的使用">字符串的使用</h3>
+<h4 id="索引">索引</h4>
+<p>使用[ ]获取字符串中一个或多个字符
+<strong>索引</strong>：返回字符串中单个字符&lt;字符串&gt;[M]
+12345678&rdquo;[0]
+或
+number[-1]</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">number</span> <span class="o">=</span> <span class="s2">&#34;12345678&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;12345678&#34;</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">number</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="mi">1</span>
+<span class="o">&gt;</span><span class="mi">8</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="切片">切片</h4>
+<p>-<strong>切片</strong>：返回字符串中一段字符子串&lt;字符串&gt;[M: N]
+“12345678&rdquo;[1:3]<br>
+或
+number[1:3]</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">number</span> <span class="o">=</span> <span class="s2">&#34;12345678&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;12345678&#34;</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">number</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="mi">23</span>
+<span class="o">&gt;</span><span class="mi">23</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>切片的高级用法</strong></p>
+<p>&lt;字符串&gt;[M: N: K]，M缺失表示至开头，N缺失表示至结尾，根据步长K对字符串切片</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;〇一二三四五六七八九十&#34;</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> 
+<span class="o">&gt;&gt;&gt;</span><span class="s2">&#34;一三五七&#34;</span>
+<span class="s2">&#34;〇一二三四五六七八九十&#34;</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+<span class="o">&gt;&gt;&gt;</span><span class="s2">&#34;十九八七六五四三二一〇&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="拼接">拼接</h4>
+<p>可以截取字符串的一部分并与其他字段拼接，如下实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">例一：</span>
+<span class="n">var1</span> <span class="o">=</span> <span class="s1">&#39;Hello World!&#39;</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&#34;已更新字符串 : &#34;</span><span class="p">,</span> <span class="n">var1</span><span class="p">[:]</span> <span class="o">+</span> <span class="s1">&#39;python!&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="err">已更新字符串</span> <span class="p">:</span>  <span class="n">Hello</span> <span class="n">World</span><span class="err">!</span><span class="n">python</span><span class="err">!</span>
+<span class="err">例二：</span>
+<span class="n">var1</span> <span class="o">=</span> <span class="s1">&#39;Hello World!&#39;</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&#34;已更新字符串 : &#34;</span><span class="p">,</span> <span class="n">var1</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;python!&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="err">已更新字符串</span> <span class="p">:</span>  <span class="n">Hello</span> <span class="n">python</span><span class="err">!</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="转义符">转义符</h3>
+<p>转义符表达特定字符的本意,在需要在字符中使用特殊字符时，python用反斜杠()转义字符。如下表：
+| 转义字符    | 描述                                                         |
+| &mdash;&mdash;&mdash;&ndash; | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; |
+| (在行尾时) | 续行符                                                       |
+| \          | 反斜杠符号                                                   |
+| '          | 单引号                                                       |
+| &quot;          | 双引号                                                       |
+| \a          | 响铃                                                         |
+| \b          | 退格(Backspace)                                              |
+| \000        | 空                                                           |
+| \n          | 换行                                                         |
+| \v          | 纵向制表符                                                   |
+| \t          | 横向制表符                                                   |
+| \r          | 回车                                                         |
+| \f          | 换页                                                         |
+| \oyy        | 八进制数，yy 代表的字符，例如：\o12 代表换行，其中 o 是字母，不是数字 0。 |
+| \xyy        | 十六进制数，yy代表的字符，例如：\x0a代表换行                 |
+| \other      | 其它的字符以普通格式输出                                     |</p>
+<h3 id="python字符串运算符">Python字符串运算符</h3>
+<p>下表实例变量a值为字符串 &ldquo;Hello&rdquo;，b变量值为 &ldquo;Python&rdquo;：
+| 操作符 | 描述                                                         | 实例                              |
+| &mdash;&mdash; | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; |
+| +      | 字符串连接                                                   | a + b 输出结果： HelloPython      |
+| *      | 重复输出字符串                                               | a*2 输出结果：HelloHello          |
+| []     | 通过索引获取字符串中字符                                     | a[1] 输出结果 e                   |
+| [ : ]  | 截取字符串中的一部分，遵循左闭右开原则，str[0:2] 是不包含第 3 个字符的。 | a[1:4] 输出结果 ell               |
+| in     | 成员运算符 - 如果字符串中包含给定的字符返回 True             | &lsquo;H&rsquo; in a 输出结果 True            |
+| not in | 成员运算符 - 如果字符串中不包含给定的字符返回 True           | &lsquo;M&rsquo; not in a 输出结果 True        |
+| r/R    | 原始字符串 - 原始字符串：所有的字符串都是直接按照字面的意思来使用，没有转义特殊或不能打印的字符。 原始字符串除在字符串的第一个引号前加上字母 r（可以大小写）以外，与普通字符串有着几乎完全相同的语法。 | print( r&rsquo;\n&rsquo;)<br />print( R&rsquo;\n&rsquo; ) |
+| %      | 格式字符串                                                   | 如下面的例子                      |</p>
+<h3 id="python字符串格式化">Python字符串格式化</h3>
+<p>Python 支持格式化字符串的输出 。尽管这样可能会用到非常复杂的表达式，但最基本的用法是将一个值插入到一个有字符串格式符 %s 的字符串中。
+在 Python 中，字符串格式化使用与 C 中 sprintf 函数一样的语法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span> <span class="p">(</span><span class="s2">&#34;我叫 </span><span class="si">%s</span><span class="s2"> 今年 </span><span class="si">%d</span><span class="s2"> 岁!&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;小明&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span><span class="err">我叫</span> <span class="err">小明</span> <span class="err">今年</span> <span class="mi">12</span> <span class="err">岁!</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>python字符串格式化符号:
+| 符  号 | 描述                                 |
+| &mdash;&mdash; | :&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; |
+| %c     | 格式化字符及其ASCII码                |
+| %s     | 格式化字符串                         |
+| %d     | 格式化整数                           |
+| %u     | 格式化无符号整型                     |
+| %o     | 格式化无符号八进制数                 |
+| %x     | 格式化无符号十六进制数               |
+| %X     | 格式化无符号十六进制数（大写）       |
+| %f     | 格式化浮点数字，可指定小数点后的精度 |
+| %e     | 用科学计数法格式化浮点数             |
+| %E     | 作用同%e，用科学计数法格式化浮点数   |
+| %g     | %f和%e的简写                         |
+| %G     | %f 和 %E 的简写                      |
+| %p     | 用十六进制数格式化变量的地址         |
+格式化操作符辅助指令:
+| 符号  | 功能                                                         |
+| &mdash;&ndash; | :&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; |
+| *     | 定义宽度或者小数点精度                                       |
+| -    | 用做左对齐                                                   |
+| +     | 在正数前面显示加号( + )                                      |
+| <sp>  | 在正数前面显示空格                                           |
+| #    | 在八进制数前面显示零(&lsquo;0&rsquo;)，在十六进制前面显示'0x&rsquo;或者'0X&rsquo;(取决于用的是&rsquo;x&rsquo;还是&rsquo;X&rsquo;) |
+| 0     | 显示的数字前面填充'0&rsquo;而不是默认的空格                        |
+| %     | &lsquo;%%&lsquo;输出一个单一的&rsquo;%&rsquo;                                        |
+| (var) | 映射变量(字典参数)                                           |
+| m.n.  | m 是显示的最小总宽度,n 是小数点后的位数(如果可用的话)        |</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">capitalize</span><span class="p">()</span>
+<span class="err">将字符串的第一个字符转换为大写</span>
+<span class="n">center</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">fillchar</span><span class="p">)</span>
+
+<span class="err">返回一个指定的宽度</span> <span class="n">width</span> <span class="err">居中的字符串，</span><span class="n">fillchar</span> <span class="err">为填充的字符，默认为空格。</span>
+<span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">beg</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+
+<span class="err">返回</span> <span class="nb">str</span> <span class="err">在</span> <span class="n">string</span> <span class="err">里面出现的次数，如果</span> <span class="n">beg</span> <span class="err">或者</span> <span class="n">end</span> <span class="err">指定则返回指定范围内</span> <span class="nb">str</span> <span class="err">出现的次数</span>
+<span class="nb">bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&#34;utf-8&#34;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&#34;strict&#34;</span><span class="p">)</span>
+
+<span class="n">Python3</span> <span class="err">中没有</span> <span class="n">decode</span> <span class="err">方法，但我们可以使用</span> <span class="nb">bytes</span> <span class="err">对象的</span> <span class="n">decode</span><span class="p">()</span> <span class="err">方法来解码给定的</span> <span class="nb">bytes</span> <span class="err">对象，这个</span> <span class="nb">bytes</span> <span class="err">对象可以由</span> <span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span> <span class="err">来编码返回。</span>
+<span class="n">encode</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;strict&#39;</span><span class="p">)</span>
+
+<span class="err">以</span> <span class="n">encoding</span> <span class="err">指定的编码格式编码字符串，如果出错默认报一个</span><span class="ne">ValueError</span> <span class="err">的异常，除非</span> <span class="n">errors</span> <span class="err">指定的是</span><span class="s1">&#39;ignore&#39;</span><span class="err">或者</span><span class="s1">&#39;replace&#39;</span>
+<span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">,</span> <span class="n">beg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+<span class="err">检查字符串是否以</span> <span class="n">obj</span> <span class="err">结束，如果</span><span class="n">beg</span> <span class="err">或者</span> <span class="n">end</span> <span class="err">指定则检查指定的范围内是否以</span> <span class="n">obj</span> <span class="err">结束，如果是，返回</span> <span class="bp">True</span><span class="p">,</span><span class="err">否则返回</span> <span class="bp">False</span><span class="o">.</span>
+<span class="n">expandtabs</span><span class="p">(</span><span class="n">tabsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="err">把字符串</span> <span class="n">string</span> <span class="err">中的</span> <span class="n">tab</span> <span class="err">符号转为空格，</span><span class="n">tab</span> <span class="err">符号默认的空格数是</span> <span class="mi">8</span> <span class="err">。</span>
+<span class="n">find</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">beg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+
+<span class="err">检测</span> <span class="nb">str</span> <span class="err">是否包含在字符串中，如果指定范围</span> <span class="n">beg</span> <span class="err">和</span> <span class="n">end</span> <span class="err">，则检查是否包含在指定范围内，如果包含返回开始的索引值，否则返回</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">index</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">beg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+
+<span class="err">跟</span><span class="n">find</span><span class="p">()</span><span class="err">方法一样，只不过如果</span><span class="n">str不在字符串中会报一个异常</span><span class="o">.</span>
+<span class="n">isalnum</span><span class="p">()</span>
+
+<span class="err">如果字符串至少有一个字符并且所有字符都是字母或数字则返</span> <span class="err">回</span> <span class="bp">True</span><span class="p">,</span><span class="err">否则返回</span> <span class="bp">False</span>
+<span class="n">isalpha</span><span class="p">()</span>
+
+<span class="err">如果字符串至少有一个字符并且所有字符都是字母则返回</span> <span class="bp">True</span><span class="p">,</span> <span class="err">否则返回</span> <span class="bp">False</span>
+<span class="n">isdigit</span><span class="p">()</span>
+
+<span class="err">如果字符串只包含数字则返回</span> <span class="bp">True</span> <span class="err">否则返回</span> <span class="bp">False</span><span class="o">..</span>
+<span class="n">islower</span><span class="p">()</span>
+
+<span class="err">如果字符串中包含至少一个区分大小写的字符，并且所有这些</span><span class="p">(</span><span class="err">区分大小写的</span><span class="p">)</span><span class="err">字符都是小写，则返回</span> <span class="bp">True</span><span class="err">，否则返回</span> <span class="bp">False</span>
+<span class="n">isnumeric</span><span class="p">()</span>
+
+<span class="err">如果字符串中只包含数字字符，则返回</span> <span class="bp">True</span><span class="err">，否则返回</span> <span class="bp">False</span>
+<span class="n">isspace</span><span class="p">()</span>
+
+<span class="err">如果字符串中只包含空白，则返回</span> <span class="bp">True</span><span class="err">，否则返回</span> <span class="bp">False</span><span class="o">.</span>
+<span class="n">istitle</span><span class="p">()</span>
+
+<span class="err">如果字符串是标题化的</span><span class="p">(</span><span class="err">见</span> <span class="n">title</span><span class="p">())</span><span class="err">则返回</span> <span class="bp">True</span><span class="err">，否则返回</span> <span class="bp">False</span>
+<span class="n">isupper</span><span class="p">()</span>
+
+<span class="err">如果字符串中包含至少一个区分大小写的字符，并且所有这些</span><span class="p">(</span><span class="err">区分大小写的</span><span class="p">)</span><span class="err">字符都是大写，则返回</span> <span class="bp">True</span><span class="err">，否则返回</span> <span class="bp">False</span>
+<span class="n">join</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+
+<span class="err">以指定字符串作为分隔符，将</span> <span class="n">seq</span> <span class="err">中所有的元素</span><span class="p">(</span><span class="err">的字符串表示</span><span class="p">)</span><span class="err">合并为一个新的字符串</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+
+<span class="err">返回字符串长度</span>
+<span class="n">ljust</span><span class="p">(</span><span class="n">width</span><span class="p">[,</span> <span class="n">fillchar</span><span class="p">])</span>
+
+<span class="err">返回一个原字符串左对齐</span><span class="p">,</span><span class="err">并使用</span> <span class="n">fillchar</span> <span class="err">填充至长度</span> <span class="n">width</span> <span class="err">的新字符串，</span><span class="n">fillchar</span> <span class="err">默认为空格。</span>
+<span class="n">lower</span><span class="p">()</span>
+
+<span class="err">转换字符串中所有大写字符为小写</span><span class="o">.</span>
+<span class="n">lstrip</span><span class="p">()</span>
+
+<span class="err">截掉字符串左边的空格或指定字符。</span>
+<span class="n">maketrans</span><span class="p">()</span>
+
+<span class="err">创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。</span>
+<span class="nb">max</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="err">返回字符串</span> <span class="nb">str</span> <span class="err">中最大的字母。</span>
+<span class="nb">min</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="err">返回字符串</span> <span class="nb">str</span> <span class="err">中最小的字母。</span>
+<span class="n">replace</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span> <span class="p">[,</span> <span class="nb">max</span><span class="p">])</span>
+
+<span class="err">把</span> <span class="err">将字符串中的</span> <span class="n">str1</span> <span class="err">替换成</span> <span class="n">str2</span><span class="p">,</span><span class="err">如果</span> <span class="nb">max</span> <span class="err">指定，则替换不超过</span> <span class="nb">max</span> <span class="err">次。</span>
+<span class="n">rfind</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">beg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+
+<span class="err">类似于</span> <span class="n">find</span><span class="p">()</span><span class="err">函数，不过是从右边开始查找</span><span class="o">.</span>
+<span class="n">rindex</span><span class="p">(</span> <span class="nb">str</span><span class="p">,</span> <span class="n">beg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+
+<span class="err">类似于</span> <span class="n">index</span><span class="p">()</span><span class="err">，不过是从右边开始</span><span class="o">.</span>
+<span class="n">rjust</span><span class="p">(</span><span class="n">width</span><span class="p">,[,</span> <span class="n">fillchar</span><span class="p">])</span>
+
+<span class="err">返回一个原字符串右对齐</span><span class="p">,</span><span class="err">并使用</span><span class="n">fillchar</span><span class="p">(</span><span class="err">默认空格）填充至长度</span> <span class="n">width</span> <span class="err">的新字符串</span>
+<span class="n">rstrip</span><span class="p">()</span>
+
+<span class="err">删除字符串字符串末尾的空格</span><span class="o">.</span>
+<span class="n">split</span><span class="p">(</span><span class="nb">str</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+
+<span class="n">num</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span> <span class="err">以</span> <span class="nb">str</span> <span class="err">为分隔符截取字符串，如果</span> <span class="n">num</span> <span class="err">有指定值，则仅截取</span> <span class="n">num</span><span class="o">+</span><span class="mi">1</span> <span class="err">个子字符串</span>
+<span class="n">splitlines</span><span class="p">([</span><span class="n">keepends</span><span class="p">])</span>
+
+<span class="err">按照行</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">,</span> \<span class="n">n</span><span class="s1">&#39;)分隔，返回一个包含各行作为元素的列表，如果参数 keepends 为 False，不包含换行符，如果为 True，则保留换行符。</span>
+<span class="n">startswith</span><span class="p">(</span><span class="n">substr</span><span class="p">,</span> <span class="n">beg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+
+<span class="err">检查字符串是否是以指定子字符串</span> <span class="n">substr</span> <span class="err">开头，是则返回</span> <span class="bp">True</span><span class="err">，否则返回</span> <span class="bp">False</span><span class="err">。如果</span><span class="n">beg</span> <span class="err">和</span> <span class="n">end</span> <span class="err">指定值，则在指定范围内检查。</span>
+<span class="n">strip</span><span class="p">([</span><span class="n">chars</span><span class="p">])</span>
+
+<span class="err">在字符串上执行</span> <span class="n">lstrip</span><span class="p">()</span><span class="err">和</span> <span class="n">rstrip</span><span class="p">()</span>
+<span class="n">swapcase</span><span class="p">()</span>
+
+<span class="err">将字符串中大写转换为小写，小写转换为大写</span>
+<span class="n">title</span><span class="p">()</span>
+
+<span class="err">返回</span><span class="s2">&#34;标题化&#34;</span><span class="err">的字符串</span><span class="p">,</span><span class="err">就是说所有单词都是以大写开始，其余字母均为小写</span><span class="p">(</span><span class="err">见</span> <span class="n">istitle</span><span class="p">())</span>
+<span class="n">translate</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">deletechars</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+
+<span class="err">根据</span> <span class="nb">str</span> <span class="err">给出的表</span><span class="p">(</span><span class="err">包含</span> <span class="mi">256</span> <span class="err">个字符</span><span class="p">)</span><span class="err">转换</span> <span class="n">string</span> <span class="err">的字符</span><span class="p">,</span> <span class="err">要过滤掉的字符放到</span> <span class="n">deletechars</span> <span class="err">参数中</span>
+<span class="n">upper</span><span class="p">()</span>
+
+<span class="err">转换字符串中的小写字母为大写</span>
+<span class="n">zfill</span> <span class="p">(</span><span class="n">width</span><span class="p">)</span>
+
+<span class="err">返回长度为</span> <span class="n">width</span> <span class="err">的字符串，原字符串右对齐，前面填充</span><span class="mi">0</span>
+<span class="n">isdecimal</span><span class="p">()</span>
+
+<span class="err">检查字符串是否只包含十进制字符，如果是返回</span> <span class="n">true</span><span class="err">，否则返回</span> <span class="n">false</span><span class="err">。</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>参考资料:<a href="https://item.jd.com/12128326.html?dist=jd" target="_blank" rel="noopener noreffer">Python语言程序设计基础(第2版)》嵩天、礼欣、黄天羽著，高等教育出版社，2017.2（讲授Python 3版本）</a></p>
+<p><a href="http://www.icourse163.org/course/BIT-268001" target="_blank" rel="noopener noreffer">视频课程</a></p>
+<p><a href="https://www.runoob.com/python3/python3-number.html" target="_blank" rel="noopener noreffer">Python3菜鸟教程</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-04-30 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-title="Python3 字符串" data-hashtags="Python语言程序设计,数据类型,字符串"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-hashtag="Python语言程序设计"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-title="Python3 字符串"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/py8_python3-%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-title="Python3 字符串"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">Python语言程序设计</a>,&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>,&nbsp;<a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/py7_%E6%AF%8F%E5%A4%A9%E5%8A%AA%E5%8A%9B%E4%B8%80%E7%82%B9%E7%82%B9%E5%92%8C%E6%AF%8F%E5%A4%A9%E9%80%80%E6%AD%A5%E4%B8%80%E7%82%B9%E7%82%B9%E7%9A%84%E6%80%9D%E8%80%83/" class="prev" rel="prev" title="每天努力一点点和每天退步一点点的思考"><i class="fas fa-angle-left fa-fw"></i>每天努力一点点和每天退步一点点的思考</a>
+            <a href="/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" class="next" rel="next" title="time库的使用">time库的使用<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{"valine":{"appId":"LzWmGBbN4JzdkCMWlCR1AcUQ-gzGzoHsz","appKey":"3Tw1cqFWjneUsJIio9gXs8CI","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"data":{"id-1":"❤欢迎来到我的博客~","id-2":"❤欢迎来到我的博客~"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":" ","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":140}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

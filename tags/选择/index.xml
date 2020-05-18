@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>选择 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/%E9%80%89%E6%8B%A9/</link>
+        <description>选择 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Fri, 19 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E9%80%89%E6%8B%A9/" rel="self" type="application/rss+xml" /><item>
+    <title>C 判断、选择与循环</title>
+    <link>http://example.org/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/</link>
+    <pubDate>Fri, 19 Oct 2018 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/</guid>
+    <description><![CDATA[判断结构 if else 通常情况： C 语言把任何非零和非空的值假定为 true，把零或 null 假定为 false。 1 2 3 4 5 if(判断条件){ 语句块1 }else{ 语句块2 } 由]]></description>
+</item></channel>
+</rss>

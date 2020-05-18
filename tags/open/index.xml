@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>open - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/open/</link>
+        <description>open - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Thu, 14 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/open/" rel="self" type="application/rss+xml" /><item>
+    <title>文件的使用</title>
+    <link>http://example.org/py26_%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+    <pubDate>Thu, 14 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py26_%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+    <description><![CDATA[定义 文件是数据的抽象和集合 是存储在辅助存储器上的数据序列 是数据存储的一种形式 文件的展现形态：文本文件和二进制文件 文件文件和二进制文件只是文件]]></description>
+</item></channel>
+</rss>

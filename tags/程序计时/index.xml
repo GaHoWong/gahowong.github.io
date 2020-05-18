@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>程序计时 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%97%B6/</link>
+        <description>程序计时 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Fri, 01 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%97%B6/" rel="self" type="application/rss+xml" /><item>
+    <title>使用timesleep()模拟文本进度条</title>
+    <link>http://example.org/py10_-%E4%BD%BF%E7%94%A8timesleep%E6%A8%A1%E6%8B%9F%E6%96%87%E6%9C%AC%E8%BF%9B%E5%BA%A6%E6%9D%A1/</link>
+    <pubDate>Fri, 01 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py10_-%E4%BD%BF%E7%94%A8timesleep%E6%A8%A1%E6%8B%9F%E6%96%87%E6%9C%AC%E8%BF%9B%E5%BA%A6%E6%9D%A1/</guid>
+    <description><![CDATA[文本进度条 简单的开始 1 2 3 4 5 6 7 8 9 10 11 #TextProBarV1.py import time scale = 10 print(&#34;------执行开始------&#34;) for i in range(scale+1): a = &#39;*&#39; * i b]]></description>
+</item><item>
+    <title>time库的使用</title>
+    <link>http://example.org/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+    <pubDate>Thu, 30 Apr 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+    <description><![CDATA[终于学到time库了，我之前学Linux时已经吃透了，所以学习python的time库毫无压力。无非是复习之前的知识而已。但博文还是要写的，]]></description>
+</item></channel>
+</rss>

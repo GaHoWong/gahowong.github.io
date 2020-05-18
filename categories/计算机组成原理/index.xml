@@ -1,0 +1,78 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>计算机组成原理 - 分类 - 黄家豪的博客</title>
+        <link>http://example.org/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/</link>
+        <description>计算机组成原理 - 分类 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Fri, 13 Mar 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" rel="self" type="application/rss+xml" /><item>
+    <title>3.2 定点数补码加、减运算器设计</title>
+    <link>http://example.org/3.2-%E5%AE%9A%E7%82%B9%E6%95%B0%E8%A1%A5%E7%A0%81%E5%8A%A0%E5%87%8F%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/</link>
+    <pubDate>Fri, 13 Mar 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/3.2-%E5%AE%9A%E7%82%B9%E6%95%B0%E8%A1%A5%E7%A0%81%E5%8A%A0%E5%87%8F%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/</guid>
+    <description><![CDATA[基于上一篇文章3.1定点数运算及溢出检测的学习，这次需要完成的定点数补码加、减运算器的设计。 什么是全加器？ 在开始之前，需要复习一下数字电路中]]></description>
+</item><item>
+    <title>3.1定点数运算及溢出检测</title>
+    <link>http://example.org/3.1%E5%AE%9A%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%8A%E6%BA%A2%E5%87%BA%E6%A3%80%E6%B5%8B/</link>
+    <pubDate>Thu, 12 Mar 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/3.1%E5%AE%9A%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%8A%E6%BA%A2%E5%87%BA%E6%A3%80%E6%B5%8B/</guid>
+    <description><![CDATA[数据在计算机中是以一定的编码方式表示的，常用的编码有原码、反码、补码和移码。同一种算术运算，使用不同的编码，有不同的运算法则。由第2章对不同]]></description>
+</item><item>
+    <title>第二章数据表示总结与练习</title>
+    <link>http://example.org/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/</link>
+    <pubDate>Wed, 11 Mar 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/</guid>
+    <description><![CDATA[一、总结 真值： 正号和负号分别用“ + ”和“ - ”表示，数据位保持二进制值不变的数据表示方法。 数值数据：计算机所支持的一种数据类型，用于科学计算，]]></description>
+</item><item>
+    <title>2.6海明校验及其实现</title>
+    <link>http://example.org/2.6%E6%B5%B7%E6%98%8E%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</link>
+    <pubDate>Tue, 10 Mar 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/2.6%E6%B5%B7%E6%98%8E%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</guid>
+    <description><![CDATA[海明校验码是由理查德.海明（Richard H a m m i n g )于1950年提出的。它不仅具有检测错误的能力，同时还具有给出错误所在准确位置的能力]]></description>
+</item><item>
+    <title>2.5CRC校验及其实现</title>
+    <link>http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</link>
+    <pubDate>Mon, 09 Mar 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</guid>
+    <description><![CDATA[循环冗余校验是一种基于模2运算建立编码规则的校验码。对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备也执行类似的算法，以保证数据传]]></description>
+</item><item>
+    <title>2.4奇偶校验及其实现</title>
+    <link>http://example.org/2.4%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</link>
+    <pubDate>Sun, 08 Mar 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/2.4%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</guid>
+    <description><![CDATA[什么是奇偶校验？ 奇偶校验是一种常见的简单校验。根据被传输的一组二进制代码的数位中“1”的个数是奇数或偶数来进行校验。采用奇数的称为奇校验，反]]></description>
+</item><item>
+    <title>2.3数据校验基本原理</title>
+    <link>http://example.org/2.3%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</link>
+    <pubDate>Sat, 07 Mar 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/2.3%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</guid>
+    <description><![CDATA[受元器件的质量、电路故障或噪音干扰等因素的影响，计算机在对数据进行处理、传输及存储过程中，往往会出现错误。如何发现或纠正上述过程中的数据错误]]></description>
+</item><item>
+    <title>2.2定点与浮点数据表示</title>
+    <link>http://example.org/2.2%E5%AE%9A%E7%82%B9%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/</link>
+    <pubDate>Fri, 06 Mar 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/2.2%E5%AE%9A%E7%82%B9%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/</guid>
+    <description><![CDATA[一、定点数据表示 定点表示法约定机器中所有数据的小数点位置固定，其中，将小数点的位置固定在数据的最高数位之前(或符号位之后）的数据表示称为定点]]></description>
+</item><item>
+    <title>2.1机器内的数据表示</title>
+    <link>http://example.org/2.1%E6%9C%BA%E5%99%A8%E5%86%85%E7%9A%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/</link>
+    <pubDate>Thu, 05 Mar 2020 16:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/2.1%E6%9C%BA%E5%99%A8%E5%86%85%E7%9A%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/</guid>
+    <description><![CDATA[二进制具有运算简单、便于物理实现、节省设备等优点，所以被计算机采用。二进制数与十进制数一样有正负之分。 在计算机中，常采用数的符号和数值一起编]]></description>
+</item><item>
+    <title>第一章 计算机系统概述总结与练习</title>
+    <link>http://example.org/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/</link>
+    <pubDate>Wed, 04 Mar 2020 16:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0/</guid>
+    <description><![CDATA[一、冯•诺依曼结构计算机的特点、工作原理 1 )冯•诺依曼结构计算机的特点 (1)由运算器、控制器、存储器、输人设备和输出设备等5部分组成。 (2)]]></description>
+</item></channel>
+</rss>

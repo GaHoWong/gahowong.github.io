@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>2.5CRC校验及其实现 - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="2.5CRC校验及其实现" />
+<meta property="og:description" content="循环冗余校验是一种基于模2运算建立编码规则的校验码。对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备也执行类似的算法，以保证数据传" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" />
+<meta property="article:published_time" content="2020-03-09T13:50:38+08:00" />
+<meta property="article:modified_time" content="2020-03-09T15:58:26+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2.5CRC校验及其实现"/>
+<meta name="twitter:description" content="循环冗余校验是一种基于模2运算建立编码规则的校验码。对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备也执行类似的算法，以保证数据传"/>
+<meta name="application-name" content="黄家豪的博客">
+<meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="prev" href="http://example.org/2.4%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="next" href="http://example.org/2.6%E6%B5%B7%E6%98%8E%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "2.5CRC校验及其实现",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "计算机组成原理, 模2运算, CRC校验","wordcount":  1049 ,
+        "url": "http:\/\/example.org\/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0\/","datePublished": "2020-03-09T13:50:38+08:00","dateModified": "2020-03-09T15:58:26+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "HAO"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><script src="/live2d-widget/autoload.js"></script><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> 主页 </a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。"> 文章 </a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！"> 标签 </a><a class="menu-item" href="/categories/" title="分类可以快速查找文章"> 分类 </a><a class="menu-item" href="/file/" title="好东西都在这！"> 资源 </a><a class="menu-item" href="/message-board/" title="我的个人简介"> 动态与留言 </a><a class="menu-item" href="/about/" title="我的个人简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">主页</a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。">文章</a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！">标签</a><a class="menu-item" href="/categories/" title="分类可以快速查找文章">分类</a><a class="menu-item" href="/file/" title="好东西都在这！">资源</a><a class="menu-item" href="/message-board/" title="我的个人简介">动态与留言</a><a class="menu-item" href="/about/" title="我的个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">2.5CRC校验及其实现</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/about/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>HAO</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                                <i class="far fa-folder fa-fw"></i>计算机组成原理
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-03-09>2020-03-09</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1049 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id="/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" class="leancloud_visitors" data-flag-title="2.5CRC校验及其实现">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1模2运算">1.模2运算</a>
+          <ul>
+            <li><a href="#1模2加减运算">1)模2加减运算</a></li>
+            <li><a href="#2模2乘运算">2)模2乘运算</a></li>
+            <li><a href="#3-模2除运算">3 )模2除运算</a></li>
+          </ul>
+        </li>
+        <li><a href="#crc基本原理">CRC基本原理</a>
+          <ul>
+            <li><a href="#1生成多项式gx">（1）生成多项式G(x)</a></li>
+            <li><a href="#2crc-编码方法">（2）CRC 编码方法</a></li>
+            <li><a href="#3crc的检错与纠错">（3）CRC的检错与纠错</a></li>
+          </ul>
+        </li>
+        <li><a href="#crc软件实现">CRC软件实现</a></li>
+        <li><a href="#crc的应用">CRC的应用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>循环冗余校验是一种基于模2运算建立编码规则的校验码。对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备也执行类似的算法，以保证数据传输的正确性和完整性。CRC在磁存储器和计算机通信方面应用较多。</p>
+<h3 id="1模2运算">1.模2运算</h3>
+<h4 id="1模2加减运算">1)模2加减运算</h4>
+<p>模2加减运算就是按位加减运算，即不带进位和借位的二进制加法和减法运算。模2加与模2减运算的结果相同。
+运算规则如下：0±0 =  0，0±1 =  1，1±0 =  1，1士1 =  0</p>
+<h4 id="2模2乘运算">2)模2乘运算</h4>
+<p>模2乘运算即按模2加求部分积之和，无进位。例2. 2 1按模2乘法运算法则求1101与101之积。
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200405210209911.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200405210209911.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200405210209911.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200405210209911.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<h4 id="3-模2除运算">3 )模2除运算</h4>
+<p>模2除运算即按模2减求部分余数，不借位。其上商原则是：(1)部分余数首位为1时，商为1，减除数。(2)部分余数首位为0时，商为0，减0。( 3 )当部分余数的位数小于除数的位数时，该余数为最后余数.
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200405210322112.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200405210322112.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200405210322112.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200405210322112.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<h3 id="crc基本原理">CRC基本原理</h3>
+<h4 id="1生成多项式gx">（1）生成多项式G(x)</h4>
+<p>收发双方约定的一个(r + 1)位二进制数，发送方利用G(X)对信息多项式做模2除运算,生成校验码。接收方利用G(X)对收到的编码多项式做模2除运算检测差错及错误定位。
+<strong>G(x)应满足的条件：</strong>
+A、最高位和最低位必须为1；
+B、当被传送信息（CRC码）任何一位发生错误时，被生成多项式做除后应该使余数不为0；
+C、不同位发生错误时，模2除运算后余数不同；
+D、对不为0余数继续进行模2除运算应使余数循环。
+<strong>常见生成多项式G(x)</strong>
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200405210641586.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200405210641586.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200405210641586.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200405210641586.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<h4 id="2crc-编码方法">（2）CRC 编码方法</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200405210913563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200405210913563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200405210913563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200405210913563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" />
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/2020040521092347.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/2020040521092347.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/2020040521092347.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/2020040521092347.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<h4 id="3crc的检错与纠错">（3）CRC的检错与纠错</h4>
+<p>假如无错则余数为0，假如出错则余数不为0，纠错需要查看表
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200405211130603.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200405211130603.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200405211130603.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200405211130603.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" />
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200405211206448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200405211206448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200405211206448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200405211206448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" />
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200405211304683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200405211304683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200405211304683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200405211304683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<h3 id="crc软件实现">CRC软件实现</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="o">******</span><span class="err">该文件使用查表法计算</span><span class="n">CCITT</span> <span class="err">标准的</span><span class="n">CRC</span><span class="o">-</span><span class="mi">16</span><span class="err">检验码，并附测试代码</span><span class="o">*******</span><span class="err">*/</span>
+<span class="cp">#include</span>
+<span class="cpf">#define CRC_INIT 0xffff//CCITT初始CRC为全1</span><span class="cp">
+</span><span class="cp">#define GOOD_CRC 0xf0b8</span><span class="c1">//校验时计算出的固定结果值
+</span><span class="c1"></span><span class="cm">/****下表是常用ccitt16,生成式1021反转成8408后的查询表格****/</span>
+<span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">crc16_ccitt_table</span><span class="p">[</span><span class="mi">256</span><span class="p">]</span> <span class="o">=</span>
+<span class="p">{</span>      
+<span class="mh">0x0000</span><span class="p">,</span> <span class="mh">0x1189</span><span class="p">,</span> <span class="mh">0x2312</span><span class="p">,</span> <span class="mh">0x329b</span><span class="p">,</span> <span class="mh">0x4624</span><span class="p">,</span> <span class="mh">0x57ad</span><span class="p">,</span> <span class="mh">0x6536</span><span class="p">,</span> <span class="mh">0x74bf</span><span class="p">,</span><span class="mh">0x8c48</span><span class="p">,</span> <span class="mh">0x9dc1</span><span class="p">,</span> <span class="mh">0xaf5a</span><span class="p">,</span> <span class="mh">0xbed3</span><span class="p">,</span> <span class="mh">0xca6c</span><span class="p">,</span> <span class="mh">0xdbe5</span><span class="p">,</span> <span class="mh">0xe97e</span><span class="p">,</span><span class="mh">0xf8f7</span><span class="p">,</span><span class="mh">0x1081</span><span class="p">,</span> <span class="mh">0x0108</span><span class="p">,</span> <span class="mh">0x3393</span><span class="p">,</span> <span class="mh">0x221a</span><span class="p">,</span> <span class="mh">0x56a5</span><span class="p">,</span> <span class="mh">0x472c</span><span class="p">,</span> <span class="mh">0x75b7</span><span class="p">,</span> <span class="mh">0x643e</span><span class="p">,</span><span class="mh">0x9cc9</span><span class="p">,</span> <span class="mh">0x8d40</span><span class="p">,</span> <span class="mh">0xbfdb</span><span class="p">,</span> <span class="mh">0xae52</span><span class="p">,</span> <span class="mh">0xdaed</span><span class="p">,</span> <span class="mh">0xcb64</span><span class="p">,</span> <span class="mh">0xf9ff</span><span class="p">,</span> <span class="mh">0xe876</span><span class="p">,</span><span class="mh">0x2102</span><span class="p">,</span> <span class="mh">0x308b</span><span class="p">,</span> <span class="mh">0x0210</span><span class="p">,</span><span class="mh">0x1399</span><span class="p">,</span> <span class="mh">0x6726</span><span class="p">,</span> <span class="mh">0x76af</span><span class="p">,</span> <span class="mh">0x4434</span><span class="p">,</span> <span class="mh">0x55bd</span><span class="p">,</span><span class="mh">0xad4a</span><span class="p">,</span> <span class="mh">0xbcc3</span><span class="p">,</span> <span class="mh">0x8e58</span><span class="p">,</span> <span class="mh">0x9fd1</span><span class="p">,</span> <span class="mh">0xeb6e</span><span class="p">,</span> <span class="mh">0xfae7</span><span class="p">,</span> <span class="mh">0xc87c</span><span class="p">,</span> <span class="mh">0xd9f5</span><span class="p">,</span><span class="mh">0x3183</span><span class="p">,</span> <span class="mh">0x200a</span><span class="p">,</span> <span class="mh">0x1291</span><span class="p">,</span> <span class="mh">0x0318</span><span class="p">,</span> <span class="mh">0x77a7</span><span class="p">,</span> <span class="mh">0x662e</span><span class="p">,</span> <span class="mh">0x54b5</span><span class="p">,</span><span class="mh">0x453c</span><span class="p">,</span><span class="mh">0xbdcb</span><span class="p">,</span> <span class="mh">0xac42</span><span class="p">,</span> <span class="mh">0x9ed9</span><span class="p">,</span> <span class="mh">0x8f50</span><span class="p">,</span> <span class="mh">0xfbef</span><span class="p">,</span> <span class="mh">0xea66</span><span class="p">,</span> <span class="mh">0xd8fd</span><span class="p">,</span> <span class="mh">0xc974</span><span class="p">,</span><span class="mh">0x4204</span><span class="p">,</span> <span class="mh">0x538d</span><span class="p">,</span> <span class="mh">0x6116</span><span class="p">,</span> <span class="mh">0x709f</span><span class="p">,</span> <span class="mh">0x0420</span><span class="p">,</span> <span class="mh">0x15a9</span><span class="p">,</span> <span class="mh">0x2732</span><span class="p">,</span> <span class="mh">0x36bb</span><span class="p">,</span><span class="mh">0xce4c</span><span class="p">,</span> <span class="mh">0xdfc5</span><span class="p">,</span> <span class="mh">0xed5e</span><span class="p">,</span><span class="mh">0xfcd7</span><span class="p">,</span> <span class="mh">0x8868</span><span class="p">,</span> <span class="mh">0x99e1</span><span class="p">,</span> <span class="mh">0xab7a</span><span class="p">,</span> <span class="mh">0xbaf3</span><span class="p">,</span><span class="mh">0x5285</span><span class="p">,</span> <span class="mh">0x430c</span><span class="p">,</span> <span class="mh">0x7197</span><span class="p">,</span> <span class="mh">0x601e</span><span class="p">,</span> <span class="mh">0x14a1</span><span class="p">,</span> <span class="mh">0x0528</span><span class="p">,</span> <span class="mh">0x37b3</span><span class="p">,</span> <span class="mh">0x263a</span><span class="p">,</span><span class="mh">0xdecd</span><span class="p">,</span> <span class="mh">0xcf44</span><span class="p">,</span> <span class="mh">0xfddf</span><span class="p">,</span> <span class="mh">0xec56</span><span class="p">,</span> <span class="mh">0x98e9</span><span class="p">,</span> <span class="mh">0x8960</span><span class="p">,</span> <span class="mh">0xbbfb</span><span class="p">,</span><span class="mh">0xaa72</span><span class="p">,</span><span class="mh">0x6306</span><span class="p">,</span> <span class="mh">0x728f</span><span class="p">,</span> <span class="mh">0x4014</span><span class="p">,</span> <span class="mh">0x519d</span><span class="p">,</span> <span class="mh">0x2522</span><span class="p">,</span> <span class="mh">0x34ab</span><span class="p">,</span> <span class="mh">0x0630</span><span class="p">,</span> <span class="mh">0x17b9</span><span class="p">,</span><span class="mh">0xef4e</span><span class="p">,</span> <span class="mh">0xfec7</span><span class="p">,</span> <span class="mh">0xcc5c</span><span class="p">,</span> <span class="mh">0xddd5</span><span class="p">,</span> <span class="mh">0xa96a</span><span class="p">,</span> <span class="mh">0xb8e3</span><span class="p">,</span> <span class="mh">0x8a78</span><span class="p">,</span> <span class="mh">0x9bf1</span><span class="p">,</span><span class="mh">0x7387</span><span class="p">,</span> <span class="mh">0x620e</span><span class="p">,</span> <span class="mh">0x5095</span><span class="p">,</span><span class="mh">0x411c</span><span class="p">,</span> <span class="mh">0x35a3</span><span class="p">,</span> <span class="mh">0x242a</span><span class="p">,</span> <span class="mh">0x16b1</span><span class="p">,</span> <span class="mh">0x0738</span><span class="p">,</span><span class="mh">0xffcf</span><span class="p">,</span> <span class="mh">0xee46</span><span class="p">,</span> <span class="mh">0xdcdd</span><span class="p">,</span> <span class="mh">0xcd54</span><span class="p">,</span> <span class="mh">0xb9eb</span><span class="p">,</span> <span class="mh">0xa862</span><span class="p">,</span> <span class="mh">0x9af9</span><span class="p">,</span> <span class="mh">0x8b70</span><span class="p">,</span><span class="mh">0x8408</span><span class="p">,</span> <span class="mh">0x9581</span><span class="p">,</span> <span class="mh">0xa71a</span><span class="p">,</span> <span class="mh">0xb693</span><span class="p">,</span> <span class="mh">0xc22c</span><span class="p">,</span> <span class="mh">0xd3a5</span><span class="p">,</span> <span class="mh">0xe13e</span><span class="p">,</span><span class="mh">0xf0b7</span><span class="p">,</span><span class="mh">0x0840</span><span class="p">,</span> <span class="mh">0x19c9</span><span class="p">,</span> <span class="mh">0x2b52</span><span class="p">,</span> <span class="mh">0x3adb</span><span class="p">,</span> <span class="mh">0x4e64</span><span class="p">,</span> <span class="mh">0x5fed</span><span class="p">,</span> <span class="mh">0x6d76</span><span class="p">,</span> <span class="mh">0x7cff</span><span class="p">,</span><span class="mh">0x9489</span><span class="p">,</span> <span class="mh">0x8500</span><span class="p">,</span> <span class="mh">0xb79b</span><span class="p">,</span> <span class="mh">0xa612</span><span class="p">,</span> <span class="mh">0xd2ad</span><span class="p">,</span> <span class="mh">0xc324</span><span class="p">,</span> <span class="mh">0xf1bf</span><span class="p">,</span> <span class="mh">0xe036</span><span class="p">,</span><span class="mh">0x18c1</span><span class="p">,</span> <span class="mh">0x0948</span><span class="p">,</span> <span class="mh">0x3bd3</span><span class="p">,</span><span class="mh">0x2a5a</span><span class="p">,</span> <span class="mh">0x5ee5</span><span class="p">,</span> <span class="mh">0x4f6c</span><span class="p">,</span> <span class="mh">0x7df7</span><span class="p">,</span> <span class="mh">0x6c7e</span><span class="p">,</span><span class="mh">0xa50a</span><span class="p">,</span> <span class="mh">0xb483</span><span class="p">,</span> <span class="mh">0x8618</span><span class="p">,</span> <span class="mh">0x9791</span><span class="p">,</span> <span class="mh">0xe32e</span><span class="p">,</span> <span class="mh">0xf2a7</span><span class="p">,</span> <span class="mh">0xc03c</span><span class="p">,</span> <span class="mh">0xd1b5</span><span class="p">,</span><span class="mh">0x2942</span><span class="p">,</span> <span class="mh">0x38cb</span><span class="p">,</span> <span class="mh">0x0a50</span><span class="p">,</span> <span class="mh">0x1bd9</span><span class="p">,</span> <span class="mh">0x6f66</span><span class="p">,</span> <span class="mh">0x7eef</span><span class="p">,</span> <span class="mh">0x4c74</span><span class="p">,</span><span class="mh">0x5dfd</span><span class="p">,</span><span class="mh">0xb58b</span><span class="p">,</span> <span class="mh">0xa402</span><span class="p">,</span> <span class="mh">0x9699</span><span class="p">,</span> <span class="mh">0x8710</span><span class="p">,</span> <span class="mh">0xf3af</span><span class="p">,</span> <span class="mh">0xe226</span><span class="p">,</span> <span class="mh">0xd0bd</span><span class="p">,</span> <span class="mh">0xc134</span><span class="p">,</span><span class="mh">0x39c3</span><span class="p">,</span> <span class="mh">0x284a</span><span class="p">,</span> <span class="mh">0x1ad1</span><span class="p">,</span> <span class="mh">0x0b58</span><span class="p">,</span> <span class="mh">0x7fe7</span><span class="p">,</span> <span class="mh">0x6e6e</span><span class="p">,</span> <span class="mh">0x5cf5</span><span class="p">,</span> <span class="mh">0x4d7c</span><span class="p">,</span><span class="mh">0xc60c</span><span class="p">,</span> <span class="mh">0xd785</span><span class="p">,</span> <span class="mh">0xe51e</span><span class="p">,</span><span class="mh">0xf497</span><span class="p">,</span> <span class="mh">0x8028</span><span class="p">,</span> <span class="mh">0x91a1</span><span class="p">,</span> <span class="mh">0xa33a</span><span class="p">,</span> <span class="mh">0xb2b3</span><span class="p">,</span><span class="mh">0x4a44</span><span class="p">,</span> <span class="mh">0x5bcd</span><span class="p">,</span> <span class="mh">0x6956</span><span class="p">,</span> <span class="mh">0x78df</span><span class="p">,</span> <span class="mh">0x0c60</span><span class="p">,</span> <span class="mh">0x1de9</span><span class="p">,</span> <span class="mh">0x2f72</span><span class="p">,</span> <span class="mh">0x3efb</span><span class="p">,</span><span class="mh">0xd68d</span><span class="p">,</span> <span class="mh">0xc704</span><span class="p">,</span> <span class="mh">0xf59f</span><span class="p">,</span> <span class="mh">0xe416</span><span class="p">,</span> <span class="mh">0x90a9</span><span class="p">,</span> <span class="mh">0x8120</span><span class="p">,</span> <span class="mh">0xb3bb</span><span class="p">,</span><span class="mh">0xa232</span><span class="p">,</span><span class="mh">0x5ac5</span><span class="p">,</span> <span class="mh">0x4b4c</span><span class="p">,</span> <span class="mh">0x79d7</span><span class="p">,</span> <span class="mh">0x685e</span><span class="p">,</span> <span class="mh">0x1ce1</span><span class="p">,</span> <span class="mh">0x0d68</span><span class="p">,</span> <span class="mh">0x3ff3</span><span class="p">,</span> <span class="mh">0x2e7a</span><span class="p">,</span><span class="mh">0xe70e</span><span class="p">,</span> <span class="mh">0xf687</span><span class="p">,</span> <span class="mh">0xc41c</span><span class="p">,</span> <span class="mh">0xd595</span><span class="p">,</span> <span class="mh">0xa12a</span><span class="p">,</span> <span class="mh">0xb0a3</span><span class="p">,</span> <span class="mh">0x8238</span><span class="p">,</span> <span class="mh">0x93b1</span><span class="p">,</span><span class="mh">0x6b46</span><span class="p">,</span> <span class="mh">0x7acf</span><span class="p">,</span> <span class="mh">0x4854</span><span class="p">,</span><span class="mh">0x59dd</span><span class="p">,</span> <span class="mh">0x2d62</span><span class="p">,</span> <span class="mh">0x3ceb</span><span class="p">,</span> <span class="mh">0x0e70</span><span class="p">,</span> <span class="mh">0x1ff9</span><span class="p">,</span><span class="mh">0xf78f</span><span class="p">,</span> <span class="mh">0xe606</span><span class="p">,</span> <span class="mh">0xd49d</span><span class="p">,</span> <span class="mh">0xc514</span><span class="p">,</span> <span class="mh">0xb1ab</span><span class="p">,</span> <span class="mh">0xa022</span><span class="p">,</span> <span class="mh">0x92b9</span><span class="p">,</span> <span class="mh">0x8330</span><span class="p">,</span><span class="mh">0x7bc7</span><span class="p">,</span> <span class="mh">0x6a4e</span><span class="p">,</span> <span class="mh">0x58d5</span><span class="p">,</span> <span class="mh">0x495c</span><span class="p">,</span> <span class="mh">0x3de3</span><span class="p">,</span> <span class="mh">0x2c6a</span><span class="p">,</span> <span class="mh">0x1ef1</span><span class="p">,</span><span class="mh">0x0f78</span> <span class="p">};</span>
+<span class="kt">unsigned</span> <span class="kt">short</span> <span class="nf">do_crc</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">reg_init</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">message</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">intlen</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">crc_reg</span><span class="o">=</span> <span class="n">reg_init</span><span class="p">;</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">len</span><span class="o">--</span><span class="p">)</span>
+	<span class="n">crc_reg</span><span class="o">=</span> <span class="p">(</span><span class="n">crc_reg</span><span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span><span class="o">^</span> <span class="n">crc16_ccitt_table</span><span class="p">[(</span><span class="n">crc_reg</span><span class="o">^*</span><span class="n">message</span><span class="o">++</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">];</span>
+	<span class="k">return</span> <span class="n">crc_reg</span><span class="p">;</span> 
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="crc的应用">CRC的应用</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/2020040521191766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/2020040521191766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/2020040521191766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/2020040521191766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<hr>
+<p><a href="http://www.icourse163.org/learn/HUST-1003159001?tid=1206076221#/learn/announce" target="_blank" rel="noopener noreffer">参考资料</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-03-09 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-title="2.5CRC校验及其实现" data-hashtags="计算机组成原理,模2运算,CRC校验"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-hashtag="计算机组成原理"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-title="2.5CRC校验及其实现"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-title="2.5CRC校验及其实现"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a>,&nbsp;<a href="/tags/%E6%A8%A12%E8%BF%90%E7%AE%97/">模2运算</a>,&nbsp;<a href="/tags/crc%E6%A0%A1%E9%AA%8C/">CRC校验</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2.4%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" class="prev" rel="prev" title="2.4奇偶校验及其实现"><i class="fas fa-angle-left fa-fw"></i>2.4奇偶校验及其实现</a>
+            <a href="/2.6%E6%B5%B7%E6%98%8E%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" class="next" rel="next" title="2.6海明校验及其实现">2.6海明校验及其实现<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{"valine":{"appId":"LzWmGBbN4JzdkCMWlCR1AcUQ-gzGzoHsz","appKey":"3Tw1cqFWjneUsJIio9gXs8CI","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"data":{"id-1":"❤欢迎来到我的博客~","id-2":"❤欢迎来到我的博客~"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":" ","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":140}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Message boards on 黄家豪的博客</title>
+    <link>http://example.org/message-board/</link>
+    <description>Recent content in Message boards on 黄家豪的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+    <webMaster>gahowong@qq.com (黄家豪)</webMaster>
+    <lastBuildDate>Thu, 07 May 2020 15:58:26 +0800</lastBuildDate>
+    
+	<atom:link href="http://example.org/message-board/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>message board</title>
+      <link>http://example.org/message-board/message-board/</link>
+      <pubDate>Thu, 07 May 2020 15:58:26 +0800</pubDate>
+      <author>gahowong@qq.com (黄家豪)</author>
+      <guid>http://example.org/message-board/message-board/</guid>
+      <description>动态与留言专区 目前使用的是Gravatar 作为评论列表头像。 请自行登录或注册Gravatar，然后修改自己的头像。 评论的时候，留下在Grav</description>
+    </item>
+    
+  </channel>
+</rss>

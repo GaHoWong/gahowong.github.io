@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Turtle库 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/turtle%E5%BA%93/</link>
+        <description>Turtle库 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Wed, 06 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/turtle%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+    <title>七段数码管显示当前日期</title>
+    <link>http://example.org/py15_%E4%B8%83%E6%AE%B5%E6%95%B0%E7%A0%81%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F/</link>
+    <pubDate>Wed, 06 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py15_%E4%B8%83%E6%AE%B5%E6%95%B0%E7%A0%81%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F/</guid>
+    <description><![CDATA[作为电子信息工程的一名学生，七段数码管可以说是很常见的了。七段数码管通常用来显示时间。今天就利用七段数码管的例子要巩固刚刚所学的函数使用方法]]></description>
+</item><item>
+    <title>用Python绘图之Turtle(海龟)库详解</title>
+    <link>http://example.org/py4_%E7%94%A8python%E7%BB%98%E5%9B%BE%E4%B9%8Bturtle%E6%B5%B7%E9%BE%9F%E5%BA%93%E8%AF%A6%E8%A7%A3/</link>
+    <pubDate>Mon, 20 Apr 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/py4_%E7%94%A8python%E7%BB%98%E5%9B%BE%E4%B9%8Bturtle%E6%B5%B7%E9%BE%9F%E5%BA%93%E8%AF%A6%E8%A7%A3/</guid>
+    <description><![CDATA[Python的学习总是很有趣，强大的库让人欲罢不能，即使作为初学者的我来说，用代码绘图是极具诱惑力的，而Turtle库是Python语言中一]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>机器码 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/%E6%9C%BA%E5%99%A8%E7%A0%81/</link>
+        <description>机器码 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Thu, 05 Mar 2020 16:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%9C%BA%E5%99%A8%E7%A0%81/" rel="self" type="application/rss+xml" /><item>
+    <title>2.1机器内的数据表示</title>
+    <link>http://example.org/2.1%E6%9C%BA%E5%99%A8%E5%86%85%E7%9A%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/</link>
+    <pubDate>Thu, 05 Mar 2020 16:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/2.1%E6%9C%BA%E5%99%A8%E5%86%85%E7%9A%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/</guid>
+    <description><![CDATA[二进制具有运算简单、便于物理实现、节省设备等优点，所以被计算机采用。二进制数与十进制数一样有正负之分。 在计算机中，常采用数的符号和数值一起编]]></description>
+</item></channel>
+</rss>

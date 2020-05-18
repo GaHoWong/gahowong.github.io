@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>C 判断、选择与循环 - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="C 判断、选择与循环" />
+<meta property="og:description" content="判断结构 if else 通常情况： C 语言把任何非零和非空的值假定为 true，把零或 null 假定为 false。 1 2 3 4 5 if(判断条件){ 语句块1 }else{ 语句块2 } 由" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/" />
+<meta property="article:published_time" content="2018-10-19T00:50:38+08:00" />
+<meta property="article:modified_time" content="2020-01-21T15:58:26+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C 判断、选择与循环"/>
+<meta name="twitter:description" content="判断结构 if else 通常情况： C 语言把任何非零和非空的值假定为 true，把零或 null 假定为 false。 1 2 3 4 5 if(判断条件){ 语句块1 }else{ 语句块2 } 由"/>
+<meta name="application-name" content="黄家豪的博客">
+<meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/" /><link rel="prev" href="http://example.org/18static-%E7%9A%84%E7%94%A8%E6%B3%95%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/" /><link rel="next" href="http://example.org/20c-%E5%87%BD%E6%95%B0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "C 判断、选择与循环",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "C语言程序设计, C语言程序设计基础, 判断, 选择, 循环, if, else, while, 三目运算, 三元运算, switch, case, default, break, continue, goto, for","wordcount":  3684 ,
+        "url": "http:\/\/example.org\/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF\/","datePublished": "2018-10-19T00:50:38+08:00","dateModified": "2020-01-21T15:58:26+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "HAO"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><script src="/live2d-widget/autoload.js"></script><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> 主页 </a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。"> 文章 </a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！"> 标签 </a><a class="menu-item" href="/categories/" title="分类可以快速查找文章"> 分类 </a><a class="menu-item" href="/file/" title="好东西都在这！"> 资源 </a><a class="menu-item" href="/message-board/" title="我的个人简介"> 动态与留言 </a><a class="menu-item" href="/about/" title="我的个人简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">主页</a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。">文章</a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！">标签</a><a class="menu-item" href="/categories/" title="分类可以快速查找文章">分类</a><a class="menu-item" href="/file/" title="好东西都在这！">资源</a><a class="menu-item" href="/message-board/" title="我的个人简介">动态与留言</a><a class="menu-item" href="/about/" title="我的个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">C 判断、选择与循环</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/about/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>HAO</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/c%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
+                                <i class="far fa-folder fa-fw"></i>C语言程序设计
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2018-10-19>2018-10-19</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3684 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;<span id="/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/" class="leancloud_visitors" data-flag-title="C 判断、选择与循环">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#if-else">if else</a>
+          <ul>
+            <li><a href="#通常情况">通常情况：</a></li>
+            <li><a href="#多个if-else语句">多个if else语句</a></li>
+            <li><a href="#if-else嵌套时">if else嵌套时</a></li>
+          </ul>
+        </li>
+        <li><a href="#--运算符三元运算符">? : 运算符(三元运算符)</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#switch-case">switch case</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#while-循环">while 循环</a>
+          <ul>
+            <li><a href="#关于while死循环">关于while死循环</a></li>
+          </ul>
+        </li>
+        <li><a href="#do-while循环">do-while循环</a></li>
+        <li><a href="#for循环">for循环</a>
+          <ul>
+            <li><a href="#关于for死循环">关于for死循环</a></li>
+          </ul>
+        </li>
+        <li><a href="#beak和continue">beak和continue</a>
+          <ul>
+            <li><a href="#beak">beak</a></li>
+            <li><a href="#continue">continue</a></li>
+            <li><a href="#beak-和-continue的区别">beak 和 continue的区别</a></li>
+          </ul>
+        </li>
+        <li><a href="#goto">goto</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#选择结构">选择结构</a></li>
+        <li><a href="#循环结构">循环结构</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<h1 id="判断结构">判断结构</h1>
+<h3 id="if-else">if else</h3>
+<h4 id="通常情况">通常情况：</h4>
+<p>C 语言把任何非零和非空的值假定为 true，把零或 null 假定为 false。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">if</span><span class="p">(</span><span class="err">判断条件</span><span class="p">){</span>
+    <span class="err">语句块</span><span class="mi">1</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="err">语句块</span><span class="mi">2</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>由于if else 语句可以根据不同的情况执行不同的代码，所以也叫分支结构或选择结构。</p>
+<ul>
+<li>在 if 语句中，判断条件必须用括号括起来。</li>
+<li>有时候，可以只使用if，而不一定使用else。</li>
+<li>if(判断条件)后不能加；分号，初学者最容易错的就是这里。</li>
+<li>if（判断条件）后的第一条语句可不加{}，但建议养成好习惯，加上{}，即使只有一条语句。</li>
+<li>语句块由{ }包围，但要注意的是在}之后不需要再加分号;（当然加上也没错）。</li>
+</ul>
+<h4 id="多个if-else语句">多个if else语句</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">if</span><span class="p">(</span><span class="err">判断条件</span><span class="mi">1</span><span class="p">){</span>
+    <span class="err">语句块</span><span class="mi">1</span>
+<span class="p">}</span> <span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="err">判断条件</span><span class="mi">2</span><span class="p">){</span>
+    <span class="err">语句块</span><span class="mi">2</span>
+<span class="p">}</span><span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="err">判断条件</span><span class="mi">3</span><span class="p">){</span>
+    <span class="err">语句块</span><span class="mi">3</span>
+<span class="p">}</span><span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="err">判断条件</span><span class="n">m</span><span class="p">){</span>
+    <span class="err">语句块</span><span class="n">m</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+     <span class="err">语句块</span><span class="n">n</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>意思是，从上到下依次检测判断条件，当某个判断条件成立时，则执行其对应的语句块，然后跳到整个 if else 语句之外继续执行其他代码。如果所有判断条件都不成立，则执行语句块n，然后继续执行后续代码。</p>
+<p><strong>也就是说，一旦遇到能够成立的判断条件，则不再执行其他的语句块，所以最终只能有一个语句块被执行。</strong></p>
+<h4 id="if-else嵌套时">if else嵌套时</h4>
+<p>C语言规定，else 总是与它前面最近的 if 配对</p>
+<h3 id="--运算符三元运算符">? : 运算符(三元运算符)</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200503205511403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200503205511403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200503205511403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200503205511403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" />
+<code>表达式1 ? 表达式2 : 表达式3</code></p>
+<p>条件运算符是C语言中唯一的一个三目运算符，其求值规则为：如果表达式1的值为真，则以表达式2 的值作为整个条件表达式的值，否则以表达式3的值作为整个条件表达式的值。条件表达式通常用于赋值语句之中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span> 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">num</span><span class="p">;</span>
+ 
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;输入一个数字 : &#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">num</span><span class="p">);</span>
+ 
+    <span class="p">(</span><span class="n">num</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="n">printf</span><span class="p">(</span><span class="s">&#34;偶数&#34;</span><span class="p">)</span><span class="o">:</span><span class="n">printf</span><span class="p">(</span><span class="s">&#34;奇数&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="选择">选择</h1>
+<h3 id="switch-case">switch case</h3>
+<p>C语言虽然没有限制 if else 能够处理的分支数量，但当分支过多时，用 if else 处理会不太方便，而且容易出现 if else 配对出错的情况。例如，输入一个整数，输出该整数对应的星期几的英文表示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Input integer number:&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>
+    <span class="k">switch</span><span class="p">(</span><span class="n">a</span><span class="p">){</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Monday</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Tuesday</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="mi">3</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Wednesday</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="mi">4</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Thursday</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="mi">5</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Friday</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="mi">6</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Saturday</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="mi">7</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Sunday</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">default</span><span class="o">:</span><span class="n">printf</span><span class="p">(</span><span class="s">&#34;error</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>case可以理解为一个站点，程序选择了这个站点，从这个站点执行，<strong>如果没有break，程序会一直执行下去，直到遇见break</strong>。例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"> <span class="k">switch</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;1</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> 
+        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;2</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> 
+        <span class="k">case</span> <span class="mi">3</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;3</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="mi">4</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Thursday</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">1
+2
+3
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>default</strong>由于 <code>default</code> 是最后一个分支，匹配后不会再执行其他分支，所以也可以不添加<code>break;</code>语句
+<strong>default</strong> 不是必须的。当没有 <code>default</code> 时，如果所有 <code>case</code> 都匹配失败，那么就什么都不执行。</p>
+<p><strong>break</strong> 是C语言中的一个关键字，专门用于跳出 <code>switch</code> 语句。所谓“跳出”，是指一旦遇到 <code>break</code>，就不再执行 <code>switch</code> 中的任何语句，包括当前分支中的语句和其他分支中的语句；也就是说，整个 <code>switch</code> 执行结束了，接着会执行整个 <code>switch</code> 后面的代码。</p>
+<h1 id="循环">循环</h1>
+<h3 id="while-循环">while 循环</h3>
+<p>当给定条件为真时（非0），重复语句或语句组。它会在执行循环主体之前测试条件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">while</span><span class="p">(</span><span class="err">表达式</span><span class="p">){</span>
+	<span class="err">语句块</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>{}后面可不加；，加了也没所谓。</p>
+<h4 id="关于while死循环">关于while死循环</h4>
+<p>while （1）循环会一直执行下去，永不结束，成为“死循环”。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#include &lt;stdio.h&gt;</span>
+int main<span class="o">(){</span>
+    <span class="k">while</span><span class="o">(</span>1<span class="o">){</span>
+        printf<span class="o">(</span><span class="s2">&#34;1&#34;</span><span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> 0<span class="p">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>死循环可以用break；跳出。</p>
+<h3 id="do-while循环">do-while循环</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">do</span><span class="p">{</span>
+    <span class="err">语句块</span><span class="p">;</span>
+<span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="err">表达式</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>与while相同，但do while是先做一次do里面的程序，然后再判断。</p>
+<h3 id="for循环">for循环</h3>
+<p>多次执行一个语句序列，简化管理循环变量的代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">for</span> <span class="p">(</span> <span class="n">init</span><span class="p">;</span> <span class="n">condition</span><span class="p">;</span> <span class="n">increment</span> <span class="p">)</span>
+<span class="p">{</span>
+   <span class="n">statement</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>init 会首先被执行，且只会执行一次。这一步允许您声明并初始化任何循环控制变量。您也可以不在这里写任何语句，只要有一个分号出现即可。</li>
+<li>接下来，会判断 condition。如果为真，则执行循环主体。如果为假，则不执行循环主体，且控制流会跳转到紧接着 for 循环的下一条语句。</li>
+<li>在执行完 for 循环主体后，控制流会跳回上面的 increment 语句。该语句允许您更新循环控制变量。该语句可以留空，只要在条件后有一个分号出现即可。</li>
+<li>条件再次被判断。如果为真，则执行循环，这个过程会不断重复（循环主体，然后增加步值，再然后重新判断条件）。在条件变为假时，for 循环终止。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&#34;stdio.h&#34;</span><span class="cp">
+</span><span class="cp"></span><span class="n">c99写法</span><span class="err">，编译器可能会报错：</span>
+<span class="p">[</span><span class="n">Error</span><span class="p">]</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="n">loop</span> <span class="n">initial</span> <span class="n">declarations</span> <span class="n">are</span> <span class="n">only</span> <span class="n">allowed</span> <span class="n">in</span> <span class="n">C99</span> <span class="n">or</span> <span class="n">C11</span> <span class="n">mode</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="err">输出</span><span class="mi">0</span><span class="o">-</span><span class="mi">99</span>
+<span class="c1">//另一种写法
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+	<span class="k">for</span><span class="p">(;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="c1">//i=0可写（）括号里面，i++可写{}大括号里面，效果一样
+</span><span class="c1"></span>	<span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="err">输出</span><span class="mi">0</span><span class="o">-</span><span class="mi">99</span>
+
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+	<span class="k">for</span><span class="p">(;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;)</span>
+	<span class="p">{</span>
+		<span class="n">i</span><span class="o">++</span><span class="p">;</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="err">输出</span><span class="mi">1</span><span class="o">-</span><span class="mi">100</span>
+
+<span class="err">所以这就是第</span><span class="mi">2</span><span class="err">，</span><span class="mi">3</span><span class="err">点的步骤，要记清。</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="关于for死循环">关于for死循环</h4>
+<p>如果条件永远不为假，则循环将变成无限循环。for 循环在传统意义上可用于实现无限循环。由于构成循环的三个表达式中任何一个都不是必需的，您可以将某些条件表达式留空来构成一个无限循环。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span> 
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+<span class="p">{</span>
+   <span class="k">for</span><span class="p">(</span> <span class="p">;</span> <span class="p">;</span> <span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&#34;该循环会永远执行下去！</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当条件表达式不存在时，它被假设为真。您也可以设置一个初始值和增量表达式，但是一般情况下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">可以按 Ctrl + C 键终止一个无限循环。
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="beak和continue">beak和continue</h3>
+<h4 id="beak">beak</h4>
+<p>C 语言中 break 语句有以下两种用法：</p>
+<ol>
+<li>当 break 语句出现在一个循环内时，循环会立即终止，且程序流将继续执行紧接着循环的下一条语句。</li>
+<li>它可用于终止 switch 语句中的一个 case
+如果您使用的是嵌套循环（即一个循环内嵌套另一个循环），break 语句会停止执行最内层的循环，然后开始执行该块之后的下一行代码。</li>
+</ol>
+<h4 id="continue">continue</h4>
+<p>C 语言中的 continue 语句有点像 break 语句。<strong>但它不是强制终止，continue 会跳过当前循环中的代码，强迫开始下一次循环。</strong></p>
+<p><strong>对于 for 循环，continue 语句执行后自增语句仍然会执行</strong>。对于 while 和 do&hellip;while 循环，continue 语句重新执行条件判断语句。</p>
+<h4 id="beak-和-continue的区别">beak 和 continue的区别</h4>
+<p>beak是终止本次循环，循环不再继续。continue是跳出当前循环，进入下一次循环，循环还在继续。</p>
+<h3 id="goto">goto</h3>
+<p>C 语言中的 goto 语句允许把控制无条件转移到同一函数内的被标记的语句。
+在任何编程语言中，都不建议使用 goto 语句。因为它使得程序的控制流难以跟踪，使程序难以理解和难以修改。任何使用 goto 语句的程序可以改写成不需要使用 goto 语句的写法。
+老师虽然说这是个万能的语句，它可以做任何事，事实也是如此，但不建议在程序上使用。哈哈哈。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">goto</span> <span class="n">label</span><span class="p">;</span>
+<span class="p">..</span>
+<span class="p">.</span>
+<span class="nl">label</span><span class="p">:</span> <span class="n">statement</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>label 可以是任何除 C 关键字以外的纯文本，它可以设置在 C 程序中 goto 语句的前面或者后面。
+它可以往后跳，也可以往前跳。反正就是，最好不要跳，不然腿被打断了都不知道怎么回事。</p>
+<h1 id="总结">总结</h1>
+<p>C语言中常用的编程结构有三种（其它编程语言也是如此），它们分别是：</p>
+<ol>
+<li><strong>顺序结构</strong>：代码从前往后依次执行，没有任何“拐弯抹角”，不跳过任何一条语句，所有的语句都会被执行到。</li>
+<li><strong>选择结构</strong>：也叫分支结构。代码会被分成多个部分，程序会根据特定条件（某个表达式的运算结果）来判断到底执行哪一部分。</li>
+<li><strong>循环结构</strong>：程序会重新执行同一段代码，直到条件不再满足，或者遇到强行跳出语句（break 关键字）。</li>
+</ol>
+<h3 id="选择结构">选择结构</h3>
+<p>选择结构（分支结构）涉及到的关键字包括 if、else、switch、case、break，还有一个条件运算符? :（这是C语言中唯一的一个三目运算符）。其中，if&hellip;else 是最基本的结构，switch&hellip;case 和? :都是由 if&hellip;else 演化而来，它们都是为了让程序员书写更加方便。</p>
+<p>你可以只使用 if，也可以 if&hellip;else 配对使用。另外要善于使用 switch&hellip;case 和? :，有时候它们看起来更加清爽。</p>
+<p>if&hellip;else 可以嵌套使用，原则上嵌套的层次（深度）没有限制，但是过多的嵌套层次会让代码结构混乱。</p>
+<h3 id="循环结构">循环结构</h3>
+<p>C语言中常用的循环结构有 while 循环和 for 循环，它们都可以用来处理同一个问题，一般可以互相代替。</p>
+<p>除了 while 和 for，C语言中还有一个 goto 语句，它也能构成循环结构。不过由于 goto 语句很容易造成代码混乱，维护和阅读困难，饱受诟病，不被推荐，而且 goto 循环完全可以被其他循环取代，所以后来的很多编程语言都取消了 goto 语句，我们也不再讲解。</p>
+<blockquote>
+<p>国内很多大学仍然讲解 goto 语句，但也仅仅是完成教材所设定的课程，goto 语句在实际开发中很难见到。
+对于 while 和 do-while 循环，循环体中应包括使循环趋于结束的语句。</p>
+</blockquote>
+<p>对于 while 和 do-while 循环，循环变量的初始化操作应该在 while 和 do-while 语句之前完成，而 for 循环可以在内部实现循环变量的初始化。</p>
+<p>for 循环是最常用的循环，它的功能强大，一般都可以代替其他循环。</p>
+<p>最后还要注意 break 和 continue 关键字用于循环结构时的区别：</p>
+<p>break 用来跳出所有循环，循环语句不再有执行的机会；</p>
+<p>continue 用来结束本次循环，直接跳到下一次循环，如果循环条件成立，还会继续循环。</p>
+<p>此外，break 关键字还可以用于跳出 switch&hellip;case 语句。所谓“跳出”，是指一旦遇到 break，就不再执行 switch 中的任何语句，包括当前分支中的语句和其他分支中的语句；也就是说，整个 switch 执行结束了，接着会执行整个 switch 后面的代码。</p>
+<p>此外，如果循环次数确定，优先使用for循环，不确定用while循环。</p>
+<hr>
+<p><strong>参考资料</strong></p>
+<p><a href="http://www.icourse163.org/learn/ZJU-199001?tid=1450247457#/learn/announce" target="_blank" rel="noopener noreffer">程序设计入门&ndash;C翁恺</a></p>
+<p><a href="https://baike.baidu.com/item/c%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/19471979?fr=aladdin" target="_blank" rel="noopener noreffer">《<em>c语言</em>程序设计》&ndash;谭浩强</a></p>
+<p><a href="https://baike.baidu.com/item/c%20primer%20plus/4851344?fr=aladdin" target="_blank" rel="noopener noreffer">《C Primer Plus》&ndash;Stephen Prata</a></p>
+<p><a href="http://c.biancheng.net/" target="_blank" rel="noopener noreffer">C语言中文网</a></p>
+<p><a href="https://www.runoob.com/cprogramming/c-tutorial.html" target="_blank" rel="noopener noreffer">C语言教程|菜鸟教程</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-01-21 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/" data-title="C 判断、选择与循环" data-hashtags="C语言程序设计,C语言程序设计基础,判断,选择,循环,if,else,while,三目运算,三元运算,switch,case,default,break,continue,goto,for"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/" data-hashtag="C语言程序设计"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/" data-title="C 判断、选择与循环"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/19c-%E5%88%A4%E6%96%AD%E9%80%89%E6%8B%A9%E4%B8%8E%E5%BE%AA%E7%8E%AF/" data-title="C 判断、选择与循环"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/c%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">C语言程序设计</a>,&nbsp;<a href="/tags/c%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/">C语言程序设计基础</a>,&nbsp;<a href="/tags/%E5%88%A4%E6%96%AD/">判断</a>,&nbsp;<a href="/tags/%E9%80%89%E6%8B%A9/">选择</a>,&nbsp;<a href="/tags/%E5%BE%AA%E7%8E%AF/">循环</a>,&nbsp;<a href="/tags/if/">if</a>,&nbsp;<a href="/tags/else/">else</a>,&nbsp;<a href="/tags/while/">while</a>,&nbsp;<a href="/tags/%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97/">三目运算</a>,&nbsp;<a href="/tags/%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97/">三元运算</a>,&nbsp;<a href="/tags/switch/">switch</a>,&nbsp;<a href="/tags/case/">case</a>,&nbsp;<a href="/tags/default/">default</a>,&nbsp;<a href="/tags/break/">break</a>,&nbsp;<a href="/tags/continue/">continue</a>,&nbsp;<a href="/tags/goto/">goto</a>,&nbsp;<a href="/tags/for/">for</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/18static-%E7%9A%84%E7%94%A8%E6%B3%95%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/" class="prev" rel="prev" title="static 的用法全局变量与局部变量"><i class="fas fa-angle-left fa-fw"></i>static 的用法全局变量与局部变量</a>
+            <a href="/20c-%E5%87%BD%E6%95%B0/" class="next" rel="next" title="C 函数">C 函数<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{"valine":{"appId":"LzWmGBbN4JzdkCMWlCR1AcUQ-gzGzoHsz","appKey":"3Tw1cqFWjneUsJIio9gXs8CI","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"data":{"id-1":"❤欢迎来到我的博客~","id-2":"❤欢迎来到我的博客~"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":" ","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":140}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

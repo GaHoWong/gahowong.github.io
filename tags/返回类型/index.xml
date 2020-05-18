@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>返回类型 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B/</link>
+        <description>返回类型 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Sat, 20 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B/" rel="self" type="application/rss+xml" /><item>
+    <title>C 函数</title>
+    <link>http://example.org/20c-%E5%87%BD%E6%95%B0/</link>
+    <pubDate>Sat, 20 Oct 2018 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/20c-%E5%87%BD%E6%95%B0/</guid>
+    <description><![CDATA[什么是函数 函数是一段可以重复使用的代码，用来独立地完成某个功能，它可以接收用户传递的数据，也可以不接收。接收用户数据的函数在定义时要指明参数]]></description>
+</item></channel>
+</rss>

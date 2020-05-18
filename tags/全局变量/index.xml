@@ -1,0 +1,29 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>全局变量 - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/</link>
+        <description>全局变量 - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (黄家豪)</managingEditor>
+            <webMaster>gahowong@qq.com (黄家豪)</webMaster><lastBuildDate>Wed, 17 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/" rel="self" type="application/rss+xml" /><item>
+    <title>C 作用域规则</title>
+    <link>http://example.org/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</link>
+    <pubDate>Wed, 17 Oct 2018 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</guid>
+    <description><![CDATA[任何一种编程中，作用域是程序中定义的变量所存在的区域，超过该区域变量就不能被访问。C 语言中有三个地方可以声明变量： 在函数或块内部的局部变量 在]]></description>
+</item><item>
+    <title>C语言模板</title>
+    <link>http://example.org/11c-%E5%AD%98%E5%82%A8%E7%B1%BB/</link>
+    <pubDate>Thu, 11 Oct 2018 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/11c-%E5%AD%98%E5%82%A8%E7%B1%BB/</guid>
+    <description><![CDATA[存储类定义 C 程序中变量/函数的范围（可见性）和生命周期。这些说明符放置在它们所修饰的类型之前。 auto 是局部变量的默认存储类, 限定变量只能在函数内]]></description>
+</item><item>
+    <title>C 变量</title>
+    <link>http://example.org/7c-%E5%8F%98%E9%87%8F/</link>
+    <pubDate>Sun, 07 Oct 2018 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/7c-%E5%8F%98%E9%87%8F/</guid>
+    <description><![CDATA[变量其实只不过是程序可操作的存储区的名称。C 中每个变量都有特定的类型，类型决定了变量存储的大小和布局，该范围内的值都可以存储在内存中，运算符]]></description>
+</item></channel>
+</rss>
