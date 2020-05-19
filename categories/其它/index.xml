@@ -12,6 +12,13 @@
     <guid>http://example.org/%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F%E8%BF%9B%E5%85%A5%E5%8D%9A%E5%AE%A2%E9%80%9F%E5%BA%A6/</guid>
     <description><![CDATA[由于此博客是部署于GitHub平台的，如果打开此博客很慢，说明打开GitHub也很慢，因此寻找了一些加快打开速度的方法 方法一：改hosts文]]></description>
 </item><item>
+    <title>message board</title>
+    <link>http://example.org/message-board/message-board/</link>
+    <pubDate>Thu, 16 Apr 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/message-board/message-board/</guid>
+    <description><![CDATA[动态与留言专区 目前使用的是Gravatar 作为评论列表头像。 请自行登录或注册Gravatar，然后修改自己的头像。 评论的时候，留下在Grav]]></description>
+</item><item>
     <title>Hello Myblog</title>
     <link>http://example.org/hellomyblog/</link>
     <pubDate>Thu, 26 Mar 2020 16:50:38 &#43;0800</pubDate>
