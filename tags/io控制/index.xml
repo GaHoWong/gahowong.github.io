@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>IO控制 - 标签 - 黄家豪的博客</title>
-        <link>http://example.org/tags/io%E6%8E%A7%E5%88%B6/</link>
+        <link>https://gahowong.github.io/tags/io%E6%8E%A7%E5%88%B6/</link>
         <description>IO控制 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 07 Feb 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/io%E6%8E%A7%E5%88%B6/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 07 Feb 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/io%E6%8E%A7%E5%88%B6/" rel="self" type="application/rss+xml" /><item>
     <title>HT32F5232单片机学习之四种方法实现按键控制LED灯</title>
-    <link>http://example.org/%E5%8D%95%E7%89%87%E6%9C%BA2-ht32f5232%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%94%AE%E6%8E%A7%E5%88%B6led%E7%81%AF-%E5%89%AF%E6%9C%AC/</link>
+    <link>https://gahowong.github.io/%E5%8D%95%E7%89%87%E6%9C%BA2-ht32f5232%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%94%AE%E6%8E%A7%E5%88%B6led%E7%81%AF-%E5%89%AF%E6%9C%AC/</link>
     <pubDate>Fri, 07 Feb 2020 13:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/%E5%8D%95%E7%89%87%E6%9C%BA2-ht32f5232%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%94%AE%E6%8E%A7%E5%88%B6led%E7%81%AF-%E5%89%AF%E6%9C%AC/</guid>
+    <guid>https://gahowong.github.io/%E5%8D%95%E7%89%87%E6%9C%BA2-ht32f5232%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%94%AE%E6%8E%A7%E5%88%B6led%E7%81%AF-%E5%89%AF%E6%9C%AC/</guid>
     <description><![CDATA[学会了如何点亮LED灯，那么接下来的就是如何把手中的这颗LED灯玩出新花样，在上一篇文章的基础上优化了第一次写代码的不足，加入了四种按键控制]]></description>
 </item></channel>
 </rss>

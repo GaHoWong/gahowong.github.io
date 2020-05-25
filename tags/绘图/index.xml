@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>绘图 - 标签 - 黄家豪的博客</title>
-        <link>http://example.org/tags/%E7%BB%98%E5%9B%BE/</link>
+        <link>https://gahowong.github.io/tags/%E7%BB%98%E5%9B%BE/</link>
         <description>绘图 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Mon, 20 Apr 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E7%BB%98%E5%9B%BE/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Mon, 20 Apr 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E7%BB%98%E5%9B%BE/" rel="self" type="application/rss+xml" /><item>
     <title>用Python绘图之Turtle(海龟)库详解</title>
-    <link>http://example.org/py4_%E7%94%A8python%E7%BB%98%E5%9B%BE%E4%B9%8Bturtle%E6%B5%B7%E9%BE%9F%E5%BA%93%E8%AF%A6%E8%A7%A3/</link>
+    <link>https://gahowong.github.io/py4_%E7%94%A8python%E7%BB%98%E5%9B%BE%E4%B9%8Bturtle%E6%B5%B7%E9%BE%9F%E5%BA%93%E8%AF%A6%E8%A7%A3/</link>
     <pubDate>Mon, 20 Apr 2020 13:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/py4_%E7%94%A8python%E7%BB%98%E5%9B%BE%E4%B9%8Bturtle%E6%B5%B7%E9%BE%9F%E5%BA%93%E8%AF%A6%E8%A7%A3/</guid>
+    <guid>https://gahowong.github.io/py4_%E7%94%A8python%E7%BB%98%E5%9B%BE%E4%B9%8Bturtle%E6%B5%B7%E9%BE%9F%E5%BA%93%E8%AF%A6%E8%A7%A3/</guid>
     <description><![CDATA[Python的学习总是很有趣，强大的库让人欲罢不能，即使作为初学者的我来说，用代码绘图是极具诱惑力的，而Turtle库是Python语言中一]]></description>
 </item></channel>
 </rss>

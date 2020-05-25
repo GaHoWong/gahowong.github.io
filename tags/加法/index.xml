@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>加法 - 标签 - 黄家豪的博客</title>
-        <link>http://example.org/tags/%E5%8A%A0%E6%B3%95/</link>
+        <link>https://gahowong.github.io/tags/%E5%8A%A0%E6%B3%95/</link>
         <description>加法 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Thu, 12 Mar 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E5%8A%A0%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Thu, 12 Mar 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E5%8A%A0%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
     <title>3.1定点数运算及溢出检测</title>
-    <link>http://example.org/3.1%E5%AE%9A%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%8A%E6%BA%A2%E5%87%BA%E6%A3%80%E6%B5%8B/</link>
+    <link>https://gahowong.github.io/3.1%E5%AE%9A%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%8A%E6%BA%A2%E5%87%BA%E6%A3%80%E6%B5%8B/</link>
     <pubDate>Thu, 12 Mar 2020 13:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/3.1%E5%AE%9A%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%8A%E6%BA%A2%E5%87%BA%E6%A3%80%E6%B5%8B/</guid>
+    <guid>https://gahowong.github.io/3.1%E5%AE%9A%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97%E5%8F%8A%E6%BA%A2%E5%87%BA%E6%A3%80%E6%B5%8B/</guid>
     <description><![CDATA[数据在计算机中是以一定的编码方式表示的，常用的编码有原码、反码、补码和移码。同一种算术运算，使用不同的编码，有不同的运算法则。由第2章对不同]]></description>
 </item></channel>
 </rss>

@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>OS库 - 标签 - 黄家豪的博客</title>
-        <link>http://example.org/tags/os%E5%BA%93/</link>
+        <link>https://gahowong.github.io/tags/os%E5%BA%93/</link>
         <description>OS库 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 15 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/os%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 15 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/os%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
     <title>OS库</title>
-    <link>http://example.org/py25_os%E5%BA%93/</link>
+    <link>https://gahowong.github.io/py25_os%E5%BA%93/</link>
     <pubDate>Fri, 15 May 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/py25_os%E5%BA%93/</guid>
+    <guid>https://gahowong.github.io/py25_os%E5%BA%93/</guid>
     <description><![CDATA[OS库是Python标准库，包含几百个函数。OS模块提供了非常丰富的方法用来处理文件和目录。 常用的几个函数 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17]]></description>
 </item></channel>
 </rss>

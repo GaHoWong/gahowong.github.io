@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>运算符优先级 - 标签 - 黄家豪的博客</title>
-        <link>http://example.org/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/</link>
+        <link>https://gahowong.github.io/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/</link>
         <description>运算符优先级 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 12 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 12 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/" rel="self" type="application/rss+xml" /><item>
     <title>C 运算符</title>
-    <link>http://example.org/12c-%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+    <link>https://gahowong.github.io/12c-%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
     <pubDate>Fri, 12 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/12c-%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+    <guid>https://gahowong.github.io/12c-%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
     <description><![CDATA[运算符是一种告诉编译器执行特定的数学或逻辑操作的符号。C 语言内置了丰富的运算符，并提供了以下类型的运算符： 算术运算符 关系运算符 逻辑运算符 位运]]></description>
 </item></channel>
 </rss>

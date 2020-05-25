@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>三角函数 - 标签 - 黄家豪的博客</title>
-        <link>http://example.org/tags/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0/</link>
+        <link>https://gahowong.github.io/tags/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0/</link>
         <description>三角函数 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Mon, 27 Apr 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Mon, 27 Apr 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0/" rel="self" type="application/rss+xml" /><item>
     <title>Python中的各种数值运算函数</title>
-    <link>http://example.org/py6_-python%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E5%87%BD%E6%95%B0/</link>
+    <link>https://gahowong.github.io/py6_-python%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E5%87%BD%E6%95%B0/</link>
     <pubDate>Mon, 27 Apr 2020 13:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/py6_-python%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E5%87%BD%E6%95%B0/</guid>
+    <guid>https://gahowong.github.io/py6_-python%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E5%87%BD%E6%95%B0/</guid>
     <description><![CDATA[数学函数 函数 描述 abs(x) 返回数字的绝对值，如abs(-10) 返回 10 ceil(x) 返回数字的上入整数，如math.ceil(4.1) 返回 5 cmp(x, y) 如果 x &lt; y 返回 -1, 如]]></description>
 </item></channel>
 </rss>

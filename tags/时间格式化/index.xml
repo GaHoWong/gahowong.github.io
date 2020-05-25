@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>时间格式化 - 标签 - 黄家豪的博客</title>
-        <link>http://example.org/tags/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/</link>
+        <link>https://gahowong.github.io/tags/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/</link>
         <description>时间格式化 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Thu, 30 Apr 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Thu, 30 Apr 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/" rel="self" type="application/rss+xml" /><item>
     <title>time库的使用</title>
-    <link>http://example.org/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+    <link>https://gahowong.github.io/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
     <pubDate>Thu, 30 Apr 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+    <guid>https://gahowong.github.io/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
     <description><![CDATA[终于学到time库了，我之前学Linux时已经吃透了，所以学习python的time库毫无压力。无非是复习之前的知识而已。但博文还是要写的，]]></description>
 </item></channel>
 </rss>

@@ -1,22 +1,22 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>形参 - 标签 - 黄家豪的博客</title>
-        <link>http://example.org/tags/%E5%BD%A2%E5%8F%82/</link>
+        <link>https://gahowong.github.io/tags/%E5%BD%A2%E5%8F%82/</link>
         <description>形参 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Sat, 20 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E5%BD%A2%E5%8F%82/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Sat, 20 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E5%BD%A2%E5%8F%82/" rel="self" type="application/rss+xml" /><item>
     <title>C 函数</title>
-    <link>http://example.org/20c-%E5%87%BD%E6%95%B0/</link>
+    <link>https://gahowong.github.io/20c-%E5%87%BD%E6%95%B0/</link>
     <pubDate>Sat, 20 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/20c-%E5%87%BD%E6%95%B0/</guid>
+    <guid>https://gahowong.github.io/20c-%E5%87%BD%E6%95%B0/</guid>
     <description><![CDATA[什么是函数 函数是一段可以重复使用的代码，用来独立地完成某个功能，它可以接收用户传递的数据，也可以不接收。接收用户数据的函数在定义时要指明参数]]></description>
 </item><item>
     <title>C 作用域规则</title>
-    <link>http://example.org/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</link>
+    <link>https://gahowong.github.io/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</link>
     <pubDate>Wed, 17 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</guid>
+    <guid>https://gahowong.github.io/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</guid>
     <description><![CDATA[任何一种编程中，作用域是程序中定义的变量所存在的区域，超过该区域变量就不能被访问。C 语言中有三个地方可以声明变量： 在函数或块内部的局部变量 在]]></description>
 </item></channel>
 </rss>
