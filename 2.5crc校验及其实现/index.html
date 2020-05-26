@@ -8,7 +8,7 @@
         <title>2.5CRC校验及其实现 - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="2.5CRC校验及其实现" />
 <meta property="og:description" content="循环冗余校验是一种基于模2运算建立编码规则的校验码。对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备也执行类似的算法，以保证数据传" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://gahowong.github.io/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" />
+<meta property="og:url" content="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" />
 <meta property="article:published_time" content="2020-03-09T13:50:38+08:00" />
 <meta property="article:modified_time" content="2020-03-09T15:58:26+08:00" />
 <meta name="twitter:card" content="summary"/>
@@ -17,7 +17,7 @@
 <meta name="application-name" content="黄家豪的博客">
 <meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://gahowong.github.io/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="prev" href="https://gahowong.github.io/2.4%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="next" href="https://gahowong.github.io/2.6%E6%B5%B7%E6%98%8E%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="prev" href="http://example.org/2.4%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="next" href="http://example.org/2.6%E6%B5%B7%E6%98%8E%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -25,19 +25,19 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/gahowong.github.io\/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0\/"
+            "@id": "http:\/\/example.org\/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0\/"
         },"image": {
                 "@type": "ImageObject",
-                "url": "https:\/\/gahowong.github.io\/cover.png",
+                "url": "http:\/\/example.org\/cover.png",
                 "width":  800 ,
                 "height":  600 
             },"genre": "posts","keywords": "计算机组成原理, 模2运算, CRC校验","wordcount":  1049 ,
-        "url": "https:\/\/gahowong.github.io\/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0\/","datePublished": "2020-03-09T13:50:38+08:00","dateModified": "2020-03-09T15:58:26+08:00","publisher": {
+        "url": "http:\/\/example.org\/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0\/","datePublished": "2020-03-09T13:50:38+08:00","dateModified": "2020-03-09T15:58:26+08:00","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
                 "@type": "ImageObject",
-                "url": "https:\/\/gahowong.github.io\/logo.png",
+                "url": "http:\/\/example.org\/logo.png",
                 "width":  127 ,
                 "height":  40 
                 }
@@ -314,7 +314,7 @@ D、对不为0余数继续进行模2除运算应使余数循环。
                             <a class="link-to-markdown" href="/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://gahowong.github.io/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-title="2.5CRC校验及其实现" data-hashtags="计算机组成原理,模2运算,CRC校验"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://gahowong.github.io/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-hashtag="计算机组成原理"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://gahowong.github.io/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-title="2.5CRC校验及其实现"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://gahowong.github.io/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-title="2.5CRC校验及其实现"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-title="2.5CRC校验及其实现" data-hashtags="计算机组成原理,模2运算,CRC校验"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-hashtag="计算机组成原理"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-title="2.5CRC校验及其实现"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/2.5crc%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" data-title="2.5CRC校验及其实现"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
             </div>
         </div>
     </div>

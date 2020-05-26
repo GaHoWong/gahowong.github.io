@@ -1,22 +1,22 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>register - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/register/</link>
+        <link>http://example.org/tags/register/</link>
         <description>register - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Thu, 11 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/register/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Thu, 11 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/register/" rel="self" type="application/rss+xml" /><item>
     <title>C语言模板</title>
-    <link>https://gahowong.github.io/11c-%E5%AD%98%E5%82%A8%E7%B1%BB/</link>
+    <link>http://example.org/11c-%E5%AD%98%E5%82%A8%E7%B1%BB/</link>
     <pubDate>Thu, 11 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/11c-%E5%AD%98%E5%82%A8%E7%B1%BB/</guid>
+    <guid>http://example.org/11c-%E5%AD%98%E5%82%A8%E7%B1%BB/</guid>
     <description><![CDATA[存储类定义 C 程序中变量/函数的范围（可见性）和生命周期。这些说明符放置在它们所修饰的类型之前。 auto 是局部变量的默认存储类, 限定变量只能在函数内]]></description>
 </item><item>
     <title>C 基本语法</title>
-    <link>https://gahowong.github.io/5c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+    <link>http://example.org/5c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
     <pubDate>Fri, 05 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/5c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+    <guid>http://example.org/5c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
     <description><![CDATA[C 的令牌（Tokens） C 程序由各种令牌组成，令牌可以是关键字、标识符、常量、字符串值，或者是一个符号。例如，下面的 C 语句包括五个令牌： 1 printf(&#34;Hello,]]></description>
 </item></channel>
 </rss>

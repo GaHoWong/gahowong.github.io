@@ -1,22 +1,22 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>效率 - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E6%95%88%E7%8E%87/</link>
+        <link>http://example.org/tags/%E6%95%88%E7%8E%87/</link>
         <description>效率 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Sun, 14 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E6%95%88%E7%8E%87/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Sun, 14 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%95%88%E7%8E%87/" rel="self" type="application/rss+xml" /><item>
     <title>a&#43;&#43; 与 &#43;&#43;a 的区别</title>
-    <link>https://gahowong.github.io/14a-%E4%B8%8E-a-%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+    <link>http://example.org/14a-%E4%B8%8E-a-%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
     <pubDate>Sun, 14 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/14a-%E4%B8%8E-a-%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+    <guid>http://example.org/14a-%E4%B8%8E-a-%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
     <description><![CDATA[a++ 是先返回百a的值，再执行++运算。 ++a 是先执行++运算，在返回a的值。 1 2 3 4 5 6 7 8 9 10 11 #include &lt;stdio.h&gt; int main(int argc, char **argv) { int a=100; printf(&#34;a = %d\n&#34;,a); printf(&#34;a++ = %d\n&#34;,a++); printf(&#34;a = %d\n&#34;,a); printf(&#34;++a = %d\n&#34;,++a); printf(&#34;a =]]></description>
 </item><item>
     <title>| 和 ||，&amp; 和 &amp;&amp; 的区别</title>
-    <link>https://gahowong.github.io/13-l%E5%92%8Cll-%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+    <link>http://example.org/13-l%E5%92%8Cll-%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
     <pubDate>Sat, 13 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/13-l%E5%92%8Cll-%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+    <guid>http://example.org/13-l%E5%92%8Cll-%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
     <description><![CDATA[我们将 || 和 &amp;&amp; 定义为逻辑运算符，而 | 和 &amp; 定义为位运算符。 &amp;&amp; 如果两个操作数都非零，则条件为真； || 如果两个操作数中有任意一个非零，则条件为真。 &amp; 按]]></description>
 </item></channel>
 </rss>

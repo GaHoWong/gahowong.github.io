@@ -1,22 +1,22 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>递归 - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E9%80%92%E5%BD%92/</link>
+        <link>http://example.org/tags/%E9%80%92%E5%BD%92/</link>
         <description>递归 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Sun, 10 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E9%80%92%E5%BD%92/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Sun, 10 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E9%80%92%E5%BD%92/" rel="self" type="application/rss+xml" /><item>
     <title>PyInstaller库应用——科赫雪花小包裹</title>
-    <link>https://gahowong.github.io/py20_pyinstaller%E5%BA%93/</link>
+    <link>http://example.org/py20_pyinstaller%E5%BA%93/</link>
     <pubDate>Sun, 10 May 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py20_pyinstaller%E5%BA%93/</guid>
+    <guid>http://example.org/py20_pyinstaller%E5%BA%93/</guid>
     <description><![CDATA[PyInstaller库是第三方库，因此需要pip安装，（用的是清华镜像） 1 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyinstaller 安装完会出现这样的提示 使用方法 cmd命令行 1 pyinstaller -F &lt]]></description>
 </item><item>
     <title>函数递归思维</title>
-    <link>https://gahowong.github.io/py16_%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92/</link>
+    <link>http://example.org/py16_%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92/</link>
     <pubDate>Thu, 07 May 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py16_%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92/</guid>
+    <guid>http://example.org/py16_%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92/</guid>
     <description><![CDATA[编程语言中，函数直接或间接调用函数本身，则该函数称为递归函数。它的定义是这样写的：一种计算过程，如果其中每一步都要用到前一步或前几步的结果，]]></description>
 </item></channel>
 </rss>

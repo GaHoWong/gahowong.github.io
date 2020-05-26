@@ -1,29 +1,29 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>const - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/const/</link>
+        <link>http://example.org/tags/const/</link>
         <description>const - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Tue, 09 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/const/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Tue, 09 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/const/" rel="self" type="application/rss+xml" /><item>
     <title>定义常量#define和const的区别</title>
-    <link>https://gahowong.github.io/9%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F#define%E5%92%8Cconst%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+    <link>http://example.org/9%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F#define%E5%92%8Cconst%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
     <pubDate>Tue, 09 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/9%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F#define%E5%92%8Cconst%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+    <guid>http://example.org/9%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F#define%E5%92%8Cconst%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
     <description><![CDATA[define是预编译指令，在预编译的时候仅仅进行字符替换，预编译后符号常量就不存在了，例如define PI 3.1415926 ，编译以后就不存在PI了，所有的P]]></description>
 </item><item>
     <title>C 常量</title>
-    <link>https://gahowong.github.io/8c-%E5%B8%B8%E9%87%8F/</link>
+    <link>http://example.org/8c-%E5%B8%B8%E9%87%8F/</link>
     <pubDate>Mon, 08 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/8c-%E5%B8%B8%E9%87%8F/</guid>
+    <guid>http://example.org/8c-%E5%B8%B8%E9%87%8F/</guid>
     <description><![CDATA[常量是固定值，在程序执行期间不会改变。一旦定义了一个常量，在程序执行中是不可被更改的，这些固定的值，又叫做字面量。 常量可以是任何的基本数据类]]></description>
 </item><item>
     <title>C 基本语法</title>
-    <link>https://gahowong.github.io/5c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+    <link>http://example.org/5c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
     <pubDate>Fri, 05 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/5c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+    <guid>http://example.org/5c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
     <description><![CDATA[C 的令牌（Tokens） C 程序由各种令牌组成，令牌可以是关键字、标识符、常量、字符串值，或者是一个符号。例如，下面的 C 语句包括五个令牌： 1 printf(&#34;Hello,]]></description>
 </item></channel>
 </rss>

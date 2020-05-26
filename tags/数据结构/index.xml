@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>数据结构 - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+        <link>http://example.org/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
         <description>数据结构 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Tue, 23 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Tue, 23 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="self" type="application/rss+xml" /><item>
     <title>C 数组</title>
-    <link>https://gahowong.github.io/23c-%E6%95%B0%E7%BB%84/</link>
+    <link>http://example.org/23c-%E6%95%B0%E7%BB%84/</link>
     <pubDate>Tue, 23 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/23c-%E6%95%B0%E7%BB%84/</guid>
+    <guid>http://example.org/23c-%E6%95%B0%E7%BB%84/</guid>
     <description><![CDATA[C 语言支持数组数据结构，它可以存储一个固定大小的相同类型元素的顺序集合。数组是用来存储一系列数据，但它往往被认为是一系列相同类型的变量。 数组]]></description>
 </item></channel>
 </rss>

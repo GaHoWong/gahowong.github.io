@@ -1,29 +1,29 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>标准库 - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/</link>
+        <link>http://example.org/tags/%E6%A0%87%E5%87%86%E5%BA%93/</link>
         <description>标准库 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 15 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 15 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%A0%87%E5%87%86%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
     <title>OS库</title>
-    <link>https://gahowong.github.io/py25_os%E5%BA%93/</link>
+    <link>http://example.org/py25_os%E5%BA%93/</link>
     <pubDate>Fri, 15 May 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py25_os%E5%BA%93/</guid>
+    <guid>http://example.org/py25_os%E5%BA%93/</guid>
     <description><![CDATA[OS库是Python标准库，包含几百个函数。OS模块提供了非常丰富的方法用来处理文件和目录。 常用的几个函数 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17]]></description>
 </item><item>
     <title>random() 函数</title>
-    <link>https://gahowong.github.io/py12_random-%E5%87%BD%E6%95%B0/</link>
+    <link>http://example.org/py12_random-%E5%87%BD%E6%95%B0/</link>
     <pubDate>Sun, 03 May 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py12_random-%E5%87%BD%E6%95%B0/</guid>
+    <guid>http://example.org/py12_random-%E5%87%BD%E6%95%B0/</guid>
     <description><![CDATA[random库是使用随机数的Python标准库 -伪随机数: 采用梅森旋转算法生成的(伪)随机序列中元素 -random库主要用于生成随机数 -使用]]></description>
 </item><item>
     <title>time库的使用</title>
-    <link>https://gahowong.github.io/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+    <link>http://example.org/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
     <pubDate>Thu, 30 Apr 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+    <guid>http://example.org/py9_time%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
     <description><![CDATA[终于学到time库了，我之前学Linux时已经吃透了，所以学习python的time库毫无压力。无非是复习之前的知识而已。但博文还是要写的，]]></description>
 </item></channel>
 </rss>

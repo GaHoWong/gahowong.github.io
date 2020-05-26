@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>浮点数常量 - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E6%B5%AE%E7%82%B9%E6%95%B0%E5%B8%B8%E9%87%8F/</link>
+        <link>http://example.org/tags/%E6%B5%AE%E7%82%B9%E6%95%B0%E5%B8%B8%E9%87%8F/</link>
         <description>浮点数常量 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Mon, 08 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E6%B5%AE%E7%82%B9%E6%95%B0%E5%B8%B8%E9%87%8F/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Mon, 08 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%B5%AE%E7%82%B9%E6%95%B0%E5%B8%B8%E9%87%8F/" rel="self" type="application/rss+xml" /><item>
     <title>C 常量</title>
-    <link>https://gahowong.github.io/8c-%E5%B8%B8%E9%87%8F/</link>
+    <link>http://example.org/8c-%E5%B8%B8%E9%87%8F/</link>
     <pubDate>Mon, 08 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/8c-%E5%B8%B8%E9%87%8F/</guid>
+    <guid>http://example.org/8c-%E5%B8%B8%E9%87%8F/</guid>
     <description><![CDATA[常量是固定值，在程序执行期间不会改变。一旦定义了一个常量，在程序执行中是不可被更改的，这些固定的值，又叫做字面量。 常量可以是任何的基本数据类]]></description>
 </item></channel>
 </rss>

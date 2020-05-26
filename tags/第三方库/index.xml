@@ -1,36 +1,36 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>第三方库 - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</link>
+        <link>http://example.org/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</link>
         <description>第三方库 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Wed, 13 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Wed, 13 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
     <title>wordcloud库</title>
-    <link>https://gahowong.github.io/py23_wordcloud%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+    <link>http://example.org/py23_wordcloud%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
     <pubDate>Wed, 13 May 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py23_wordcloud%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+    <guid>http://example.org/py23_wordcloud%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
     <description><![CDATA[wordcloud是优秀的词云展示第三方库，它可以根据文本中词语出现的频率等参数绘制词云，词云的绘制形状、尺寸和颜色都可以设定。 安装 安装wo]]></description>
 </item><item>
     <title>用python实现文本词频统计</title>
-    <link>https://gahowong.github.io/py21_%E6%96%87%E6%9C%AC%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/</link>
+    <link>http://example.org/py21_%E6%96%87%E6%9C%AC%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/</link>
     <pubDate>Mon, 11 May 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py21_%E6%96%87%E6%9C%AC%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/</guid>
+    <guid>http://example.org/py21_%E6%96%87%E6%9C%AC%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/</guid>
     <description><![CDATA[英文文本 对于英文文本，首先要把文本放到当前代码.py文件的目录下。 1、对文本进行open操作 2、由于英文单词有大小写的，将所有大写转换为小写]]></description>
 </item><item>
     <title>PyInstaller库应用——科赫雪花小包裹</title>
-    <link>https://gahowong.github.io/py20_pyinstaller%E5%BA%93/</link>
+    <link>http://example.org/py20_pyinstaller%E5%BA%93/</link>
     <pubDate>Sun, 10 May 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py20_pyinstaller%E5%BA%93/</guid>
+    <guid>http://example.org/py20_pyinstaller%E5%BA%93/</guid>
     <description><![CDATA[PyInstaller库是第三方库，因此需要pip安装，（用的是清华镜像） 1 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyinstaller 安装完会出现这样的提示 使用方法 cmd命令行 1 pyinstaller -F &lt]]></description>
 </item><item>
     <title>Python第三方库下载时的国内镜像</title>
-    <link>https://gahowong.github.io/py19_python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E4%B8%8B%E8%BD%BD%E6%97%B6%E7%9A%84%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/</link>
+    <link>http://example.org/py19_python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E4%B8%8B%E8%BD%BD%E6%97%B6%E7%9A%84%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/</link>
     <pubDate>Tue, 21 Apr 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py19_python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E4%B8%8B%E8%BD%BD%E6%97%B6%E7%9A%84%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/</guid>
+    <guid>http://example.org/py19_python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E4%B8%8B%E8%BD%BD%E6%97%B6%E7%9A%84%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/</guid>
     <description><![CDATA[Python第三方库下载时的国内镜像 国内镜像： 清华：https://pypi.tuna.tsinghua.edu.cn/simple 阿里云：]]></description>
 </item></channel>
 </rss>

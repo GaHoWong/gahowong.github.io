@@ -1,29 +1,36 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>其它 - 分类 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/categories/%E5%85%B6%E5%AE%83/</link>
+        <link>http://example.org/categories/%E5%85%B6%E5%AE%83/</link>
         <description>其它 - 分类 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Sun, 26 Apr 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/categories/%E5%85%B6%E5%AE%83/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Mon, 25 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/%E5%85%B6%E5%AE%83/" rel="self" type="application/rss+xml" /><item>
+    <title>Windows环境如何配置Git？</title>
+    <link>http://example.org/windows%E7%8E%AF%E5%A2%83%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEgit/</link>
+    <pubDate>Mon, 25 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/windows%E7%8E%AF%E5%A2%83%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEgit/</guid>
+    <description><![CDATA[Git是目前世界上最先进的分布式版本控制系统，如果你是码农，那一定不会陌生。 一、下载Git 首先去官网（https://git-scm.com]]></description>
+</item><item>
     <title>加速打开GitHub和此博客的方法</title>
-    <link>https://gahowong.github.io/%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F%E8%BF%9B%E5%85%A5%E5%8D%9A%E5%AE%A2%E9%80%9F%E5%BA%A6/</link>
+    <link>http://example.org/%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F%E8%BF%9B%E5%85%A5%E5%8D%9A%E5%AE%A2%E9%80%9F%E5%BA%A6/</link>
     <pubDate>Sun, 26 Apr 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F%E8%BF%9B%E5%85%A5%E5%8D%9A%E5%AE%A2%E9%80%9F%E5%BA%A6/</guid>
+    <guid>http://example.org/%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F%E8%BF%9B%E5%85%A5%E5%8D%9A%E5%AE%A2%E9%80%9F%E5%BA%A6/</guid>
     <description><![CDATA[由于此博客是部署于GitHub平台的，如果打开此博客很慢，说明打开GitHub也很慢，因此寻找了一些加快打开速度的方法 方法一：改hosts文]]></description>
 </item><item>
     <title>message board</title>
-    <link>https://gahowong.github.io/message-board/message-board/</link>
+    <link>http://example.org/message-board/message-board/</link>
     <pubDate>Thu, 16 Apr 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/message-board/message-board/</guid>
+    <guid>http://example.org/message-board/message-board/</guid>
     <description><![CDATA[动态与留言专区 目前使用的是Gravatar 作为评论列表头像。 请自行登录或注册Gravatar，然后修改自己的头像。 评论的时候，留下在Grav]]></description>
 </item><item>
     <title>Hello Myblog</title>
-    <link>https://gahowong.github.io/hellomyblog/</link>
+    <link>http://example.org/hellomyblog/</link>
     <pubDate>Thu, 26 Mar 2020 16:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/hellomyblog/</guid>
+    <guid>http://example.org/hellomyblog/</guid>
     <description><![CDATA[我为什么写博客？ 几乎每一个程序员都听说过写博客有很多好处，但真的动手去写的却很少。其中有一个很重要的原因就是，有些人心里会认为：我不是大牛，]]></description>
 </item></channel>
 </rss>

@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>天天向上 - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E5%A4%A9%E5%A4%A9%E5%90%91%E4%B8%8A/</link>
+        <link>http://example.org/tags/%E5%A4%A9%E5%A4%A9%E5%90%91%E4%B8%8A/</link>
         <description>天天向上 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Tue, 28 Apr 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E5%A4%A9%E5%A4%A9%E5%90%91%E4%B8%8A/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Tue, 28 Apr 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E5%A4%A9%E5%A4%A9%E5%90%91%E4%B8%8A/" rel="self" type="application/rss+xml" /><item>
     <title>每天努力一点点和每天退步一点点的思考</title>
-    <link>https://gahowong.github.io/py7_%E6%AF%8F%E5%A4%A9%E5%8A%AA%E5%8A%9B%E4%B8%80%E7%82%B9%E7%82%B9%E5%92%8C%E6%AF%8F%E5%A4%A9%E9%80%80%E6%AD%A5%E4%B8%80%E7%82%B9%E7%82%B9%E7%9A%84%E6%80%9D%E8%80%83/</link>
+    <link>http://example.org/py7_%E6%AF%8F%E5%A4%A9%E5%8A%AA%E5%8A%9B%E4%B8%80%E7%82%B9%E7%82%B9%E5%92%8C%E6%AF%8F%E5%A4%A9%E9%80%80%E6%AD%A5%E4%B8%80%E7%82%B9%E7%82%B9%E7%9A%84%E6%80%9D%E8%80%83/</link>
     <pubDate>Tue, 28 Apr 2020 13:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py7_%E6%AF%8F%E5%A4%A9%E5%8A%AA%E5%8A%9B%E4%B8%80%E7%82%B9%E7%82%B9%E5%92%8C%E6%AF%8F%E5%A4%A9%E9%80%80%E6%AD%A5%E4%B8%80%E7%82%B9%E7%82%B9%E7%9A%84%E6%80%9D%E8%80%83/</guid>
+    <guid>http://example.org/py7_%E6%AF%8F%E5%A4%A9%E5%8A%AA%E5%8A%9B%E4%B8%80%E7%82%B9%E7%82%B9%E5%92%8C%E6%AF%8F%E5%A4%A9%E9%80%80%E6%AD%A5%E4%B8%80%E7%82%B9%E7%82%B9%E7%9A%84%E6%80%9D%E8%80%83/</guid>
     <description><![CDATA[经过这几天的学习，我想用Python编程的思想去思考一下，每天进步一点点和每天退步一点点的问题。 问题一 如果每天在原来的基础上进步千分之一，那]]></description>
 </item></channel>
 </rss>

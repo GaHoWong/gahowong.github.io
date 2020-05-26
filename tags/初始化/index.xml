@@ -1,29 +1,29 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>初始化 - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
+        <link>http://example.org/tags/%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
         <description>初始化 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Tue, 23 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E5%88%9D%E5%A7%8B%E5%8C%96/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Tue, 23 Oct 2018 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E5%88%9D%E5%A7%8B%E5%8C%96/" rel="self" type="application/rss+xml" /><item>
     <title>C 数组</title>
-    <link>https://gahowong.github.io/23c-%E6%95%B0%E7%BB%84/</link>
+    <link>http://example.org/23c-%E6%95%B0%E7%BB%84/</link>
     <pubDate>Tue, 23 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/23c-%E6%95%B0%E7%BB%84/</guid>
+    <guid>http://example.org/23c-%E6%95%B0%E7%BB%84/</guid>
     <description><![CDATA[C 语言支持数组数据结构，它可以存储一个固定大小的相同类型元素的顺序集合。数组是用来存储一系列数据，但它往往被认为是一系列相同类型的变量。 数组]]></description>
 </item><item>
     <title>static 的用法全局变量与局部变量</title>
-    <link>https://gahowong.github.io/18static-%E7%9A%84%E7%94%A8%E6%B3%95%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/</link>
+    <link>http://example.org/18static-%E7%9A%84%E7%94%A8%E6%B3%95%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/</link>
     <pubDate>Thu, 18 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/18static-%E7%9A%84%E7%94%A8%E6%B3%95%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/</guid>
+    <guid>http://example.org/18static-%E7%9A%84%E7%94%A8%E6%B3%95%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/</guid>
     <description><![CDATA[1. 什么是static? static 是 C/C++ 中很常用的修饰符，它被用来控制变量的存储方式和可见性。 1.1 static 的引入 我们知道在函数内部定义的变量，当程序执行到它的定]]></description>
 </item><item>
     <title>C 作用域规则</title>
-    <link>https://gahowong.github.io/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</link>
+    <link>http://example.org/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</link>
     <pubDate>Wed, 17 Oct 2018 00:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</guid>
+    <guid>http://example.org/17c-%E4%BD%9C%E7%94%A8%E5%9F%9F%E8%A7%84%E5%88%99/</guid>
     <description><![CDATA[任何一种编程中，作用域是程序中定义的变量所存在的区域，超过该区域变量就不能被访问。C 语言中有三个地方可以声明变量： 在函数或块内部的局部变量 在]]></description>
 </item></channel>
 </rss>

@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>元组 - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E5%85%83%E7%BB%84/</link>
+        <link>http://example.org/tags/%E5%85%83%E7%BB%84/</link>
         <description>元组 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 08 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E5%85%83%E7%BB%84/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 08 May 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E5%85%83%E7%BB%84/" rel="self" type="application/rss+xml" /><item>
     <title>Python组合数据类型</title>
-    <link>https://gahowong.github.io/py17_python%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+    <link>http://example.org/py17_python%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
     <pubDate>Fri, 08 May 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py17_python%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+    <guid>http://example.org/py17_python%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
     <description><![CDATA[之前写了一篇文章是Python基本数据类型，主要记录了python的整数类型、浮点数类型、负数类型和常用的数值运算函数。除了基本类型，pyt]]></description>
 </item></channel>
 </rss>

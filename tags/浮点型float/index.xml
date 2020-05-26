@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>浮点型(float) - 标签 - 黄家豪的博客</title>
-        <link>https://gahowong.github.io/tags/%E6%B5%AE%E7%82%B9%E5%9E%8Bfloat/</link>
+        <link>http://example.org/tags/%E6%B5%AE%E7%82%B9%E5%9E%8Bfloat/</link>
         <description>浮点型(float) - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 24 Apr 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="https://gahowong.github.io/tags/%E6%B5%AE%E7%82%B9%E5%9E%8Bfloat/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 24 Apr 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%B5%AE%E7%82%B9%E5%9E%8Bfloat/" rel="self" type="application/rss+xml" /><item>
     <title>Python基本数据类型</title>
-    <link>https://gahowong.github.io/py5_python%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+    <link>http://example.org/py5_python%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
     <pubDate>Fri, 24 Apr 2020 13:50:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://gahowong.github.io/py5_python%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+    <guid>http://example.org/py5_python%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
     <description><![CDATA[整数类型 整型(int) - 通常被称为是整型或整数，是正或负整数，不带小数点。Python3 整型是没有限制大小的，可以当作 Long 类型使用，所以 Python3 没有]]></description>
 </item></channel>
 </rss>
