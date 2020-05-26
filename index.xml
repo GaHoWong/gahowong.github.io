@@ -5,6 +5,13 @@
         <description>欢迎来到我的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
             <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Thu, 16 Apr 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/" rel="self" type="application/rss+xml" /><item>
+    <title>Windows环境搭建Hugo博客</title>
+    <link>http://example.org/windows%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</link>
+    <pubDate>Tue, 26 May 2020 00:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/windows%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</guid>
+    <description><![CDATA[！！！前提条件：在搭建Hugo博客之前，需要配置好git环境 下载hugo 在这里（https://github.com/gohugoio/hu]]></description>
+</item><item>
     <title>Windows环境如何配置Git？</title>
     <link>http://example.org/windows%E7%8E%AF%E5%A2%83%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEgit/</link>
     <pubDate>Mon, 25 May 2020 00:00:00 &#43;0800</pubDate>
@@ -67,12 +74,5 @@
     <author>作者</author>
     <guid>http://example.org/py20_pyinstaller%E5%BA%93/</guid>
     <description><![CDATA[PyInstaller库是第三方库，因此需要pip安装，（用的是清华镜像） 1 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyinstaller 安装完会出现这样的提示 使用方法 cmd命令行 1 pyinstaller -F &lt]]></description>
-</item><item>
-    <title>基本统计值计算</title>
-    <link>http://example.org/py18_%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1%E5%80%BC%E8%AE%A1%E7%AE%97/</link>
-    <pubDate>Sat, 09 May 2020 00:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://example.org/py18_%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1%E5%80%BC%E8%AE%A1%E7%AE%97/</guid>
-    <description><![CDATA[为了加深组合数据类型的理解，用python实现基本数值的计算，根据用户给出的n个数值，分别求出平均值、方差、中位数。 1、要求平均值，那么就需]]></description>
 </item></channel>
 </rss>
