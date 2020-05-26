@@ -12,11 +12,11 @@
     <guid>http://example.org/windows%E7%8E%AF%E5%A2%83%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEgit/</guid>
     <description><![CDATA[Git是目前世界上最先进的分布式版本控制系统，如果你是码农，那一定不会陌生。 一、下载Git 首先去官网（https://git-scm.com]]></description>
 </item><item>
-    <title>加速打开GitHub和此博客的方法</title>
-    <link>http://example.org/%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F%E8%BF%9B%E5%85%A5%E5%8D%9A%E5%AE%A2%E9%80%9F%E5%BA%A6/</link>
+    <title>GitHub打开速度慢的解决方法</title>
+    <link>http://example.org/github%E6%89%93%E5%BC%80%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link>
     <pubDate>Sun, 26 Apr 2020 00:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://example.org/%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F%E8%BF%9B%E5%85%A5%E5%8D%9A%E5%AE%A2%E9%80%9F%E5%BA%A6/</guid>
+    <guid>http://example.org/github%E6%89%93%E5%BC%80%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid>
     <description><![CDATA[由于此博客是部署于GitHub平台的，如果打开此博客很慢，说明打开GitHub也很慢，因此寻找了一些加快打开速度的方法 方法一：改hosts文]]></description>
 </item><item>
     <title>Hello Myblog</title>
