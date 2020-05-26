@@ -7,7 +7,7 @@
 
 **！！！前提条件：在搭建Hugo博客之前，需要配置好git环境**
 ### 下载hugo
-在这里（https://github.com/gohugoio/hugo/releases） [下载hugo](https://github.com/gohugoio/hugo/releases)，推荐下载hugo_extended版本，很多hugo主题需要扩展版支持。如果你发现下载太慢，可以给试试我上传到csdn的资源（[点这里跳转]()）
+在这里（https://github.com/gohugoio/hugo/releases） [下载hugo](https://github.com/gohugoio/hugo/releases)，推荐下载hugo_extended版本，很多hugo主题需要扩展版支持。如果你发现下载太慢，可以给试试我上传到csdn的资源（[点这里跳转](https://download.csdn.net/download/OldHuangC/12458839)）
 ### 添加环境变量
 下载好之后，选择把他复制到安装路径解压，我的是（D:\Program Files\hugo）然后复制你的路径，将它添加到系统的环境变量
 ![添加环境变量](https://img-blog.csdnimg.cn/20200525215236460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70)![添加环境变量](https://img-blog.csdnimg.cn/20200525215245275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70)添加完之后，右键打开git bash 输入
