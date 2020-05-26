@@ -26,7 +26,7 @@ Git是目前世界上最先进的分布式版本控制系统，如果你是码�
  git config --global user.email '你的邮箱'#定义全局的邮件地址
  git config --list #查看配置信息
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200525204735687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70)![在本地配置用户信息](https://img-blog.csdnimg.cn/20200525201841312.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200525204735687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70)
 
 
 
