@@ -5,6 +5,13 @@
         <description>欢迎来到我的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
             <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Thu, 16 Apr 2020 00:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/" rel="self" type="application/rss+xml" /><item>
+    <title>STM8s_实现bootloader</title>
+    <link>http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/</link>
+    <pubDate>Sat, 30 May 2020 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/</guid>
+    <description><![CDATA[一、实验目的与要求 串口下载固件：把串口接收到的固件保存到指定的Flash地址 中断向量表转向：bootloader的中断向量表要转向到固件的中]]></description>
+</item><item>
     <title>STM8s_PWM的实现</title>
     <link>http://example.org/stm8s_pwm%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
     <pubDate>Fri, 29 May 2020 00:50:38 &#43;0800</pubDate>
@@ -67,12 +74,5 @@
     <author>作者</author>
     <guid>http://example.org/py25_os%E5%BA%93/</guid>
     <description><![CDATA[OS库是Python标准库，包含几百个函数。OS模块提供了非常丰富的方法用来处理文件和目录。 常用的几个函数 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17]]></description>
-</item><item>
-    <title>文件的使用</title>
-    <link>http://example.org/py26_%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
-    <pubDate>Thu, 14 May 2020 00:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://example.org/py26_%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-    <description><![CDATA[定义 文件是数据的抽象和集合 是存储在辅助存储器上的数据序列 是数据存储的一种形式 文件的展现形态：文本文件和二进制文件 文件文件和二进制文件只是文件]]></description>
 </item></channel>
 </rss>

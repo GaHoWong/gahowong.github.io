@@ -4,7 +4,14 @@
         <link>http://example.org/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E9%A9%B1%E5%8A%A8%E6%9D%BF/</link>
         <description>步进电机驱动板 - 标签 - 黄家豪的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
-            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Fri, 29 May 2020 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E9%A9%B1%E5%8A%A8%E6%9D%BF/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Sat, 30 May 2020 00:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E9%A9%B1%E5%8A%A8%E6%9D%BF/" rel="self" type="application/rss+xml" /><item>
+    <title>STM8s_实现bootloader</title>
+    <link>http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/</link>
+    <pubDate>Sat, 30 May 2020 00:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/</guid>
+    <description><![CDATA[一、实验目的与要求 串口下载固件：把串口接收到的固件保存到指定的Flash地址 中断向量表转向：bootloader的中断向量表要转向到固件的中]]></description>
+</item><item>
     <title>STM8s_PWM的实现</title>
     <link>http://example.org/stm8s_pwm%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
     <pubDate>Fri, 29 May 2020 00:50:38 &#43;0800</pubDate>

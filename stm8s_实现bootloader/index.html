@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>STM8s_实现bootloader - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="STM8s_实现bootloader" />
+<meta property="og:description" content="一、实验目的与要求 串口下载固件：把串口接收到的固件保存到指定的Flash地址 中断向量表转向：bootloader的中断向量表要转向到固件的中" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/" />
+<meta property="article:published_time" content="2020-05-30T00:50:38+08:00" />
+<meta property="article:modified_time" content="2020-05-30T15:58:26+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="STM8s_实现bootloader"/>
+<meta name="twitter:description" content="一、实验目的与要求 串口下载固件：把串口接收到的固件保存到指定的Flash地址 中断向量表转向：bootloader的中断向量表要转向到固件的中"/>
+<meta name="application-name" content="黄家豪的博客">
+<meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/" /><link rel="prev" href="http://example.org/stm8s_pwm%E7%9A%84%E5%AE%9E%E7%8E%B0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "STM8s_实现bootloader",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/stm8s_%E5%AE%9E%E7%8E%B0bootloader\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "步进电机驱动板, 单片机, STM8s, bootloader, 中断向量表, 中断向量表转向, 固件, 升级","wordcount":  5444 ,
+        "url": "http:\/\/example.org\/stm8s_%E5%AE%9E%E7%8E%B0bootloader\/","datePublished": "2020-05-30T00:50:38+08:00","dateModified": "2020-05-30T15:58:26+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "GaHo"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><script src="/live2d-widget/autoload.js"></script><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> 主页 </a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。"> 文章 </a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！"> 标签 </a><a class="menu-item" href="/categories/" title="分类可以快速查找文章"> 分类 </a><a class="menu-item" href="/file/" title="好东西都在这！"> 资源 </a><a class="menu-item" href="/message-board/" title="留言板"> 动态与留言 </a><a class="menu-item" href="/about/" title="我的个人简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">主页</a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。">文章</a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！">标签</a><a class="menu-item" href="/categories/" title="分类可以快速查找文章">分类</a><a class="menu-item" href="/file/" title="好东西都在这！">资源</a><a class="menu-item" href="/message-board/" title="留言板">动态与留言</a><a class="menu-item" href="/about/" title="我的个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">STM8s_实现bootloader</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/about/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>GaHo</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                                <i class="far fa-folder fa-fw"></i>嵌入式
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-05-30>2020-05-30</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5444 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 11 分钟&nbsp;<span id="/stm8s_%E5%AE%9E%E7%8E%B0bootloader/" class="leancloud_visitors" data-flag-title="STM8s_实现bootloader">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一实验目的与要求">一、实验目的与要求</a></li>
+        <li><a href="#二实验原理">二、实验原理</a></li>
+        <li><a href="#三实验过程">三、实验过程</a></li>
+        <li><a href="#四实现代码">四、实现代码</a></li>
+        <li><a href="#五异常问题">五、异常问题</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#解决方法">解决方法：</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#六总结">六、总结：</a>
+          <ul>
+            <li><a href="#1bootloader程序流程图">1、Bootloader程序流程图</a></li>
+            <li><a href="#2中断向量表">2、中断向量表</a></li>
+            <li><a href="#3固件">3、固件</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="一实验目的与要求">一、实验目的与要求</h3>
+<ol>
+<li>串口下载固件：把串口接收到的固件保存到指定的Flash地址</li>
+<li>中断向量表转向：bootloader的中断向量表要转向到固件的中断向量表（Reset中断除外）</li>
+</ol>
+<h3 id="二实验原理">二、实验原理</h3>
+<ol>
+<li>通过串口烧写固件：
+根据MyHairboot.c的流程，可分为以下几步
+–	开始(BOOT_HEAD)
+–	接收并写Flash(BOOT_WRITE)
+•	可以忽略BOOT_WRITE_INTERRUPT_VEC
+•	此步骤有个简单的验证算法，通过变量verify实现
+–	结束(BOOT_OK或者BOOT_ERR)
+–	下载完毕后，需要重启开发板
+如果一段时间内没有从串口接收到数据，就会跳转到固件(开始执行固件)
+–	asm(“JP $8200”);  // asm函数用于调用汇编指令</li>
+<li>中断向量表转向</li>
+</ol>
+<ol>
+<li>当固件的中断发生时，CPU会去查找位于0x8000的bootloader的中断向量表</li>
+<li>bootloader的中断向量表需要转向到固件的中断向量表，以便找到固件定义的中断处理函数
+a)	Bootloader不知道固件中断处理函数的物理地址
+固件中断处理函数的物理地址是在链接固件时产生的，并保存在固件的中断向量表
+b)	Bootloader的Reset中断不用转向：这样当固件的Reset中断发生后，会调用bootloader的Reset中断处理函数__iar_program_start()，重启bootloader，然后由bootloader重新运行固件</li>
+</ol>
+<h3 id="三实验过程">三、实验过程</h3>
+<p>仔细阅读以下参考资料，特别是后两个，包括使用说明</p>
+<ol>
+<li>en.CD00176595.pdf和en.stsw-stm8006.zip：ST公司官方关于Bootloader的资料和例程；</li>
+<li>hairBoot-master.zip：资料1的简化版，针对STM8S低端型号，https://github.com/Zepan/hairBoot；</li>
+<li>stm8s_uploader.rar：资料2的优化版，并附带上位机程序，http://bbs.21ic.com/icview-1251224-1-1.html；
+主要是使用它所带的上位机程序：stm8s_uploader.exe</li>
+</ol>
+<p>注意：使用上位机(stm8s_uploader.exe)时，不能选中”自动调整中断映射表”。</p>
+<p>实现一个Bootloader，能从串口下载并运行固件，步骤如下：</p>
+<ol>
+<li>
+<p>创建一个新项目MyHairBoot，把MyHairBoot.c的内容复制到main.c。设置项目属性，在原来的基础上，还要设置以下几点：
+(1)	C/C++ Compiler -&gt; Optimizations -&gt; High -&gt; Balanced
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222450146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222450146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222450146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222450146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="62"
+        title="62" />
+(2)	Output Converter -&gt; Output -&gt; Generate additional output -&gt; Binary
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222506639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222506639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222506639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222506639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="63"
+        title="63" />
+(3)	Linker -&gt; Library: 取消”Include C-SPY debugging support”选项
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222520406.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222520406.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222520406.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222520406.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="64"
+        title="64" />
+完成以上设置后，编译项目后，会在项目目录下的Debug-&gt;Exe目录生成.bin文件，一定要保证.bin文件小于512字节。
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222536721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222536721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222536721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222536721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="65"
+        title="65" /></p>
+</li>
+<li>
+<p>阅读MyHairBoot.c，并结合参考资料，回答以下问题：
+(1)	MyHairBoot和上位机的串口通讯流程。
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222603522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222603522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222603522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222603522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="66"
+        title="66" />
+注：开发板启动后，在等待通讯前，LED会快闪烁。
+(2)	通过MyHairBoot从串口烧写程序时，被烧写的程序保存到Flash的什么位置(地址)？
+答：被烧写的程序保存到Flash的0x8200往后
+(3)	为什么MyHairBoot.bin的大小不能超过512字节？
+<strong>答：因为MyHairBoot在flash保存的范围是0x8000-0x8200。因为16进制的0x200即十进制的512字节，因此不能溢出。</strong></p>
+</li>
+<li>
+<p>用IAR编译并烧写MyHairBoot，并打开View菜单下的Disassembly和Memory窗口，回答以下问题：</p>
+<p>(1)	用二进制编辑器(例如UltraEdit, EditPlus, Windows 10商店里面的Hex Editor Pro)察看生成的bin文件，并于Flash的内容比较，生成的bin文件下载到Flash的什么位置(地址)？
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222627109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222627109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222627109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222627109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="67"
+        title="67" />
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222643575.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222643575.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222643575.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222643575.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="68"
+        title="68" />
+<strong>答：生成的bin文件与IAR中观察flash的内容是一样的，生成的bin文件下载到Flash的0x8000</strong></p>
+</li>
+</ol>
+<p>(2)	Interrupt Vector(中断向量表)位于Flash的什么位置(地址)？有多大？</p>
+<p><strong>答：中断向量表位于flash的0x8000~0x8080，大小为128字节。</strong></p>
+<p>(3)	中断向量表的每个字节的含义是什么？</p>
+<p><strong>答：前两个字节表示INT指令，如0x8200。后两个字节表示中断处理函数，如0x80DD:</strong></p>
+<p><strong>TIM2_OVR_UIF_IRQHandler，指如果发生TIM2 update/overflow中断，就跳转到函数</strong></p>
+<p><strong>TIM2_OVR_UIF_IRQHandler</strong></p>
+<p>(4)	当前的中断向量表存在什么问题？</p>
+<p><strong>答：当前的中断向量表未转向到0x8200</strong></p>
+<ol start="4">
+<li>
+<p>用TestLED.c创建一个项目TestLED，编译并生成Bin文件。
+(1)	设置项目属性时，除了指定CPU型号外，还要加上第1步第(2)小步的步骤；
+(2)	不要用IAR下载该项目，否则会覆盖MyHairBoot</p>
+</li>
+<li>
+<p>用资料3中的上位机(stm8s_uploader.exe)下载TestLED.bin。
+(1)	打开上位机，选择芯片类型和串口，然后指定TestLED.bin的路径；
+注：其他选项不用修改，用默认即可。
+(2)	按下开发板的Reset按钮，此时开发板的LED会以很快的速度闪烁；
+(3)	在开发板的LED停止闪烁之前，按下上位机的”上传”按钮，成功的话会显示”上传完毕”提示
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222704837.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222704837.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222704837.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222704837.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="69"
+        title="69" />
+(4)	再次按下开发板的Reset按钮，可发现被下载的TestLED无法运行</p>
+</li>
+<li>
+<p>再次用IAR打开MyHairBoot项目并下载它
+(1)	用二进制编辑器打开TestLED.bin，并与Flash的内容比较，判断TestLED.bin被下载到什么位置(地址)?
+<strong>答：TestLED.bin被下载到了flash的0x8200的位置</strong>
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222723713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222723713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222723713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222723713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="70"
+        title="70" />
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222732838.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222732838.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222732838.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222732838.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="71"
+        title="71" /></p>
+</li>
+</ol>
+<p>(2)	TestLED程序的中断向量表，分别位于bin文件和Flash的什么位置(地址)？有多大？</p>
+<p><strong>答：TestLED程序的中断向量表，位于bin文件的0x00~0x7f的位置，大小为128字节。位于flash的0x8200-0x827f，大小为128字节</strong></p>
+<p>(3)	TestLED被下载后无法运行的原因是什么？</p>
+<p>提示：分析中断向量表</p>
+<p><strong>答：当TestLED的中断发生时，中断向量表并没有跳转到0x8200固件的中断向量表，因而无法正确跳转到中断处理函数的物理地址。</strong></p>
+<ol start="7">
+<li>
+<p>按照第4步的方法，用TestLED.c创建TestLED2项目，设置项目属性时，增加以下一个额外的步骤：
+(1)	Linker -&gt; Config -&gt; Override default: 然后my_lnkstm8s103f3.icf的路径代替原来的路径
+(2)	新icf把原icf文件中的”define region NearFuncCode = [from 0x8000 to 0x9FFF]”改成了”define region NearFuncCode = [from 0x8200 to 0x9FFF]”
+(3)	比较TestLED.bin和TestLED2.bin的不同
+<strong>答：TestLED2固件的起始地址相比于TestLED增加了0x200.</strong>
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222753755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222753755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222753755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222753755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="72"
+        title="72" />
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222804628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222804628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222804628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222804628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+</li>
+<li>
+<p>按照第5步的方法下载TestLED2.bin，此时会发现TestLED2能正常运行。解释为什么TestLED不能正常运行而TestLED2能正常运行。
+(4)	<strong>答：TestLED不能正常运行而TestLED2能正常运行的原因是因为在TestLED2中将my_lnkstm8s103f3.icf中的define region NearFuncCode = [from 0x8000 to 0x9FFF]”改成了”define region NearFuncCode = [from 0x8200 to 0x9FFF]”使得了TestLED2的起始地址相较于TestLED增加了0x200，又因为 TestLED2没有使用到中断，因此即使前面bootloade的中断向量表没转向也不影响TestLED2的运行，但会影响后面使用了中断的Lab2b的运行</strong></p>
+</li>
+<li>
+<p>按照第7步和第8步的方法，打开Lab2b中实现的项目，并生成bin文件(Lab2b.bin)
+(1)	用上位机把Lab2b.bin下载到Flash中，
+(2)	用IAR再次下载MyHairBoot
+(3)	在Memory窗口检查Flash内容，确保Lab2b.bin被正确下载到Flash中
+(4)	退出IAR的Debug状态，按下开发板的Reset按钮，为什么此时的Lab2b.bin无法正常运行？
+提示：分析中断向量表
+<strong>答：bootloader的中断向量表没有转向到固件Lab2b的中断向量表，找不到固件Lab2b定义的中断处理函数。固件的起始地址也没有修改为0x8200。</strong>
+(5)	如何解决上一步的问题？参考en.CD00176595.pdf的Figure 6，给出你的解决思路。
+<strong>答：①修改固件的起始地址②转向bootload的中断向量表</strong></p>
+</li>
+<li>
+<p>解决第9步的问题，用IAR下载MyHairBoot，使Flash中的Lab2b.bin能正常运行，并写出你的解决步骤。
+提示：解决方法不止一种，例如参考资料1的汇编，参考资料2的手工修改bin文件等，或者lec13.ppt第7页提到的其他方法。
+<strong>答：①利用汇编语言将MyHairBootload中断向量表的地址转向到0x8200-0x827f，（修改stm8s_interrupt.s文件,将.s文件放到main.c的目录下编译）</strong>
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222836962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222836962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222836962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222836962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" />
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/2020052822284463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/2020052822284463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/2020052822284463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/2020052822284463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="中断向量表转向前的bin文件"
+        title="中断向量表转向前的bin文件" />中断向量表转向前的bin文件</p>
+</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222912958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222912958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222912958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222912958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="中断向量表转向后的bin文件"
+        title="中断向量表转向后的bin文件" />
+中断向量表转向后的bin文件
+②修改固件的起始地址在my_lnkstm8s103f3.icf中将define region NearFuncCode = [from 0x8000 to 0x9FFF]”改成了”define region NearFuncCode = [from 0x8200 to 0x9FFF]”</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528222947403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528222947403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528222947403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528222947403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="77"
+        title="77" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528223002188.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528223002188.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528223002188.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528223002188.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528223009502.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528223009502.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528223009502.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528223009502.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<h3 id="四实现代码">四、实现代码</h3>
+<p><strong>myhairboot.c</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="c1">// Refernece: 
+</span><span class="c1">//   1. AN2659
+</span><span class="c1">//   2. https://github.com/Zepan/hairBoot
+</span><span class="c1">//   3. http://bbs.21ic.com/icview-1251224-1-1.html
+</span><span class="c1"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostm8s103f3.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="c1">//#include &lt;intrinsics.h&gt;
+</span><span class="c1"></span>
+<span class="cp">#define UART1_FLAG_TXE  (unsigned char)0x80  </span><span class="c1">// Tx Data Register Empty flag
+</span><span class="c1"></span><span class="cp">#define UART1_FLAG_RXNE (unsigned char)0x20  </span><span class="c1">// Rx Data Register Not Empty flag
+</span><span class="c1"></span>
+<span class="cp">#define BLOCK_BYTES   64
+</span><span class="cp">#define	BLOCK_SHIFT   6
+</span><span class="cp">#define BOOT_ERR      0xa1
+</span><span class="cp">#define BOOT_HEAD     0xa5
+</span><span class="cp">#define BOOT_OK       0xa0
+</span><span class="cp">#define BOOT_WRITE    0xa7
+</span><span class="cp">#define BOOT_WRITE_INTERRUPT_VEC 0xaa
+</span><span class="cp">#define FLASH_START   0x8000
+</span><span class="cp"></span><span class="c1">//#define INIT_PAGE     0x08
+</span><span class="c1"></span>
+<span class="kt">void</span> <span class="nf">UART1_SendB</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">ch</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">UART1_SR</span> <span class="o">&amp;</span> <span class="n">UART1_FLAG_TXE</span><span class="p">));</span>
+  <span class="n">UART1_DR</span> <span class="o">=</span> <span class="n">ch</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="nf">UART1_RcvB</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">UART1_SR</span> <span class="o">&amp;</span> <span class="n">UART1_FLAG_RXNE</span><span class="p">));</span>
+  <span class="k">return</span> <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">UART1_DR</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//addr must at begin of block
+</span><span class="c1"></span><span class="n">__ramfunc</span> <span class="kt">void</span> <span class="nf">FLASH_ProgBlock</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">Buffer</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">i</span><span class="p">;</span>
+  <span class="n">FLASH_CR2</span> <span class="o">|=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="mh">0x01</span><span class="p">;</span>     <span class="c1">// programming time fixed at Tprog
+</span><span class="c1"></span>  <span class="n">FLASH_NCR2</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)(</span><span class="mh">0xFE</span><span class="p">);</span>  <span class="c1">// block programming enabled
+</span><span class="c1"></span>  <span class="c1">// Copy data bytes from RAM to FLASH memory
+</span><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">BLOCK_BYTES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="o">*</span><span class="p">((</span><span class="n">__near</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">addr</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)(</span><span class="n">Buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span> <span class="kt">void</span> <span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">tryCnt</span> <span class="o">=</span> <span class="mi">65535</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">ch</span><span class="p">,</span> <span class="n">page</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>  <span class="c1">//10 for 1s
+</span><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">BLOCK_BYTES</span><span class="p">];</span>
+  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">verify</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">addr</span><span class="p">;</span>
+
+  <span class="c1">// setup clock
+</span><span class="c1"></span>  <span class="n">CLK_CKDIVR</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)(</span><span class="o">~</span><span class="mh">0x18</span><span class="p">);</span>  <span class="c1">// 16MHz high speed internal clock
+</span><span class="c1"></span>
+  <span class="c1">//LED: B5
+</span><span class="c1"></span>  <span class="n">PB_DDR</span> <span class="o">=</span> <span class="mh">0x20</span><span class="p">;</span>  <span class="c1">// output
+</span><span class="c1"></span>  <span class="c1">//PB_CR1 = 0x20;  // push pull
+</span><span class="c1"></span>  <span class="c1">//PB_CR2 |= 0x20;  // 10MHz output speed
+</span><span class="c1"></span>  
+  <span class="c1">// setup uart: 115200, 8-n-1
+</span><span class="c1"></span>  <span class="n">UART1_CR2</span> <span class="o">=</span> <span class="mh">0x0C</span><span class="p">;</span>  <span class="c1">// rx/tx enabled, rx int disabled, tx int disabled
+</span><span class="c1"></span>  <span class="n">UART1_BRR2</span> <span class="o">=</span> <span class="mh">0x0B</span><span class="p">;</span>  <span class="c1">// 115200 baud rate. must set BRR2 first
+</span><span class="c1"></span>  <span class="n">UART1_BRR1</span> <span class="o">=</span> <span class="mh">0x08</span><span class="p">;</span>  <span class="c1">// 115200 baud rate. must set BRR2 first
+</span><span class="c1"></span>  
+  <span class="c1">// wait UART data
+</span><span class="c1"></span>  <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PB_ODR</span> <span class="o">=</span> <span class="n">i</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">;</span>  <span class="c1">// LOW is ON
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">UART1_SR</span> <span class="o">&amp;</span> <span class="n">UART1_FLAG_RXNE</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">//wait for head
+</span><span class="c1"></span>      <span class="n">ch</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">UART1_DR</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="n">BOOT_HEAD</span><span class="p">)</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">tryCnt</span><span class="o">--</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tryCnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">//PB_ODR |= 0x20;  // HIGH if OFF
+</span><span class="c1"></span>  
+  <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">FLASH_IAPSR</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="mh">0xFD</span><span class="p">;</span>  <span class="c1">// lock flash
+</span><span class="c1"></span>    <span class="k">asm</span><span class="p">(</span><span class="s">&#34;JP $8200&#34;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">FLASH_PUKR</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="mh">0x56</span><span class="p">;</span>  <span class="c1">// unlock flash
+</span><span class="c1"></span>    <span class="n">FLASH_PUKR</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="mh">0xAE</span><span class="p">;</span>  <span class="c1">// unlock flash
+</span><span class="c1"></span>    <span class="n">UART1_SendB</span><span class="p">(</span><span class="mh">0xa8</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ch</span> <span class="o">=</span> <span class="n">UART1_RcvB</span><span class="p">();</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="n">ch</span><span class="p">)</span> <span class="p">{</span>
+      
+      <span class="k">case</span> <span class="nl">BOOT_WRITE</span><span class="p">:</span>
+      <span class="k">case</span> <span class="nl">BOOT_WRITE_INTERRUPT_VEC</span><span class="p">:</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="n">UART1_RcvB</span><span class="p">();</span>
+        <span class="n">addr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)(</span><span class="n">FLASH_START</span> <span class="o">+</span> <span class="p">(</span><span class="n">page</span> <span class="o">&lt;&lt;</span> <span class="n">BLOCK_SHIFT</span><span class="p">));</span>
+        <span class="n">verify</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">BLOCK_BYTES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">UART1_RcvB</span><span class="p">();</span>
+          <span class="n">verify</span> <span class="o">+=</span> <span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">verify</span> <span class="o">==</span> <span class="n">UART1_RcvB</span><span class="p">())</span> <span class="p">{</span>  <span class="c1">// verify successed
+</span><span class="c1"></span>          <span class="k">if</span> <span class="p">(</span><span class="n">page</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">BOOT_WRITE_INTERRUPT_VEC</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// restore original reset interrupt vec
+</span><span class="c1"></span>            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+              <span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">addr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+          <span class="p">}</span>
+          <span class="n">FLASH_ProgBlock</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+          <span class="n">UART1_SendB</span><span class="p">(</span><span class="n">BOOT_OK</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="k">default</span><span class="o">:</span>  <span class="c1">// verify failed
+</span><span class="c1"></span>          <span class="n">UART1_SendB</span><span class="p">(</span><span class="n">BOOT_ERR</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>        
+        
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>  
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>stm8s_interrupt.s</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/**************************************************
+ *
+ * System initialization code for the STM8 IAR Compiler.
+ *
+ * Copyright 2010 IAR Systems AB.
+ *
+ * $Revision: 1413 $
+ *
+ ***************************************************
+ *
+ * To add your own interrupt handler to the table,
+ * give it the label _interrupt_N, where N is the
+ * offset from the RESET vector.  Your label will
+ * override the corresponding weak label declaration
+ * on the unhandled_exception function.
+ *
+ **************************************************/
+
+        MODULE   ?interrupt
+
+        SECTION __DEFAULT_CODE_SECTION__:CODE
+
+declare_label MACRO
+        PUBWEAK _interrupt_\1
+_interrupt_\1:
+        ENDM
+
+unhandled_exception:
+
+        declare_label 1
+        declare_label 2
+        declare_label 3
+        declare_label 4
+        declare_label 5
+        declare_label 6
+        declare_label 7
+        declare_label 8
+        declare_label 9
+        declare_label 10
+        declare_label 11
+        declare_label 12
+        declare_label 13
+        declare_label 14
+        declare_label 15
+        declare_label 16
+        declare_label 17
+        declare_label 18
+        declare_label 19
+        declare_label 20
+        declare_label 21
+        declare_label 22
+        declare_label 23
+        declare_label 24
+        declare_label 25
+        declare_label 26
+        declare_label 27
+        declare_label 28
+        declare_label 29
+        declare_label 30
+        declare_label 31
+
+        NOP                                   ;; put a breakpoint here
+        JRA    unhandled_exception
+
+
+/*
+ * The interrupt vector table.
+ */
+
+
+        SECTION `.intvec`:CONST
+
+define_vector MACRO
+        DC8     0x82
+        DC24    _interrupt_\1
+        ENDM
+
+        PUBLIC  __intvec
+        EXTERN   __iar_program_start
+        
+
+
+__intvec:
+        DC8     0x82
+        DC24    __iar_program_start          ;; RESET    0x8000
+        DC8     0x82
+        DC24    0x8204
+        DC8     0x82
+        DC24    0x8208
+        DC8     0x82
+        DC24    0x820C
+        DC8     0x82
+        DC24    0x8210
+        DC8     0x82
+        DC24    0x8214
+        DC8     0x82
+        DC24    0x8218
+        DC8     0x82
+        DC24    0x821C
+        DC8     0x82
+        DC24    0x8220
+        DC8     0x82
+        DC24    0x8224
+        DC8     0x82
+        DC24    0x8228
+        DC8     0x82
+        DC24    0x822C
+        DC8     0x82
+        DC24    0x8230
+        DC8     0x82
+        DC24    0x8234
+        DC8     0x82
+        DC24    0x8238
+        DC8     0x82
+        DC24    0x823C
+        DC8     0x82
+        DC24    0x8240
+        DC8     0x82
+        DC24    0x8244
+        DC8     0x82
+        DC24    0x8248
+        DC8     0x82
+        DC24    0x824C
+        DC8     0x82
+        DC24    0x8250
+        DC8     0x82
+        DC24    0x8254
+        DC8     0x82
+        DC24    0x8258
+        DC8     0x82
+        DC24    0x825C
+        DC8     0x82
+        DC24    0x8260
+        DC8     0x82
+        DC24    0x8264
+        DC8     0x82
+        DC24    0x8268
+        DC8     0x82
+        DC24    0x826C
+        DC8     0x82
+        DC24    0x8270
+        DC8     0x82
+        DC24    0x8274
+        DC8     0x82
+        DC24    0x8278
+        DC8     0x82
+        DC24    0x827C
+
+        END
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="五异常问题">五、异常问题</h3>
+<p>错误理解bootload和固件的关系，将固件的中断向量表转向到自己，造成无限死循环，而bootload的中断向量表反而没有转向。</p>
+<h5 id="解决方法">解决方法：</h5>
+<p>取消固件的中断向量表转向，把lab 2c.s文件添加到MyHairBoot工程下编译运行，实现bootload的中断向量表的转向。</p>
+<h3 id="六总结">六、总结：</h3>
+<h4 id="1bootloader程序流程图">1、Bootloader程序流程图</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/2020052822310334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/2020052822310334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/2020052822310334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/2020052822310334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="Bootloader程序流程图"
+        title="Bootloader程序流程图" /></p>
+<h4 id="2中断向量表">2、中断向量表</h4>
+<p>（1）在stm6s中，中断向量表的地址是0x8000，它位于Flash的开头，大小是128字节，范围是0x8000 ~ 0x807F，中断向量表里面储存的内容叫做中断向量(Interrupt Vectors)，每个中断向量占4字节，STM8共有32个不同的中断向量，因此中断向量表的大小为128k。</p>
+<p>（2）中断向量表的转向：就是当固件的中断发生时，CPU会去查找位于0x8000的bootloader的中断向量表。bootloader的中断向量表需要转向到固件的中断向量表，以便找到固件定义的中断处理函数。因为固件中断处理函数的物理地址是在链接固件时产生的，并保存在固件的中断向量表，所以Bootloader不知道固件中断处理函数的物理地址。因此实验要求将bootloader的中断向量表转向到0x8200固件的中断向量表上。</p>
+<h4 id="3固件">3、固件</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200528223418427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200528223418427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200528223418427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200528223418427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="固件"
+        title="固件" />
+（1） 固件是担任着一个系统最基础最底层工作的软件。而在硬件设备中，固件就是硬件设备的灵魂，因为一些硬件设备除了固件以外没有其它软件组成，因此固件也就决定着硬件设备的功能及性能。在许多嵌入式设备中，如果设备需要升级，绝大多数都是通过固件升级的。
+（2）STM8程序默认起始地址是0x8000即bootloader的起始地址。
+（3）固件的起始地址也是固定的，在本实验中要求固件的起始地址是0x8200。
+（4）通过.icf文件可以修改固件的起始地址，把.icf文件中以define region开头的行中的0x8000，修改为固件的实际起始地址0x8200</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-05-30 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/stm8s_%E5%AE%9E%E7%8E%B0bootloader/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/" data-title="STM8s_实现bootloader" data-hashtags="步进电机驱动板,单片机,STM8s,bootloader,中断向量表,中断向量表转向,固件,升级"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/" data-hashtag="步进电机驱动板"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/" data-title="STM8s_实现bootloader"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/stm8s_%E5%AE%9E%E7%8E%B0bootloader/" data-title="STM8s_实现bootloader"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E9%A9%B1%E5%8A%A8%E6%9D%BF/">步进电机驱动板</a>,&nbsp;<a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a>,&nbsp;<a href="/tags/stm8s/">STM8s</a>,&nbsp;<a href="/tags/bootloader/">bootloader</a>,&nbsp;<a href="/tags/%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8/">中断向量表</a>,&nbsp;<a href="/tags/%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8%E8%BD%AC%E5%90%91/">中断向量表转向</a>,&nbsp;<a href="/tags/%E5%9B%BA%E4%BB%B6/">固件</a>,&nbsp;<a href="/tags/%E5%8D%87%E7%BA%A7/">升级</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/stm8s_pwm%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="prev" rel="prev" title="STM8s_PWM的实现"><i class="fas fa-angle-left fa-fw"></i>STM8s_PWM的实现</a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{"valine":{"appId":"g5qj4aPdeiK1nH5RFhj7W8A5-MdYXbMMI","appKey":"Rqx9rulA5eNB1I7q56kAQpoh","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":25,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"data":{"id-1":"❤欢迎来到我的博客~","id-2":"❤欢迎来到我的博客~"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":" ","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":140}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
