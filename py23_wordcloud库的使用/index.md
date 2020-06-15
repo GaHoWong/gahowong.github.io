@@ -5,16 +5,22 @@ wordcloud是优秀的词云展示第三方库，它可以根据文本中词语�
 
 ------
 
-
 ### 安装
+
+安装jieba库（中文分词库）
+
+```
+pip install jieba-i https://pypi.doubanio.com/simple/
+```
+
 安装wordcloud（用来生成图云）
 ```
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple wordcloud 
+pip install wordcloud  -i https://pypi.doubanio.com/simple/
 ```
 安装imageio（用来获取图像）
 
 ```
-pip install -i http://mirrors.aliyun.com/pypi/simple/ imageio
+pip install imageio  -i https://pypi.doubanio.com/simple/
 ```
 
 ### 常规使用方法：
