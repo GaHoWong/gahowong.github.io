@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>学会看时序图——I2C通讯协议 - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="学会看时序图——I2C通讯协议" />
+<meta property="og:description" content="一、I2C协议简介 I2C 通讯协议(Inter－Integrated Circuit)是由Phiilps公司开发的，由于它引脚少，硬件实现简单，可扩" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" />
+<meta property="article:published_time" content="2020-06-26T13:50:38+08:00" />
+<meta property="article:modified_time" content="2020-02-26T15:58:26+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="学会看时序图——I2C通讯协议"/>
+<meta name="twitter:description" content="一、I2C协议简介 I2C 通讯协议(Inter－Integrated Circuit)是由Phiilps公司开发的，由于它引脚少，硬件实现简单，可扩"/>
+<meta name="application-name" content="黄家豪的博客">
+<meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" /><link rel="prev" href="http://example.org/%E5%A6%82%E4%BD%95%E7%94%A8vscode%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E8%B6%85%E8%88%92%E6%9C%8D%E7%9A%84python%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83/" /><link rel="next" href="http://example.org/%E8%BD%AF%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "学会看时序图——I2C通讯协议",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "单片机, STM32, I2C, 通讯协议, 时序图","wordcount":  2708 ,
+        "url": "http:\/\/example.org\/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE\/","datePublished": "2020-06-26T13:50:38+08:00","dateModified": "2020-02-26T15:58:26+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "GaHo"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><script src="/live2d-widget/autoload.js"></script><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> 主页 </a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。"> 文章 </a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！"> 标签 </a><a class="menu-item" href="/categories/" title="分类可以快速查找文章"> 分类 </a><a class="menu-item" href="/file/" title="好东西都在这！"> 资源 </a><a class="menu-item" href="/message-board/" title="留言板"> 动态与留言 </a><a class="menu-item" href="/about/" title="我的个人简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">主页</a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。">文章</a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！">标签</a><a class="menu-item" href="/categories/" title="分类可以快速查找文章">分类</a><a class="menu-item" href="/file/" title="好东西都在这！">资源</a><a class="menu-item" href="/message-board/" title="留言板">动态与留言</a><a class="menu-item" href="/about/" title="我的个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">学会看时序图——I2C通讯协议</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/about/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>GaHo</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/">
+                                <i class="far fa-folder fa-fw"></i>单片机
+                            </a>&nbsp;<a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                                <i class="far fa-folder fa-fw"></i>嵌入式
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-06-26>2020-06-26</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2708 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" class="leancloud_visitors" data-flag-title="学会看时序图——I2C通讯协议">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一i2c协议简介">一、I2C协议简介</a>
+      <ul>
+        <li><a href="#一i2c物理层">（一）、I2C物理层</a></li>
+        <li><a href="#二协议层">（二）协议层</a>
+          <ul>
+            <li><a href="#1i2c基本读写过程">1.I2C基本读写过程</a></li>
+            <li><a href="#2通讯的起始和停止信号">2.通讯的起始和停止信号</a></li>
+            <li><a href="#3数据有效性">3.数据有效性</a></li>
+            <li><a href="#4地址及数据方向">4.地址及数据方向</a></li>
+            <li><a href="#5响应">5.响应</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<h2 id="一i2c协议简介">一、I2C协议简介</h2>
+<p>I2C 通讯协议(Inter－Integrated  Circuit)是由Phiilps公司开发的，由于它引脚少，硬件实现简单，可扩展性强，不需要USART、CAN等通讯协议的外部收发设备，现在被广泛地使用在系统内多个集成电路(IC)间的通讯。
+在计算机科学里，大部分复杂的问题都可以通过分层来简化。如芯片被分为内核层和片上外设；STM32标准库则是在寄存器与用户代码之间的软件层。对于通讯协议，我们也以分层的方式来理解，最基本的是把它分为物理层和协议层。物理层规定通讯系统中具有机械、电子功能部分的特性，确保原始数据在物理媒体的传输。协议层主要规定通讯逻辑，统一收发双方的数据打包、解包标准。简单来说物理层规定我们用嘴巴还是用肢体来交流，协议层则规定我们用中文还是英文来交流。</p>
+<h3 id="一i2c物理层">（一）、I2C物理层</h3>
+<p>2C通讯设备之间的常用连接方式
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200629095421836.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200629095421836.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200629095421836.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200629095421836.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" />
+它的物理层有如下特点：
+(1)它是一个支持设备的总线。“<strong>总线</strong>”指多个设备共用的信号线。在一个I2C通讯总线中，可连接多个I2C通讯设备，支持多个通讯主机及多个通讯从机。
+(2)一个I2C总线只使用两条总线线路，一条双向串行数据线(SDA)，一条串行时钟线(SCL)。数据线即用来表示数据，时钟线用于数据收发同步。
+(3)每个连接到总线的设备都有一个<strong>独立的地址</strong>，主机可以利用这个地址进行不同设备之间的访问。
+(4)总线通过上拉电阻接到电源。当I2C设备空闲时，会输出<strong>高阻态</strong>，而当所有设备都空闲，都输出高阻态时，由上拉电阻把总线拉成高电平。
+(5)多个主机同时使用总线时，为了防止数据冲突，会利用<strong>仲裁</strong>方式决定由哪个设备占用总线。
+(6)具有三种传输模式：标准模式传输速率为100kbit/s ，快速模式为400kbit/s ，高速模式下可达3.4Mbit/s，但目前大多I2C设备尚不支持高速模式。
+(7)连接到相同总线的IC 数量受到总线的最大电容400pF 限制。</p>
+<h3 id="二协议层">（二）协议层</h3>
+<p>I2C的协议定义了通讯的起始和停止信号、数据有效性、响应、仲裁、时钟同步和地址广播等环节。</p>
+<h4 id="1i2c基本读写过程">1.I2C基本读写过程</h4>
+<p>↓I2C通讯过程的基本结构↓
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200629095614404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200629095614404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200629095614404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200629095614404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" />
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200629095623533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200629095623533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200629095623533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200629095623533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<p>这些图表示的是主机和从机通讯时，SDA线的数据包序列。
+其中S表示由主机的I2C接口产生的传输起始信号(S)，这时连接到I2C总线上的所有从机都会接收到这个信号。
+起始信号产生后，所有从机就开始等待主机紧接下来广播的从 机 地址 信 号(SLAVE_ADDRESS)。在I2C总线上，每个设备的地址都是唯一的，当主机广播的地址与某个设备地址相同时，这个设备就被选中了，没被选中的设备将会忽略之后的数据信号。根据I2C协议，这个从机地址可以是7位或10位。
+在地址位之后，是传输方向的选择位，该位为0时，表示后面的数据传输方向是由主机传输至从机，即主机向从机写数据。该位为1时，则相反，即主机由从机读数据。</p>
+<p>从机接收到匹配的地址后，主机或从机会返回一个应答(ACK)或非应答(NACK)信号，只有接收到应答信号后，主机才能继续发送或接收数据</p>
+<p><strong>写数据</strong></p>
+<p>若配置的方向传输位为“写数据”方向，即第一幅图的情况，广播完地址，接收到应答信号后，主机开始正式向从机传输数据(DATA)，数据包的大小为8位，主机每发送完一个字节数据，都要等待从机的应答信号(ACK)，重复这个过程，可以向从机传输N个数据，这个N没有大小限制。当数据传输结束时，主机向从机发送一个停止传输信号(P)，表示不再传输数据。</p>
+<p><strong>读数据</strong></p>
+<p>若配置的方向传输位为“读数据”方向，即第二幅图的情况，广播完地址，接收到应答信号后，从机开始向主机返回数据(DATA)，数据包大小也为8位，从机每发送完一个数据，都会等待主机的应答信号(ACK)，重复这个过程，可以返回N个数据，这个N也没有大小限制。当主机希望停止接收数据时，就向从机返回一个非应答信号(NACK)，则从机自动停止数据传输。</p>
+<p><strong>读和写数据</strong>
+除了基本的读写，I2C通讯更常用的是复合格式，即第三幅图的情况，该传输过程有两次起始信号(S)。一般在第一次传输中，主机通过SLAVE_ADDRESS寻找到从设备后，发送一段“数据”，这段数据通常用于表示从设备内部的寄存器或存储器地址(注意区分它与SLAVE_ADDRESS的区别)；在第二次的传输中，对该地址的内容进行读或写。也就是说，第一次通讯是告诉从机读写地址，第二次则是读写的实际内容。</p>
+<h4 id="2通讯的起始和停止信号">2.通讯的起始和停止信号</h4>
+<p>前文中提到的起始(S)和停止(P)信号是两种特殊的状态，见图24-5。当SCL 线是高电平时SDA 线从高电平向低电平切换，这个情况表示通讯的起始。当SCL 是高电平时SDA 线由低电平向高电平切换，表示通讯的停止。起始和停止信号一般由主机产生。
+<img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200629095650529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200629095650529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200629095650529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200629095650529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<h4 id="3数据有效性">3.数据有效性</h4>
+<p>I2C使用SDA信号线来传输数据，使用SCL信号线进行数据同步。见图24-6。SDA数据线在SCL的每个时钟周期传输一位数据。传输时，SCL为高电平的时候SDA表示的数据有效，即此时的SDA为高电平时表示数据“1”，为低电平时表示数据“0”。当SCL为低电平时，SDA的数据无效，一般在这个时候SDA进行电平切换，为下一次表示数据做好准备。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200629095701738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200629095701738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200629095701738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200629095701738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<blockquote>
+<p>每次数据传输都以字节为单位，每次传输的字节数不受限制</p>
+</blockquote>
+<h4 id="4地址及数据方向">4.地址及数据方向</h4>
+<p>I2C总线上的每个设备都有自己的独立地址，主机发起通讯时，通过SDA信号线发送设备地址(SLAVE_ADDRESS)来查找从机。I2C协议规定设备地址可以是7位或10位，实际中7位的地址应用比较广泛。紧跟设备地址的一个数据位用来表示数据传输方向，它是数据方向位(R/W——)，第8位或第11位。数据方向位为“1”时表示主机由从机读数据，该位为“0”时表示主机向从机写数据。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200629095742306.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200629095742306.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200629095742306.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200629095742306.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<p>读数据方向时，主机会释放对SDA信号线的控制，由从机控制SDA信号线，主机接收信号，写数据方向时，SDA由主机控制，从机接收信号。</p>
+<h4 id="5响应">5.响应</h4>
+<p>I2C的数据和地址传输都带响应。响应包括“应答(ACK)”和“非应答(NACK)”两种信号。作为数据接收端时，当设备(无论主从机)接收到I2C传输的一个字节数据或地址后，若希望对方继续发送数据，则需要向对方发送“应答(ACK)”信号，发送方会继续发送下一个数据；若接收端希望结束数据传输，则向对方发送“非应答(NACK)”信号，发送方接收到该信号后会产生一个停止信号，结束信号传输。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="https://img-blog.csdnimg.cn/20200629095757782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/20200629095757782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70, https://img-blog.csdnimg.cn/20200629095757782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 1.5x, https://img-blog.csdnimg.cn/20200629095757782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L09sZEh1YW5nQw==,size_16,color_FFFFFF,t_70 2x"
+        data-sizes="auto"
+        alt="在这里插入图片描述"
+        title="在这里插入图片描述" /></p>
+<p>传输时主机产生时钟，在第9个时钟时，数据发送端会释放SDA的控制权，由数据接收端控制SDA，若SDA为高电平，表示非应答信号(NACK)，低电平表示应答信号(ACK)。</p>
+<hr>
+<p>野火STM32系列教程</p>
+<p>正点原子STM32系列教程</p>
+<p>洋桃电子STM32系列教程</p>
+<p>《STM32F10X-中文参考手册》</p>
+<p>《I2C总线协议》</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-02-26 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" data-title="学会看时序图——I2C通讯协议" data-hashtags="单片机,STM32,I2C,通讯协议,时序图"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" data-hashtag="单片机"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" data-title="学会看时序图——I2C通讯协议"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%97%B6%E5%BA%8F%E5%9B%BEi2c%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" data-title="学会看时序图——I2C通讯协议"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a>,&nbsp;<a href="/tags/stm32/">STM32</a>,&nbsp;<a href="/tags/i2c/">I2C</a>,&nbsp;<a href="/tags/%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/">通讯协议</a>,&nbsp;<a href="/tags/%E6%97%B6%E5%BA%8F%E5%9B%BE/">时序图</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E5%A6%82%E4%BD%95%E7%94%A8vscode%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E8%B6%85%E8%88%92%E6%9C%8D%E7%9A%84python%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83/" class="prev" rel="prev" title="如何用VSCode配置一个超舒服的Python编程环境？"><i class="fas fa-angle-left fa-fw"></i>如何用VSCode配置一个超舒服的Python编程环境？</a>
+            <a href="/%E8%BD%AF%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95/" class="next" rel="next" title="软件I2C的实现原理及方法">软件I2C的实现原理及方法<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{"valine":{"appId":"g5qj4aPdeiK1nH5RFhj7W8A5-MdYXbMMI","appKey":"Rqx9rulA5eNB1I7q56kAQpoh","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":25,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"data":{"id-1":"❤欢迎来到我的博客~","id-2":"❤欢迎来到我的博客~"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":" ","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":140}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

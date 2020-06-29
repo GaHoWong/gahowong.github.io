@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>硬件I2C - 标签 - 黄家豪的博客</title>
+        <link>http://example.org/tags/%E7%A1%AC%E4%BB%B6i2c/</link>
+        <description>硬件I2C - 标签 - 黄家豪的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>gahowong@qq.com (GaHo)</managingEditor>
+            <webMaster>gahowong@qq.com (GaHo)</webMaster><lastBuildDate>Sun, 28 Jun 2020 13:50:38 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E7%A1%AC%E4%BB%B6i2c/" rel="self" type="application/rss+xml" /><item>
+    <title>硬件I2C的实现</title>
+    <link>http://example.org/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+    <pubDate>Sun, 28 Jun 2020 13:50:38 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://example.org/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+    <description><![CDATA[在前面两篇文章中已经讲过了I2C的原理，这篇文章主要讲硬件I2C的实现。 I2C初始化结构体详解 跟其它外设一样，STM32标准库提供了I2C初]]></description>
+</item></channel>
+</rss>

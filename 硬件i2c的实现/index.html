@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>硬件I2C的实现 - 黄家豪的博客</title><meta name="Description" content="欢迎来到我的博客"><meta property="og:title" content="硬件I2C的实现" />
+<meta property="og:description" content="在前面两篇文章中已经讲过了I2C的原理，这篇文章主要讲硬件I2C的实现。 I2C初始化结构体详解 跟其它外设一样，STM32标准库提供了I2C初" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/" />
+<meta property="article:published_time" content="2020-06-28T13:50:38+08:00" />
+<meta property="article:modified_time" content="2020-02-28T15:58:26+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="硬件I2C的实现"/>
+<meta name="twitter:description" content="在前面两篇文章中已经讲过了I2C的原理，这篇文章主要讲硬件I2C的实现。 I2C初始化结构体详解 跟其它外设一样，STM32标准库提供了I2C初"/>
+<meta name="application-name" content="黄家豪的博客">
+<meta name="apple-mobile-web-app-title" content="黄家豪的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/" /><link rel="prev" href="http://example.org/%E8%BD%AF%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "硬件I2C的实现",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "单片机, STM32, I2C, 通讯协议, 硬件I2C","wordcount":  2888 ,
+        "url": "http:\/\/example.org\/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0\/","datePublished": "2020-06-28T13:50:38+08:00","dateModified": "2020-02-28T15:58:26+08:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/example.org\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "GaHo"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><script src="/live2d-widget/autoload.js"></script><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> 主页 </a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。"> 文章 </a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！"> 标签 </a><a class="menu-item" href="/categories/" title="分类可以快速查找文章"> 分类 </a><a class="menu-item" href="/file/" title="好东西都在这！"> 资源 </a><a class="menu-item" href="/message-board/" title="留言板"> 动态与留言 </a><a class="menu-item" href="/about/" title="我的个人简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="黄家豪的博客"><img
+        class="lazyload logo"
+        src="/svg/loading/small.min.svg"
+        data-src="/avatar.jpg"
+        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-sizes="auto"
+        alt="黄家豪的博客"
+        title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="标题、内容、关键字等" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">主页</a><a class="menu-item" href="/posts/" title="谈不上毕生所学，至少曾经努力过。">文章</a><a class="menu-item" href="/tags/" title="不要乱给别人贴标签！但文章可以！">标签</a><a class="menu-item" href="/categories/" title="分类可以快速查找文章">分类</a><a class="menu-item" href="/file/" title="好东西都在这！">资源</a><a class="menu-item" href="/message-board/" title="留言板">动态与留言</a><a class="menu-item" href="/about/" title="我的个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">硬件I2C的实现</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/about/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>GaHo</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/">
+                                <i class="far fa-folder fa-fw"></i>单片机
+                            </a>&nbsp;<a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                                <i class="far fa-folder fa-fw"></i>嵌入式
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-06-28>2020-06-28</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2888 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="leancloud_visitors" data-flag-title="硬件I2C的实现">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading"></a></li>
+    <li><a href="#i2c初始化结构体详解">I2C初始化结构体详解</a></li>
+    <li><a href="#代码实现">代码实现</a>
+      <ul>
+        <li><a href="#i2ch">I2C.h</a></li>
+        <li><a href="#i2cc">I2C.c</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<h2 id="heading"></h2>
+<p>在前面两篇文章中已经讲过了I2C的原理，这篇文章主要讲硬件I2C的实现。</p>
+<hr>
+<h2 id="i2c初始化结构体详解">I2C初始化结构体详解</h2>
+<p>跟其它外设一样，STM32标准库提供了I2C初始化结构体及初始化函数来配置I2C外设。初始化结构体及函数定义在库文件“stm32f10x_i2c.h”及“stm32f10x_i2c.c”中，编程时我们可以结合这两个文件内的注释使用或参考库帮助文档。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">typedef</span> <span class="k">struct</span><span class="p">{</span>
+	<span class="n">uint32_tI2C_ClockSpeed</span><span class="p">;</span> <span class="cm">/*!&lt; 设置SCL时钟频率，此值要低于400000*/</span>
+	<span class="n">uint16_tI2C_Mode</span><span class="p">;</span>      <span class="cm">/*!&lt; 指定工作模式，可选I2C模式及SMBUS模式*/</span>
+	<span class="n">uint16_tI2C_DutyCycle</span><span class="p">;</span> <span class="cm">/*指定时钟占空比，可选low/high = 2:1及16:9模式*/</span>
+	<span class="n">uint16_tI2C_OwnAddress1</span><span class="p">;</span>     <span class="cm">/*!&lt; 指定自身的I2C设备地址*/</span>
+	<span class="n">uint16_tI2C_Ack</span><span class="p">;</span>                 <span class="cm">/*!&lt; 使能或关闭响应(一般都要使能) */</span>
+	<span class="n">uint16_tI2C_AcknowledgedAddress</span><span class="p">;</span><span class="cm">/*!&lt; 指定地址的长度，可为7位及10位*/</span>
+<span class="p">}</span> <span class="n">I2C_InitTypeDef</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这些结构体成员说明如下，其中括号内的文字是对应参数在STM32标准库中定义的宏：</p>
+<p><strong>（1）I2C_ClockSpeed</strong></p>
+<p>本成员设置的是I2C的传输速率，在调用初始化函数时，函数会根据我们输入的数值经过运算后把时钟因子写入到I2C的时钟控制寄存器CCR。而我们写入的这个参数值不得高于400KHz。实际上由于CCR寄存器不能写入小数类型的时钟因子，影响到SCL的实际频率可能会低于本成员设置的参数值，这时除了通讯稍慢一点以外，不会对I2C的标准通讯造成其它影响。</p>
+<p><strong>（2）I2C_Mode</strong></p>
+<p>本成员是选择I2C的使用方式，有I2C模式(I2C_Mode_I2C)和SMBus主、从模式(I2C_Mode_SMBusHost、I2C_Mode_SMBusDevice ) 。I2C不需要在此处区分主从模式，直接设置I2C_Mode_I2C即可。
+<strong>（3）I2C_DutyCycle</strong>
+本成员设置的是I2C的SCL线时钟的占空比。该配置有两个选择，分别为低电平时间比高电平时间为2：1  ( I2C_DutyCycle_2)和16：9  (I2C_DutyCycle_16_9)。其实这两个模式的比例差别并不大，一般要求都不会如此严格，这里随便选就可以。
+<strong>（4）I2C_OwnAddress1</strong>
+本成员配置的是STM32的I2C设备自己的地址，每个连接到I2C总线上的设备都要有一 个 自 己 的 地 址 ， 作 为 主 机 也 不 例 外 。地 址 可 设 置 为7位或10位(受 下 面I2C_AcknowledgeAddress成员决定)，只要该地址是I2C总线上唯一的即可。</p>
+<p>STM32的I2C外设可同时使用两个地址，即同时对两个地址作出响应，这个结构成员I2C_OwnAddress1配置的是默认的、OAR1寄存器存储的地址，若需要设置第二个地址寄存器OAR2，可使用I2C_OwnAddress2Config函数来配置，OAR2不支持10位地址，只有7位。
+<strong>(5)I2C_Ack_Enable</strong>
+本成员是关于I2C应答设置，设置为使能则可以发送响应信号。本实验配置为允许应答(I2C_Ack_Enable)，这是绝大多数遵循I2C标准的设备的通讯要求，改为禁止应答(I2C_Ack_Disable)往往会导致通讯错误。</p>
+<p><strong>(6)I2C_AcknowledgeAddress</strong>
+本成员选择I2C的寻址模式是7位还是10位地址。这需要根据实际连接到I2C总线上设备的地址进行选择，这个成员的配置也影响到I2C_OwnAddress1成员，只有这里设置成10位模式时，I2C_OwnAddress1才支持10位地址。</p>
+<p>配置完这些结构体成员值，调用库函数I2C_Init即可把结构体的配置写入到寄存器中。</p>
+<h2 id="代码实现">代码实现</h2>
+<h3 id="i2ch">I2C.h</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#ifndef __I2C_H
+</span><span class="cp">#define __I2C_H	 
+</span><span class="cp">#include</span> <span class="cpf">&#34;sys.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#define I2CPORT		GPIOB	</span><span class="c1">//定义IO接口
+</span><span class="c1"></span><span class="cp">#define I2C_SCL		GPIO_Pin_6	</span><span class="c1">//定义IO接口
+</span><span class="c1"></span><span class="cp">#define I2C_SDA		GPIO_Pin_7	</span><span class="c1">//定义IO接口
+</span><span class="c1"></span>
+<span class="cp">#define HostAddress	0xC0	</span><span class="c1">//总线主机的器件地址
+</span><span class="c1"></span><span class="cp">#define BusSpeed	200000	</span><span class="c1">//总线速度（不高于400000）
+</span><span class="c1"></span>
+
+<span class="kt">void</span> <span class="nf">I2C_Configuration</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">I2C_SAND_BUFFER</span><span class="p">(</span><span class="n">u8</span> <span class="n">SlaveAddr</span><span class="p">,</span> <span class="n">u8</span> <span class="n">WriteAddr</span><span class="p">,</span> <span class="n">u8</span><span class="o">*</span> <span class="n">pBuffer</span><span class="p">,</span> <span class="n">u16</span> <span class="n">NumByteToWrite</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">I2C_SAND_BYTE</span><span class="p">(</span><span class="n">u8</span> <span class="n">SlaveAddr</span><span class="p">,</span><span class="n">u8</span> <span class="n">writeAddr</span><span class="p">,</span><span class="n">u8</span> <span class="n">pBuffer</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">I2C_READ_BUFFER</span><span class="p">(</span><span class="n">u8</span> <span class="n">SlaveAddr</span><span class="p">,</span><span class="n">u8</span> <span class="n">readAddr</span><span class="p">,</span><span class="n">u8</span><span class="o">*</span> <span class="n">pBuffer</span><span class="p">,</span><span class="n">u16</span> <span class="n">NumByteToRead</span><span class="p">);</span>
+<span class="n">u8</span> <span class="nf">I2C_READ_BYTE</span><span class="p">(</span><span class="n">u8</span> <span class="n">SlaveAddr</span><span class="p">,</span><span class="n">u8</span> <span class="n">readAddr</span><span class="p">);</span>
+		 				    
+<span class="cp">#endif
+</span><span class="cp"></span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="i2cc">I2C.c</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&#34;i2c.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">I2C_GPIO_Init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span> <span class="c1">//I2C接口初始化
+</span><span class="c1"></span>	<span class="n">GPIO_InitTypeDef</span>  <span class="n">GPIO_InitStructure</span><span class="p">;</span> 	
+    <span class="n">RCC_APB2PeriphClockCmd</span><span class="p">(</span><span class="n">RCC_APB2Periph_GPIOA</span><span class="o">|</span><span class="n">RCC_APB2Periph_GPIOB</span><span class="o">|</span><span class="n">RCC_APB2Periph_GPIOC</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span>       
+	<span class="n">RCC_APB1PeriphClockCmd</span><span class="p">(</span><span class="n">RCC_APB1Periph_I2C1</span><span class="p">,</span> <span class="n">ENABLE</span><span class="p">);</span> <span class="c1">//启动I2C功能 
+</span><span class="c1"></span>    <span class="n">GPIO_InitStructure</span><span class="p">.</span><span class="n">GPIO_Pin</span> <span class="o">=</span> <span class="n">I2C_SCL</span> <span class="o">|</span> <span class="n">I2C_SDA</span><span class="p">;</span> <span class="c1">//选择端口号                      
+</span><span class="c1"></span>    <span class="n">GPIO_InitStructure</span><span class="p">.</span><span class="n">GPIO_Mode</span> <span class="o">=</span> <span class="n">GPIO_Mode_AF_OD</span><span class="p">;</span> <span class="c1">//选择IO接口工作方式       
+</span><span class="c1"></span>    <span class="n">GPIO_InitStructure</span><span class="p">.</span><span class="n">GPIO_Speed</span> <span class="o">=</span> <span class="n">GPIO_Speed_50MHz</span><span class="p">;</span> <span class="c1">//设置IO接口速度（2/10/50MHz）    
+</span><span class="c1"></span>	<span class="n">GPIO_Init</span><span class="p">(</span><span class="n">I2CPORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">GPIO_InitStructure</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">I2C_Configuration</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span> <span class="c1">//I2C初始化
+</span><span class="c1"></span>	<span class="n">I2C_InitTypeDef</span>  <span class="n">I2C_InitStructure</span><span class="p">;</span>
+	<span class="n">I2C_GPIO_Init</span><span class="p">();</span> <span class="c1">//先设置GPIO接口的状态
+</span><span class="c1"></span>	<span class="n">I2C_InitStructure</span><span class="p">.</span><span class="n">I2C_Mode</span> <span class="o">=</span> <span class="n">I2C_Mode_I2C</span><span class="p">;</span><span class="c1">//设置为I2C模式
+</span><span class="c1"></span>	<span class="n">I2C_InitStructure</span><span class="p">.</span><span class="n">I2C_DutyCycle</span> <span class="o">=</span> <span class="n">I2C_DutyCycle_2</span><span class="p">;</span>
+	<span class="n">I2C_InitStructure</span><span class="p">.</span><span class="n">I2C_OwnAddress1</span> <span class="o">=</span> <span class="n">HostAddress</span><span class="p">;</span> <span class="c1">//主机地址（从机不得用此地址）
+</span><span class="c1"></span>	<span class="n">I2C_InitStructure</span><span class="p">.</span><span class="n">I2C_Ack</span> <span class="o">=</span> <span class="n">I2C_Ack_Enable</span><span class="p">;</span><span class="c1">//允许应答
+</span><span class="c1"></span>	<span class="n">I2C_InitStructure</span><span class="p">.</span><span class="n">I2C_AcknowledgedAddress</span> <span class="o">=</span> <span class="n">I2C_AcknowledgedAddress_7bit</span><span class="p">;</span> <span class="c1">//7位地址模式
+</span><span class="c1"></span>	<span class="n">I2C_InitStructure</span><span class="p">.</span><span class="n">I2C_ClockSpeed</span> <span class="o">=</span> <span class="n">BusSpeed</span><span class="p">;</span> <span class="c1">//总线速度设置 	
+</span><span class="c1"></span>	<span class="n">I2C_Init</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="o">&amp;</span><span class="n">I2C_InitStructure</span><span class="p">);</span>
+	<span class="n">I2C_Cmd</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span><span class="c1">//开启I2C					
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">I2C_SAND_BUFFER</span><span class="p">(</span><span class="n">u8</span> <span class="n">SlaveAddr</span><span class="p">,</span><span class="n">u8</span> <span class="n">WriteAddr</span><span class="p">,</span><span class="n">u8</span><span class="o">*</span> <span class="n">pBuffer</span><span class="p">,</span><span class="n">u16</span> <span class="n">NumByteToWrite</span><span class="p">){</span> <span class="c1">//I2C发送数据串（器件地址，内部地址，寄存器，数量）
+</span><span class="c1"></span>	<span class="n">I2C_GenerateSTART</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span><span class="c1">//产生起始位
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_MODE_SELECT</span><span class="p">));</span> <span class="c1">//清除EV5
+</span><span class="c1"></span>	<span class="n">I2C_Send7bitAddress</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">SlaveAddr</span><span class="p">,</span><span class="n">I2C_Direction_Transmitter</span><span class="p">);</span><span class="c1">//发送器件地址
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED</span><span class="p">));</span><span class="c1">//清除EV6
+</span><span class="c1"></span>	<span class="n">I2C_SendData</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">WriteAddr</span><span class="p">);</span> <span class="c1">//内部功能地址
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_BYTE_TRANSMITTED</span><span class="p">));</span><span class="c1">//移位寄存器非空，数据寄存器已空，产生EV8，发送数据到DR既清除该事件
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="n">NumByteToWrite</span><span class="o">--</span><span class="p">){</span> <span class="c1">//循环发送数据	
+</span><span class="c1"></span>		<span class="n">I2C_SendData</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="o">*</span><span class="n">pBuffer</span><span class="p">);</span> <span class="c1">//发送数据
+</span><span class="c1"></span>		<span class="n">pBuffer</span><span class="o">++</span><span class="p">;</span> <span class="c1">//数据指针移位
+</span><span class="c1"></span>		<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_BYTE_TRANSMITTED</span><span class="p">));</span><span class="c1">//清除EV8
+</span><span class="c1"></span>	<span class="p">}</span>
+	<span class="n">I2C_GenerateSTOP</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span><span class="c1">//产生停止信号
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kt">void</span> <span class="nf">I2C_SAND_BYTE</span><span class="p">(</span><span class="n">u8</span> <span class="n">SlaveAddr</span><span class="p">,</span><span class="n">u8</span> <span class="n">writeAddr</span><span class="p">,</span><span class="n">u8</span> <span class="n">pBuffer</span><span class="p">){</span> <span class="c1">//I2C发送一个字节（从地址，内部地址，内容）
+</span><span class="c1"></span>	<span class="n">I2C_GenerateSTART</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span> <span class="c1">//发送开始信号
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_MODE_SELECT</span><span class="p">));</span> <span class="c1">//等待完成	
+</span><span class="c1"></span>	<span class="n">I2C_Send7bitAddress</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">SlaveAddr</span><span class="p">,</span> <span class="n">I2C_Direction_Transmitter</span><span class="p">);</span> <span class="c1">//发送从器件地址及状态（写入）
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED</span><span class="p">));</span> <span class="c1">//等待完成	
+</span><span class="c1"></span>	<span class="n">I2C_SendData</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">writeAddr</span><span class="p">);</span> <span class="c1">//发送从器件内部寄存器地址
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_BYTE_TRANSMITTED</span><span class="p">));</span> <span class="c1">//等待完成	
+</span><span class="c1"></span>	<span class="n">I2C_SendData</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">pBuffer</span><span class="p">);</span> <span class="c1">//发送要写入的内容
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_BYTE_TRANSMITTED</span><span class="p">));</span> <span class="c1">//等待完成	
+</span><span class="c1"></span>	<span class="n">I2C_GenerateSTOP</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span> <span class="c1">//发送结束信号
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kt">void</span> <span class="nf">I2C_READ_BUFFER</span><span class="p">(</span><span class="n">u8</span> <span class="n">SlaveAddr</span><span class="p">,</span><span class="n">u8</span> <span class="n">readAddr</span><span class="p">,</span><span class="n">u8</span><span class="o">*</span> <span class="n">pBuffer</span><span class="p">,</span><span class="n">u16</span> <span class="n">NumByteToRead</span><span class="p">){</span> <span class="c1">//I2C读取数据串（器件地址，寄存器，内部地址，数量）
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="n">I2C_GetFlagStatus</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_FLAG_BUSY</span><span class="p">));</span>
+	<span class="n">I2C_GenerateSTART</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span><span class="c1">//开启信号
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_MODE_SELECT</span><span class="p">));</span>	<span class="c1">//清除 EV5
+</span><span class="c1"></span>	<span class="n">I2C_Send7bitAddress</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">SlaveAddr</span><span class="p">,</span> <span class="n">I2C_Direction_Transmitter</span><span class="p">);</span> <span class="c1">//写入器件地址
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED</span><span class="p">));</span><span class="c1">//清除 EV6
+</span><span class="c1"></span>	<span class="n">I2C_Cmd</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span>
+	<span class="n">I2C_SendData</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">readAddr</span><span class="p">);</span> <span class="c1">//发送读的地址
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_BYTE_TRANSMITTED</span><span class="p">));</span> <span class="c1">//清除 EV8
+</span><span class="c1"></span>	<span class="n">I2C_GenerateSTART</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span> <span class="c1">//开启信号
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_MODE_SELECT</span><span class="p">));</span> <span class="c1">//清除 EV5
+</span><span class="c1"></span>	<span class="n">I2C_Send7bitAddress</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">SlaveAddr</span><span class="p">,</span><span class="n">I2C_Direction_Receiver</span><span class="p">);</span> <span class="c1">//将器件地址传出，主机为读
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED</span><span class="p">));</span> <span class="c1">//清除EV6
+</span><span class="c1"></span>	<span class="k">while</span><span class="p">(</span><span class="n">NumByteToRead</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">NumByteToRead</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span> <span class="c1">//只剩下最后一个数据时进入 if 语句
+</span><span class="c1"></span>			<span class="n">I2C_AcknowledgeConfig</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">DISABLE</span><span class="p">);</span> <span class="c1">//最后有一个数据时关闭应答位
+</span><span class="c1"></span>			<span class="n">I2C_GenerateSTOP</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span>	<span class="c1">//最后一个数据时使能停止位
+</span><span class="c1"></span>		<span class="p">}</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_BYTE_RECEIVED</span><span class="p">)){</span> <span class="c1">//读取数据
+</span><span class="c1"></span>			<span class="o">*</span><span class="n">pBuffer</span> <span class="o">=</span> <span class="n">I2C_ReceiveData</span><span class="p">(</span><span class="n">I2C1</span><span class="p">);</span><span class="c1">//调用库函数将数据取出到 pBuffer
+</span><span class="c1"></span>			<span class="n">pBuffer</span><span class="o">++</span><span class="p">;</span> <span class="c1">//指针移位
+</span><span class="c1"></span>			<span class="n">NumByteToRead</span><span class="o">--</span><span class="p">;</span> <span class="c1">//字节数减 1 
+</span><span class="c1"></span>		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">I2C_AcknowledgeConfig</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">u8</span> <span class="nf">I2C_READ_BYTE</span><span class="p">(</span><span class="n">u8</span> <span class="n">SlaveAddr</span><span class="p">,</span><span class="n">u8</span> <span class="n">readAddr</span><span class="p">){</span> <span class="c1">//I2C读取一个字节
+</span><span class="c1"></span>	<span class="n">u8</span> <span class="n">a</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">I2C_GetFlagStatus</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_FLAG_BUSY</span><span class="p">));</span>
+	<span class="n">I2C_GenerateSTART</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_MODE_SELECT</span><span class="p">));</span>
+	<span class="n">I2C_Send7bitAddress</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">SlaveAddr</span><span class="p">,</span> <span class="n">I2C_Direction_Transmitter</span><span class="p">);</span> 
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED</span><span class="p">));</span>
+	<span class="n">I2C_Cmd</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span>
+	<span class="n">I2C_SendData</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">readAddr</span><span class="p">);</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_BYTE_TRANSMITTED</span><span class="p">));</span>
+	<span class="n">I2C_GenerateSTART</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_MODE_SELECT</span><span class="p">));</span>
+	<span class="n">I2C_Send7bitAddress</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">SlaveAddr</span><span class="p">,</span> <span class="n">I2C_Direction_Receiver</span><span class="p">);</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">I2C_CheckEvent</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED</span><span class="p">));</span>
+	<span class="n">I2C_AcknowledgeConfig</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">DISABLE</span><span class="p">);</span> <span class="c1">//最后有一个数据时关闭应答位
+</span><span class="c1"></span>	<span class="n">I2C_GenerateSTOP</span><span class="p">(</span><span class="n">I2C1</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span>	<span class="c1">//最后一个数据时使能停止位
+</span><span class="c1"></span>	<span class="n">a</span> <span class="o">=</span> <span class="n">I2C_ReceiveData</span><span class="p">(</span><span class="n">I2C1</span><span class="p">);</span>
+	<span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>野火STM32系列教程</p>
+<p>正点原子STM32系列教程</p>
+<p>洋桃电子STM32系列教程</p>
+<p>《STM32F10X-中文参考手册》</p>
+<p>《I2C总线协议》</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-02-28 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-title="硬件I2C的实现" data-hashtags="单片机,STM32,I2C,通讯协议,硬件I2C"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-hashtag="单片机"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-title="硬件I2C的实现"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://example.org/%E7%A1%AC%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-title="硬件I2C的实现"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a>,&nbsp;<a href="/tags/stm32/">STM32</a>,&nbsp;<a href="/tags/i2c/">I2C</a>,&nbsp;<a href="/tags/%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/">通讯协议</a>,&nbsp;<a href="/tags/%E7%A1%AC%E4%BB%B6i2c/">硬件I2C</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E8%BD%AF%E4%BB%B6i2c%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95/" class="prev" rel="prev" title="软件I2C的实现原理及方法"><i class="fas fa-angle-left fa-fw"></i>软件I2C的实现原理及方法</a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{"valine":{"appId":"g5qj4aPdeiK1nH5RFhj7W8A5-MdYXbMMI","appKey":"Rqx9rulA5eNB1I7q56kAQpoh","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":25,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"data":{"id-1":"❤欢迎来到我的博客~","id-2":"❤欢迎来到我的博客~"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":" ","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":140}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
