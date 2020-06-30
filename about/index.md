@@ -25,6 +25,10 @@
 
 ### 关于本站
 
+2020年6月
+
+变更域名为：https://gaho.xyz
+
 2020年5月
 
 更换了新的网址：https://gahowong.github.io
