@@ -55,8 +55,8 @@
             <a href="/" title="黄家豪的博客"><img
         class="lazyload logo"
         src="/svg/loading/small.min.svg"
-        data-src="/avatar.jpg"
-        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-src="https://imgchr.com/i/NIDPne"
+        data-srcset="https://imgchr.com/i/NIDPne, https://imgchr.com/i/NIDPne 1.5x, https://imgchr.com/i/NIDPne 2x"
         data-sizes="auto"
         alt="黄家豪的博客"
         title="黄家豪的博客" /><span id="id-1" class="typeit"></span></a>
@@ -86,8 +86,8 @@
                 <a href="/" title="黄家豪的博客"><img
         class="lazyload logo"
         src="/svg/loading/small.min.svg"
-        data-src="/avatar.jpg"
-        data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+        data-src="https://imgchr.com/i/NIDPne"
+        data-srcset="https://imgchr.com/i/NIDPne, https://imgchr.com/i/NIDPne 1.5x, https://imgchr.com/i/NIDPne 2x"
         data-sizes="auto"
         alt="黄家豪的博客"
         title="黄家豪的博客" /><span id="id-2" class="typeit"></span></a>
@@ -146,7 +146,6 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#heading"></a></li>
     <li><a href="#i2c初始化结构体详解">I2C初始化结构体详解</a></li>
     <li><a href="#代码实现">代码实现</a>
       <ul>
@@ -157,7 +156,6 @@
   </ul>
 </nav></div>
             </div><div class="content" id="content"><hr>
-<h2 id="heading"></h2>
 <p>在前面两篇文章中已经讲过了I2C的原理，这篇文章主要讲硬件I2C的实现。</p>
 <hr>
 <h2 id="i2c初始化结构体详解">I2C初始化结构体详解</h2>
@@ -175,11 +173,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="k">typedef</span> <span class="k">struct</span><span class="p">{</span>
-	<span class="n">uint32_tI2C_ClockSpeed</span><span class="p">;</span> <span class="cm">/*!&lt; 设置SCL时钟频率，此值要低于400000*/</span>
-	<span class="n">uint16_tI2C_Mode</span><span class="p">;</span>      <span class="cm">/*!&lt; 指定工作模式，可选I2C模式及SMBUS模式*/</span>
-	<span class="n">uint16_tI2C_DutyCycle</span><span class="p">;</span> <span class="cm">/*指定时钟占空比，可选low/high = 2:1及16:9模式*/</span>
-	<span class="n">uint16_tI2C_OwnAddress1</span><span class="p">;</span>     <span class="cm">/*!&lt; 指定自身的I2C设备地址*/</span>
-	<span class="n">uint16_tI2C_Ack</span><span class="p">;</span>                 <span class="cm">/*!&lt; 使能或关闭响应(一般都要使能) */</span>
+	<span class="n">uint32_tI2C_ClockSpeed</span><span class="p">;</span>         <span class="cm">/*!&lt; 设置SCL时钟频率，此值要低于400000*/</span>
+	<span class="n">uint16_tI2C_Mode</span><span class="p">;</span>               <span class="cm">/*!&lt; 指定工作模式，可选I2C模式及SMBUS模式*/</span>
+	<span class="n">uint16_tI2C_DutyCycle</span><span class="p">;</span>          <span class="cm">/*指定时钟占空比，可选low/high = 2:1及16:9模式*/</span>
+	<span class="n">uint16_tI2C_OwnAddress1</span><span class="p">;</span>        <span class="cm">/*!&lt; 指定自身的I2C设备地址*/</span>
+	<span class="n">uint16_tI2C_Ack</span><span class="p">;</span>                <span class="cm">/*!&lt; 使能或关闭响应(一般都要使能) */</span>
 	<span class="n">uint16_tI2C_AcknowledgedAddress</span><span class="p">;</span><span class="cm">/*!&lt; 指定地址的长度，可为7位及10位*/</span>
 <span class="p">}</span> <span class="n">I2C_InitTypeDef</span><span class="p">;</span>
 </code></pre></td></tr></table>
@@ -189,15 +187,15 @@
 <p>本成员设置的是I2C的传输速率，在调用初始化函数时，函数会根据我们输入的数值经过运算后把时钟因子写入到I2C的时钟控制寄存器CCR。而我们写入的这个参数值不得高于400KHz。实际上由于CCR寄存器不能写入小数类型的时钟因子，影响到SCL的实际频率可能会低于本成员设置的参数值，这时除了通讯稍慢一点以外，不会对I2C的标准通讯造成其它影响。</p>
 <p><strong>（2）I2C_Mode</strong></p>
 <p>本成员是选择I2C的使用方式，有I2C模式(I2C_Mode_I2C)和SMBus主、从模式(I2C_Mode_SMBusHost、I2C_Mode_SMBusDevice ) 。I2C不需要在此处区分主从模式，直接设置I2C_Mode_I2C即可。</p>
-<p><strong>（3）I2C_DutyCycle</strong>
-本成员设置的是I2C的SCL线时钟的占空比。该配置有两个选择，分别为低电平时间比高电平时间为2：1  ( I2C_DutyCycle_2)和16：9  (I2C_DutyCycle_16_9)。其实这两个模式的比例差别并不大，一般要求都不会如此严格，这里随便选就可以。</p>
-<p><strong>（4）I2C_OwnAddress1</strong>
-本成员配置的是STM32的I2C设备自己的地址，每个连接到I2C总线上的设备都要有一 个 自 己 的 地 址 ， 作 为 主 机 也 不 例 外 。地 址 可 设 置 为7位或10位(受 下 面I2C_AcknowledgeAddress成员决定)，只要该地址是I2C总线上唯一的即可。</p>
+<p><strong>（3）I2C_DutyCycle</strong></p>
+<p>本成员设置的是I2C的SCL线时钟的占空比。该配置有两个选择，分别为低电平时间比高电平时间为2：1  ( I2C_DutyCycle_2)和16：9  (I2C_DutyCycle_16_9)。其实这两个模式的比例差别并不大，一般要求都不会如此严格，这里随便选就可以。</p>
+<p><strong>（4）I2C_OwnAddress1</strong></p>
+<p>本成员配置的是STM32的I2C设备自己的地址，每个连接到I2C总线上的设备都要有一 个 自 己 的 地 址 ， 作 为 主 机 也 不 例 外 。地 址 可 设 置 为7位或10位(受 下 面I2C_AcknowledgeAddress成员决定)，只要该地址是I2C总线上唯一的即可。</p>
 <p>STM32的I2C外设可同时使用两个地址，即同时对两个地址作出响应，这个结构成员I2C_OwnAddress1配置的是默认的、OAR1寄存器存储的地址，若需要设置第二个地址寄存器OAR2，可使用I2C_OwnAddress2Config函数来配置，OAR2不支持10位地址，只有7位。</p>
-<p><strong>(5)I2C_Ack_Enable</strong>
-本成员是关于I2C应答设置，设置为使能则可以发送响应信号。本实验配置为允许应答(I2C_Ack_Enable)，这是绝大多数遵循I2C标准的设备的通讯要求，改为禁止应答(I2C_Ack_Disable)往往会导致通讯错误。</p>
-<p><strong>(6)I2C_AcknowledgeAddress</strong>
-本成员选择I2C的寻址模式是7位还是10位地址。这需要根据实际连接到I2C总线上设备的地址进行选择，这个成员的配置也影响到I2C_OwnAddress1成员，只有这里设置成10位模式时，I2C_OwnAddress1才支持10位地址。</p>
+<p><strong>(5)I2C_Ack_Enable</strong></p>
+<p>本成员是关于I2C应答设置，设置为使能则可以发送响应信号。本实验配置为允许应答(I2C_Ack_Enable)，这是绝大多数遵循I2C标准的设备的通讯要求，改为禁止应答(I2C_Ack_Disable)往往会导致通讯错误。</p>
+<p><strong>(6)I2C_AcknowledgeAddress</strong></p>
+<p>本成员选择I2C的寻址模式是7位还是10位地址。这需要根据实际连接到I2C总线上设备的地址进行选择，这个成员的配置也影响到I2C_OwnAddress1成员，只有这里设置成10位模式时，I2C_OwnAddress1才支持10位地址。</p>
 <p>配置完这些结构体成员值，调用库函数I2C_Init即可把结构体的配置写入到寄存器中。</p>
 <h2 id="代码实现">代码实现</h2>
 <h3 id="i2ch">I2C.h</h3>
@@ -223,6 +221,7 @@
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
+</span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#ifndef __I2C_H
@@ -245,6 +244,7 @@
 		 				    
 <span class="cp">#endif
 </span><span class="cp"></span>
+
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="i2cc">I2C.c</h3>
@@ -345,12 +345,10 @@
 </span><span class="lnt">93
 </span><span class="lnt">94
 </span><span class="lnt">95
-</span><span class="lnt">96
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&#34;i2c.h&#34;</span><span class="cp">
 </span><span class="cp"></span>
-
 <span class="kt">void</span> <span class="nf">I2C_GPIO_Init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span> <span class="c1">//I2C接口初始化
 </span><span class="c1"></span>	<span class="n">GPIO_InitTypeDef</span>  <span class="n">GPIO_InitStructure</span><span class="p">;</span> 	
     <span class="n">RCC_APB2PeriphClockCmd</span><span class="p">(</span><span class="n">RCC_APB2Periph_GPIOA</span><span class="o">|</span><span class="n">RCC_APB2Periph_GPIOB</span><span class="o">|</span><span class="n">RCC_APB2Periph_GPIOC</span><span class="p">,</span><span class="n">ENABLE</span><span class="p">);</span>       

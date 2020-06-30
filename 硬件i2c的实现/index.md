@@ -3,11 +3,7 @@
 
 ------
 
-## 
-
-
-
-在前面两篇文章中已经讲过了I2C的原理，这篇文章主要讲硬件I2C的实现。
+ 在前面两篇文章中已经讲过了I2C的原理，这篇文章主要讲硬件I2C的实现。
 
 ------
 
@@ -18,11 +14,11 @@
 
 ```c
 typedef struct{
-	uint32_tI2C_ClockSpeed; /*!< 设置SCL时钟频率，此值要低于400000*/
-	uint16_tI2C_Mode;      /*!< 指定工作模式，可选I2C模式及SMBUS模式*/
-	uint16_tI2C_DutyCycle; /*指定时钟占空比，可选low/high = 2:1及16:9模式*/
-	uint16_tI2C_OwnAddress1;     /*!< 指定自身的I2C设备地址*/
-	uint16_tI2C_Ack;                 /*!< 使能或关闭响应(一般都要使能) */
+	uint32_tI2C_ClockSpeed;         /*!< 设置SCL时钟频率，此值要低于400000*/
+	uint16_tI2C_Mode;               /*!< 指定工作模式，可选I2C模式及SMBUS模式*/
+	uint16_tI2C_DutyCycle;          /*指定时钟占空比，可选low/high = 2:1及16:9模式*/
+	uint16_tI2C_OwnAddress1;        /*!< 指定自身的I2C设备地址*/
+	uint16_tI2C_Ack;                /*!< 使能或关闭响应(一般都要使能) */
 	uint16_tI2C_AcknowledgedAddress;/*!< 指定地址的长度，可为7位及10位*/
 } I2C_InitTypeDef;
 ```
@@ -30,24 +26,28 @@ typedef struct{
 
   **（1）I2C_ClockSpeed**
 
-本成员设置的是I2C的传输速率，在调用初始化函数时，函数会根据我们输入的数值经过运算后把时钟因子写入到I2C的时钟控制寄存器CCR。而我们写入的这个参数值不得高于400KHz。实际上由于CCR寄存器不能写入小数类型的时钟因子，影响到SCL的实际频率可能会低于本成员设置的参数值，这时除了通讯稍慢一点以外，不会对I2C的标准通讯造成其它影响。
+  本成员设置的是I2C的传输速率，在调用初始化函数时，函数会根据我们输入的数值经过运算后把时钟因子写入到I2C的时钟控制寄存器CCR。而我们写入的这个参数值不得高于400KHz。实际上由于CCR寄存器不能写入小数类型的时钟因子，影响到SCL的实际频率可能会低于本成员设置的参数值，这时除了通讯稍慢一点以外，不会对I2C的标准通讯造成其它影响。
 
  **（2）I2C_Mode**
 
 本成员是选择I2C的使用方式，有I2C模式(I2C_Mode_I2C)和SMBus主、从模式(I2C_Mode_SMBusHost、I2C_Mode_SMBusDevice ) 。I2C不需要在此处区分主从模式，直接设置I2C_Mode_I2C即可。
 
 **（3）I2C_DutyCycle**
+
 本成员设置的是I2C的SCL线时钟的占空比。该配置有两个选择，分别为低电平时间比高电平时间为2：1  ( I2C_DutyCycle_2)和16：9  (I2C_DutyCycle_16_9)。其实这两个模式的比例差别并不大，一般要求都不会如此严格，这里随便选就可以。
 
 **（4）I2C_OwnAddress1**
+
 本成员配置的是STM32的I2C设备自己的地址，每个连接到I2C总线上的设备都要有一 个 自 己 的 地 址 ， 作 为 主 机 也 不 例 外 。地 址 可 设 置 为7位或10位(受 下 面I2C_AcknowledgeAddress成员决定)，只要该地址是I2C总线上唯一的即可。
 
 STM32的I2C外设可同时使用两个地址，即同时对两个地址作出响应，这个结构成员I2C_OwnAddress1配置的是默认的、OAR1寄存器存储的地址，若需要设置第二个地址寄存器OAR2，可使用I2C_OwnAddress2Config函数来配置，OAR2不支持10位地址，只有7位。
 
 **(5)I2C_Ack_Enable**
+
 本成员是关于I2C应答设置，设置为使能则可以发送响应信号。本实验配置为允许应答(I2C_Ack_Enable)，这是绝大多数遵循I2C标准的设备的通讯要求，改为禁止应答(I2C_Ack_Disable)往往会导致通讯错误。
 
 **(6)I2C_AcknowledgeAddress**
+
 本成员选择I2C的寻址模式是7位还是10位地址。这需要根据实际连接到I2C总线上设备的地址进行选择，这个成员的配置也影响到I2C_OwnAddress1成员，只有这里设置成10位模式时，I2C_OwnAddress1才支持10位地址。
 
 配置完这些结构体成员值，调用库函数I2C_Init即可把结构体的配置写入到寄存器中。
@@ -55,6 +55,7 @@ STM32的I2C外设可同时使用两个地址，即同时对两个地址作出响
 
 ## 代码实现
 ### I2C.h
+
 ```c
 #ifndef __I2C_H
 #define __I2C_H	 
@@ -76,12 +77,15 @@ u8 I2C_READ_BYTE(u8 SlaveAddr,u8 readAddr);
 		 				    
 #endif
 
+
 ```
+
+
+
 ### I2C.c
 
 ```c
 #include "i2c.h"
-
 
 void I2C_GPIO_Init(void){ //I2C接口初始化
 	GPIO_InitTypeDef  GPIO_InitStructure; 	
